@@ -1,0 +1,9 @@
+Available Models from 'materialsvirtuallab/matgl':
+m3gnet_formation_energy
+m3gnet_universal_potential
+megnet_band_gap_mfi
+megnet_formation_energy
+
+Loaded Model:
+Model Name: m3gnet_universal_potential
+Model loaded successfully.
