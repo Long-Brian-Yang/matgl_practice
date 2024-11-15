@@ -1,0 +1,8 @@
+Available Pretrained Models:
+CHGNet-MPtrj-2023.12.1-PES-2.7M
+CHGNet-MPtrj-2024.2.13-PES-11M
+M3GNet-MP-2018.6.1-Eform
+M3GNet-MP-2021.2.8-DIRECT-PES
+M3GNet-MP-2021.2.8-PES
+MEGNet-MP-2018.6.1-Eform
+MEGNet-MP-2019.4.1-BandGap-mfi
