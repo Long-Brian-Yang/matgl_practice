@@ -14,7 +14,7 @@ from pymatgen.core import Structure
 from pytorch_lightning.loggers import CSVLogger
 from tqdm import tqdm
 from matgl.ext.pymatgen import Structure2Graph, get_element_list
-from matgl.graph.data import MGLDataset, MGLDataLoader, collate_fn
+from matgl.graph.data import MGLDataset, MGLDataLoader, collate_fn #Version of matgl is 1.0.0
 from matgl.layers import BondExpansion
 from matgl.models import MEGNet
 from matgl.utils.io import RemoteFile
