@@ -1,0 +1,96 @@
+[
+  {
+    "material_id": "BaZrO3",
+    "chemical_formula": "BaZrO3",
+    "formation_energy_per_atom": -8.344797928,
+    "band_gap": 3.1180000000000003,
+    "lattice_parameters": {
+      "a": 4.23653298,
+      "b": 4.23653298,
+      "c": 4.23653298,
+      "alpha": 90.0,
+      "beta": 90.0,
+      "gamma": 90.0,
+      "volume": 76.03819075936572
+    },
+    "structure": {
+      "elements": [
+        "Ba",
+        "Zr",
+        "O"
+      ],
+      "element_counts": {
+        "Ba": 1.0,
+        "Zr": 1.0,
+        "O": 3.0
+      },
+      "sites": [
+        {
+          "element": "Ba",
+          "coordinates": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "fractional_coordinates": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "element": "Zr",
+          "coordinates": [
+            2.11826649,
+            2.11826649,
+            2.11826649
+          ],
+          "fractional_coordinates": [
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "element": "O",
+          "coordinates": [
+            2.11826649,
+            2.11826649,
+            0.0
+          ],
+          "fractional_coordinates": [
+            0.5,
+            0.5,
+            0.0
+          ]
+        },
+        {
+          "element": "O",
+          "coordinates": [
+            2.11826649,
+            0.0,
+            2.11826649
+          ],
+          "fractional_coordinates": [
+            0.5,
+            0.0,
+            0.5
+          ]
+        },
+        {
+          "element": "O",
+          "coordinates": [
+            0.0,
+            2.11826649,
+            2.11826649
+          ],
+          "fractional_coordinates": [
+            0.0,
+            0.5,
+            0.5
+          ]
+        }
+      ]
+    }
+  }
+]

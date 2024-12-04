@@ -1,0 +1,25 @@
+[
+  {
+    "material_id": "mvc-8154",
+    "formula": "Cr3O8",
+    "elements": [
+      "Cr",
+      "O"
+    ],
+    "element_counts": {
+      "Cr": 6.0,
+      "O": 16.0
+    },
+    "formation_energy": -1.3368413395454541,
+    "band_gap": 0.0,
+    "lattice_parameters": {
+      "a": 5.83917389,
+      "b": 5.839173592979999,
+      "c": 9.7512602,
+      "alpha": 90.0,
+      "beta": 90.0,
+      "gamma": 120.000001739,
+      "volume": 287.93480489231376
+    }
+  }
+]

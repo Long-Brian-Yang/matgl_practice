@@ -1,0 +1,18 @@
+[
+  {
+    "material_id": "BaZrO3",
+    "chemical_formula": "BaZrO3",
+    "formation_energy_per_atom": -8.344797928,
+    "band_gap": 3.1180000000000003,
+    "lattice_parameters": {
+      "a": 4.23653298,
+      "b": 4.23653298,
+      "c": 4.23653298,
+      "alpha": 90.0,
+      "beta": 90.0,
+      "gamma": 90.0,
+      "volume": 76.03819075936572
+    },
+    "structure": "# generated using pymatgen\ndata_BaZrO3\n_symmetry_space_group_name_H-M   'P 1'\n_cell_length_a   4.23653298\n_cell_length_b   4.23653298\n_cell_length_c   4.23653298\n_cell_angle_alpha   90.00000000\n_cell_angle_beta   90.00000000\n_cell_angle_gamma   90.00000000\n_symmetry_Int_Tables_number   1\n_chemical_formula_structural   BaZrO3\n_chemical_formula_sum   'Ba1 Zr1 O3'\n_cell_volume   76.03819076\n_cell_formula_units_Z   1\nloop_\n _symmetry_equiv_pos_site_id\n _symmetry_equiv_pos_as_xyz\n  1  'x, y, z'\nloop_\n _atom_site_type_symbol\n _atom_site_label\n _atom_site_symmetry_multiplicity\n _atom_site_fract_x\n _atom_site_fract_y\n _atom_site_fract_z\n _atom_site_occupancy\n  Ba  Ba0  1  0.00000000  0.00000000  0.00000000  1\n  Zr  Zr1  1  0.50000000  0.50000000  0.50000000  1\n  O  O2  1  0.50000000  0.50000000  0.00000000  1\n  O  O3  1  0.50000000  0.00000000  0.50000000  1\n  O  O4  1  0.00000000  0.50000000  0.50000000  1\n"
+  }
+]
