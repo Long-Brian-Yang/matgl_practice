@@ -5,11 +5,11 @@ from pytorch_lightning.loggers import CSVLogger
 
 import matgl
 from matgl.utils.training import PotentialLightningModule
-from dataset import prepare_data, cleanup
+from dataset_json import prepare_data, cleanup
 
 def pretrain(max_epochs=1):
     # Prepare data
-    train_loader, val_loader, _ = prepare_data(batch_size=16)
+    train_loader, val_loader, test_loader = prepare_data("dataset.json", batch_size=1)
     
     # Load pre-trained model
     m3gnet_nnp = matgl.load_model("M3GNet-MP-2021.2.8-DIRECT-PES")

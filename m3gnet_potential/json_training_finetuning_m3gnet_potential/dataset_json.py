@@ -18,9 +18,8 @@ def load_structures_from_json(json_path):
     structures = []
     energies = []
     
-    for material in data['materials']:
-        # Convert dictionary to pymatgen Structure
-        struct_dict = material['structure']
+    # Load structures
+    for struct_dict in data['structures']:
         structure = Structure(
             lattice=struct_dict['lattice'],
             species=struct_dict['species'],
@@ -28,7 +27,10 @@ def load_structures_from_json(json_path):
             coords_are_cartesian=False  # Assuming fractional coordinates
         )
         structures.append(structure)
-        energies.append(material['energy'])
+    
+    # Load energies if available
+    if 'labels' in data and 'energies' in data['labels']:
+        energies = data['labels']['energies']
     
     return structures, energies
 

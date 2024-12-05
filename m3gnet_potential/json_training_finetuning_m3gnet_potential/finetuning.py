@@ -5,11 +5,11 @@ from pytorch_lightning.loggers import CSVLogger
 
 import matgl
 from matgl.utils.training import PotentialLightningModule
-from dataset import prepare_data, cleanup
+from dataset_json import prepare_data, cleanup
 
 def finetune(model_path=None, max_epochs=50):
     # Prepare data
-    train_loader, val_loader, _ = prepare_data(batch_size=16)
+    train_loader, val_loader, test_loader = prepare_data("dataset.json", batch_size=1)
     
     # Load the base model for fine-tuning
     if model_path and os.path.exists(model_path):

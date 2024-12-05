@@ -1,0 +1,52 @@
+allow_missing_labels: false
+data_mean: 0.0
+data_std: !!python/object/apply:torch._utils._rebuild_tensor_v2
+- !!python/object/apply:torch.storage._load_from_bytes
+  - !!binary |
+    gAKKCmz8nEb5IGqoUBkugAJN6QMugAJ9cQAoWBAAAABwcm90b2NvbF92ZXJzaW9ucQFN6QNYDQAA
+    AGxpdHRsZV9lbmRpYW5xAohYCgAAAHR5cGVfc2l6ZXNxA31xBChYBQAAAHNob3J0cQVLAlgDAAAA
+    aW50cQZLBFgEAAAAbG9uZ3EHSwR1dS6AAihYBwAAAHN0b3JhZ2VxAGN0b3JjaApGbG9hdFN0b3Jh
+    Z2UKcQFYDwAAADE0MDE2OTg4NDk3MTMyOHECWAMAAABjcHVxA0sBTnRxBFEugAJdcQBYDwAAADE0
+    MDE2OTg4NDk3MTMyOHEBYS4BAAAAAAAAALibfEE=
+- 0
+- !!python/tuple []
+- !!python/tuple []
+- false
+- !!python/object/apply:collections.OrderedDict
+  - []
+decay_alpha: 0.01
+decay_steps: 100
+element_refs: !!python/object/apply:torch._utils._rebuild_tensor_v2
+- !!python/object/apply:torch.storage._load_from_bytes
+  - !!binary |
+    gAKKCmz8nEb5IGqoUBkugAJN6QMugAJ9cQAoWBAAAABwcm90b2NvbF92ZXJzaW9ucQFN6QNYDQAA
+    AGxpdHRsZV9lbmRpYW5xAohYCgAAAHR5cGVfc2l6ZXNxA31xBChYBQAAAHNob3J0cQVLAlgDAAAA
+    aW50cQZLBFgEAAAAbG9uZ3EHSwR1dS6AAihYBwAAAHN0b3JhZ2VxAGN0b3JjaApGbG9hdFN0b3Jh
+    Z2UKcQFYDwAAADE0MDE2OTg4NTA4NzUwNHECWAMAAABjcHVxA0tZTnRxBFEugAJdcQBYDwAAADE0
+    MDE2OTg4NTA4NzUwNHEBYS5ZAAAAAAAAAM6eVcDHXL3AFGAlwFdgUMDmQMzAaL0Hwcoa8MAecMHA
+    WWyCwIVG3LysQr2/9mObv5fle8CctqvAMW/EwEWrhsDt4gHAw3GAvfxv6L9WvEPAQL7cwH0GEcG/
+    lBTBP8Acwaw3FMGmvADBgYzdwO1BuMCNtHnAflumvxuCWsA9tJXAxDyQwHTWY8A66hbAqXUmQPfm
+    yr+aVybA6ykEwfBJG8EMaCjBYrkpwQkoJcFiiQXB2Mu2wGIYrMCxADbAW2E2v3oKPsA6DofAhDOP
+    wLG3OsA7pve/FfP9QIrQKcCQy1XADkHuwHKa88AptfbAZja3wNARpMAvA8rAOYk4wSRJiMHfFsLA
+    yTHjwL2OzsDhzrfAIlemwB4B3r9kOsjAVWQmwZJ9RMEOlE3BAZlHweFENcFCBQnB4/TPwOTYYcBz
+    L+S9cuQ0wAbuhcAVb4nAlGvJwO4YGcEDCA3BfKFmwdriXsEoBm3B
+- 0
+- !!python/tuple
+  - 89
+- !!python/tuple
+  - 1
+- false
+- !!python/object/apply:collections.OrderedDict
+  - []
+energy_weight: 1.0
+force_weight: 1.0
+include_line_graph: true
+loss: mse_loss
+loss_params: null
+lr: 0.001
+magmom_target: absolute
+magmom_weight: 0.0
+optimizer: null
+scheduler: null
+stress_weight: 0.1
+sync_dist: false

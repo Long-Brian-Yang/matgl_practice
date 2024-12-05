@@ -1,0 +1,39 @@
+allow_missing_labels: false
+data_mean: 0.0
+data_std: 1.0
+decay_alpha: 0.01
+decay_steps: 1000
+element_refs: !!python/object/apply:torch._utils._rebuild_tensor_v2
+- !!python/object/apply:torch.storage._load_from_bytes
+  - !!binary |
+    gAKKCmz8nEb5IGqoUBkugAJN6QMugAJ9cQAoWBAAAABwcm90b2NvbF92ZXJzaW9ucQFN6QNYDQAA
+    AGxpdHRsZV9lbmRpYW5xAohYCgAAAHR5cGVfc2l6ZXNxA31xBChYBQAAAHNob3J0cQVLAlgDAAAA
+    aW50cQZLBFgEAAAAbG9uZ3EHSwR1dS6AAihYBwAAAHN0b3JhZ2VxAGN0b3JjaApGbG9hdFN0b3Jh
+    Z2UKcQFYDwAAADE0MDU4NTE0ODY2MTU2OHECWAMAAABjcHVxA0tZTnRxBFEugAJdcQBYDwAAADE0
+    MDU4NTE0ODY2MTU2OHEBYS5ZAAAAAAAAAL88XsAuG1C/SspdwEgcm8AwfwDBzXEGwQSe98AoJ+zA
+    Xg2ewK3NmbyP0yPA/5UAwC3Fo8APzP3Ap8bdwHFylcA0NUTAALx9vfQWGMARZZrA4SgAwTJrN8Et
+    4g7B3oEJwUurAsGQ1NPABP2owDXYjMD8ulHAKTutv4hCZ8Co25TAtFWEwDt6b8BsLDTAxULQQIZL
+    FsDrtofApPsjwbchOcHeozzBKP4NwWZfFcFgIfLA4OHRwDVToMDS1/K/alQ2vzL5NMAxQ3bAoqdY
+    wIMVM8B91Pm/CfAfQdf8J8ApO53Aa4wNwWmOEMHeMvvANLQAwQ9KzMD0ugTB3hNVwVLKjcHxLvPA
+    8bcDwT7JBMEP3uzAhhQGwY2DUMBrZPLAyZZJwWJKWsFxfBfBMM87wfEzH8GCCvPAVGOvwDUbKcBf
+    xN0+mVQQwPgDX8BEvEnAfvOpwF6dI8FHRDPBxIxiwdWEZcEENnjB
+- 0
+- !!python/tuple
+  - 89
+- !!python/tuple
+  - 1
+- false
+- !!python/object/apply:collections.OrderedDict
+  - []
+energy_weight: 1.0
+force_weight: 1.0
+include_line_graph: true
+loss: mse_loss
+loss_params: null
+lr: 0.0001
+magmom_target: absolute
+magmom_weight: 0.0
+optimizer: null
+scheduler: null
+stress_weight: 0.01
+sync_dist: false
