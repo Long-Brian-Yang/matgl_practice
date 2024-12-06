@@ -7,18 +7,19 @@ import matgl
 from matgl.utils.training import PotentialLightningModule
 from dataset_json import prepare_data, cleanup
 
+
 def pretrain(max_epochs=1):
     # Prepare data
     train_loader, val_loader, test_loader = prepare_data("dataset.json", batch_size=1)
-    
+
     # Load pre-trained model
     m3gnet_nnp = matgl.load_model("M3GNet-MP-2021.2.8-DIRECT-PES")
     model_pretrained = m3gnet_nnp.model
-    
+
     # Get element reference energies and data normalization parameters
     element_refs_m3gnet = m3gnet_nnp.element_refs.property_offset
     data_std = m3gnet_nnp.data_std
-    
+
     # Create lightning module
     lit_module = PotentialLightningModule(
         model=model_pretrained,
@@ -31,7 +32,7 @@ def pretrain(max_epochs=1):
         decay_steps=100,
         decay_alpha=0.01
     )
-    
+
     # Training setup
     logger = CSVLogger("logs", name="M3GNet_training")
     trainer = pl.Trainer(
@@ -40,19 +41,20 @@ def pretrain(max_epochs=1):
         logger=logger,
         inference_mode=False
     )
-    
+
     # Train the model
     trainer.fit(
         model=lit_module,
         train_dataloaders=train_loader,
         val_dataloaders=val_loader
     )
-    
+
     # Save the model
     model_export_path = "./trained_model/"
     lit_module.model.save(model_export_path)
-    
+
     return model_export_path
+
 
 if __name__ == "__main__":
     pretrain()

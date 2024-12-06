@@ -4,6 +4,7 @@ from pymatgen.io.vasp import Poscar, Outcar, Vasprun
 import os
 import sys
 
+
 def parse_vasp_files(poscar_path, outcar_path, vasprun_path, output_json_path):
     """
     Parse VASP output files and save the required information as a JSON file.
@@ -14,13 +15,13 @@ def parse_vasp_files(poscar_path, outcar_path, vasprun_path, output_json_path):
     - vasprun_path (str): Path to the vasprun.xml file.
     - output_json_path (str): Path to the output JSON file.
     """
-    
+
     # Check if files exist
     for file_path in [poscar_path, outcar_path, vasprun_path]:
         if not os.path.isfile(file_path):
             print(f"Error: File does not exist - {file_path}")
             sys.exit(1)
-    
+
     # Read POSCAR or CONTCAR file
     try:
         poscar = Poscar.from_file(poscar_path)
@@ -31,7 +32,7 @@ def parse_vasp_files(poscar_path, outcar_path, vasprun_path, output_json_path):
     except Exception as e:
         print(f"Error: Unable to read POSCAR file - {e}")
         sys.exit(1)
-    
+
     # Initialize data structure
     data = {
         "structures": [
@@ -47,7 +48,7 @@ def parse_vasp_files(poscar_path, outcar_path, vasprun_path, output_json_path):
             "forces": []
         }
     }
-    
+
     # Read OUTCAR file to extract force information
     forces_extracted = False
     try:
@@ -74,21 +75,21 @@ def parse_vasp_files(poscar_path, outcar_path, vasprun_path, output_json_path):
     except Exception as e:
         print(f"Error: Unable to read OUTCAR file - {e}")
         sys.exit(1)
-    
+
     # Read vasprun.xml file to extract energy, stress, and (if needed) force information
     try:
         vasprun = Vasprun(vasprun_path, parse_potcar_file=False, parse_dos=False, parse_eigen=False)
         energy = vasprun.final_energy  # Final energy (eV)
         data["labels"]["energies"].append(energy)
-        
+
         ionic_steps = vasprun.ionic_steps
         if ionic_steps:
             last_step_vasprun = ionic_steps[-1]
-            
+
             # Extract stress tensor
             stress = last_step_vasprun["stress"]  # Stress tensor
             print(f"Stress tensor before conversion: {stress}")
-            
+
             # Check the structure of the stress tensor and convert
             if isinstance(stress, list):
                 try:
@@ -104,7 +105,7 @@ def parse_vasp_files(poscar_path, outcar_path, vasprun_path, output_json_path):
             else:
                 print("Error: Incorrect format for stress tensor.")
                 sys.exit(1)
-            
+
             # If forces were not extracted from OUTCAR, attempt to extract from vasprun.xml
             if not forces_extracted:
                 if "forces" in last_step_vasprun and last_step_vasprun["forces"] is not None:
@@ -123,12 +124,11 @@ def parse_vasp_files(poscar_path, outcar_path, vasprun_path, output_json_path):
                     print("Warning: No force information found in vasprun.xml file.")
         else:
             print("Warning: No ionic step information found in vasprun.xml file.")
-        
+
     except Exception as e:
         print(f"Error: Unable to read vasprun.xml file - {e}")
         sys.exit(1)
-    
-    # Save as JSON file
+
     try:
         with open(output_json_path, "w") as f:
             json.dump(data, f, indent=4)
@@ -137,12 +137,12 @@ def parse_vasp_files(poscar_path, outcar_path, vasprun_path, output_json_path):
         print(f"Error: Unable to write JSON file - {e}")
         sys.exit(1)
 
+
 if __name__ == "__main__":
-    # Define file paths
     poscar_file = "POSCAR"          # or "CONTCAR"
     outcar_file = "OUTCAR"
     vasprun_file = "vasprun.xml"
-    output_json = "test_dataset.json"
+    output_json = "vasp_dataset.json"
 
     # Call the parsing function
     parse_vasp_files(poscar_file, outcar_file, vasprun_file, output_json)

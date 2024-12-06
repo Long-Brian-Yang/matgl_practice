@@ -1,6 +1,7 @@
 import json
 import random
 
+
 def generate_fabricated_data(num_samples=10):
     data = {
         "structures": [],
@@ -22,7 +23,8 @@ def generate_fabricated_data(num_samples=10):
         # Slight variations in species and coordinates
         species = ["Ba", "Zr", "O", "O", "O"]
         coords = [
-            [0.0 + random.uniform(-0.005, 0.005), 0.0 + random.uniform(-0.005, 0.005), 0.0 + random.uniform(-0.005, 0.005)],
+            [0.0 + random.uniform(-0.005, 0.005), 0.0 + random.uniform(-0.005, 0.005),
+             0.0 + random.uniform(-0.005, 0.005)],
             [0.5 + random.uniform(-0.01, 0.01), 0.5 + random.uniform(-0.01, 0.01), 0.5 + random.uniform(-0.01, 0.01)],
             [0.5 + random.uniform(-0.01, 0.01), 0.5 + random.uniform(-0.01, 0.01), 0.0 + random.uniform(-0.01, 0.01)],
             [0.5 + random.uniform(-0.01, 0.01), 0.0 + random.uniform(-0.01, 0.01), 0.5 + random.uniform(-0.01, 0.01)],
@@ -67,6 +69,7 @@ def generate_fabricated_data(num_samples=10):
         data["labels"]["forces"].append(forces)
 
     return data
+
 
 if __name__ == "__main__":
     num_samples = 10  # Adjust the number of samples as needed
