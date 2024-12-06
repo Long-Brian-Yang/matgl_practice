@@ -1,0 +1,63 @@
+2024-12-06 13:34:04,515 - INFO - Loading BaZrO3 structure...
+2024-12-06 13:34:07,116 - INFO - Successfully loaded BaZrO3 structure
+2024-12-06 13:34:07,116 - INFO - Loading potential model...
+2024-12-06 13:34:07,116 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-12-06 13:34:07,117 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-12-06 13:34:07,117 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-12-06 13:34:07,371 - INFO - Loaded pretrained M3GNet model
+2024-12-06 13:34:07,375 - INFO - Added proton 1/1:
+2024-12-06 13:34:07,375 - INFO -   Near O atom: 2
+2024-12-06 13:34:07,376 - INFO -   Position: [1.70611025 3.4122205  1.70611025]
+2024-12-06 13:34:07,376 - INFO -   OH distance: 0.980 Å
+2024-12-06 13:34:07,376 - INFO - Successfully added 1 protons
+2024-12-06 13:34:07,376 - INFO - Final composition: HBaO3Zr
+2024-12-06 13:34:07,377 - INFO - 
+Starting simulation at 600K...
+2024-12-06 13:34:07,379 - INFO - Running MD at 600K...
+2024-12-06 13:34:07,781 - INFO - Temperature 600K - Step 0/4000
+2024-12-06 13:34:11,859 - INFO - Temperature 600K - Step 100/4000
+2024-12-06 13:34:16,326 - INFO - Temperature 600K - Step 200/4000
+2024-12-06 13:34:20,443 - INFO - Temperature 600K - Step 300/4000
+2024-12-06 13:34:25,012 - INFO - Temperature 600K - Step 400/4000
+2024-12-06 13:34:29,233 - INFO - Temperature 600K - Step 500/4000
+2024-12-06 13:34:34,589 - INFO - Temperature 600K - Step 600/4000
+2024-12-06 13:34:40,210 - INFO - Temperature 600K - Step 700/4000
+2024-12-06 13:34:44,183 - INFO - Temperature 600K - Step 800/4000
+2024-12-06 13:34:48,287 - INFO - Temperature 600K - Step 900/4000
+2024-12-06 13:34:53,184 - INFO - Temperature 600K - Step 1000/4000
+2024-12-06 13:34:57,095 - INFO - Temperature 600K - Step 1100/4000
+2024-12-06 13:35:02,001 - INFO - Temperature 600K - Step 1200/4000
+2024-12-06 13:35:06,147 - INFO - Temperature 600K - Step 1300/4000
+2024-12-06 13:35:10,034 - INFO - Temperature 600K - Step 1400/4000
+2024-12-06 13:35:14,779 - INFO - Temperature 600K - Step 1500/4000
+2024-12-06 13:35:18,769 - INFO - Temperature 600K - Step 1600/4000
+2024-12-06 13:35:22,973 - INFO - Temperature 600K - Step 1700/4000
+2024-12-06 13:35:28,312 - INFO - Temperature 600K - Step 1800/4000
+2024-12-06 13:35:33,278 - INFO - Temperature 600K - Step 1900/4000
+2024-12-06 13:35:37,637 - INFO - Temperature 600K - Step 2000/4000
+2024-12-06 13:35:41,953 - INFO - Temperature 600K - Step 2100/4000
+2024-12-06 13:35:45,310 - INFO - Temperature 600K - Step 2200/4000
+2024-12-06 13:35:48,855 - INFO - Temperature 600K - Step 2300/4000
+2024-12-06 13:35:52,159 - INFO - Temperature 600K - Step 2400/4000
+2024-12-06 13:35:55,702 - INFO - Temperature 600K - Step 2500/4000
+2024-12-06 13:35:59,148 - INFO - Temperature 600K - Step 2600/4000
+2024-12-06 13:36:02,444 - INFO - Temperature 600K - Step 2700/4000
+2024-12-06 13:36:06,436 - INFO - Temperature 600K - Step 2800/4000
+2024-12-06 13:36:10,468 - INFO - Temperature 600K - Step 2900/4000
+2024-12-06 13:36:14,246 - INFO - Temperature 600K - Step 3000/4000
+2024-12-06 13:36:17,831 - INFO - Temperature 600K - Step 3100/4000
+2024-12-06 13:36:21,066 - INFO - Temperature 600K - Step 3200/4000
+2024-12-06 13:36:24,578 - INFO - Temperature 600K - Step 3300/4000
+2024-12-06 13:36:28,538 - INFO - Temperature 600K - Step 3400/4000
+2024-12-06 13:36:32,077 - INFO - Temperature 600K - Step 3500/4000
+2024-12-06 13:36:36,854 - INFO - Temperature 600K - Step 3600/4000
+2024-12-06 13:36:41,113 - INFO - Temperature 600K - Step 3700/4000
+2024-12-06 13:36:45,607 - INFO - Temperature 600K - Step 3800/4000
+2024-12-06 13:36:49,912 - INFO - Temperature 600K - Step 3900/4000
+2024-12-06 13:36:54,548 - INFO - Analyzing trajectory for 600K...
+2024-12-06 13:36:55,273 - INFO - Results for 600K:
+2024-12-06 13:36:55,273 - INFO -   Diffusion coefficient: 2.0755e-04 [cm^2/s]
+2024-12-06 13:36:55,273 - INFO -   Maximum MSD: 70.51 Å²
+2024-12-06 13:36:55,274 - INFO -   Average MSD: 30.18 Å²
+2024-12-06 13:36:56,001 - INFO - 
+MD simulations completed for all temperatures
