@@ -1,0 +1,12 @@
+{
+    "elements": [
+        "Hf",
+        "Be",
+        "O"
+    ],
+    "selected_potcar_types": {
+        "Hf": "Hf_pv",
+        "Be": "Be_sv",
+        "O": "O"
+    }
+}

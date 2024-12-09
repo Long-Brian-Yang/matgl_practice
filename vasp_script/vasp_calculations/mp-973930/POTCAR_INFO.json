@@ -1,0 +1,12 @@
+{
+    "elements": [
+        "Np",
+        "Be",
+        "O"
+    ],
+    "selected_potcar_types": {
+        "Np": "Np",
+        "Be": "Be_sv",
+        "O": "O"
+    }
+}

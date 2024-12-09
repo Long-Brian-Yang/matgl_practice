@@ -1,0 +1,12 @@
+{
+    "elements": [
+        "Ac",
+        "Fe",
+        "O"
+    ],
+    "selected_potcar_types": {
+        "Ac": "Ac",
+        "Fe": "Fe_pv",
+        "O": "O"
+    }
+}

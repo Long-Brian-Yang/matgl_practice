@@ -1,0 +1,12 @@
+{
+    "elements": [
+        "U",
+        "Ti",
+        "O"
+    ],
+    "selected_potcar_types": {
+        "U": "U",
+        "Ti": "Ti_sv",
+        "O": "O"
+    }
+}
