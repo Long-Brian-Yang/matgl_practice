@@ -56,7 +56,7 @@ def parse_args():
                         help='Timestep for MD simulation (fs)')
     parser.add_argument('--friction', type=float, default=0.002,
                         help='Friction coefficient for MD')
-    parser.add_argument('--n-steps', type=int, default=4000,
+    parser.add_argument('--n-steps', type=int, default=2000,
                         help='Number of MD steps')
     parser.add_argument('--n-protons', type=int, default=1,
                         help='Number of protons to add')
