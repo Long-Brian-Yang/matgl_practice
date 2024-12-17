@@ -206,32 +206,27 @@ def calculate_msd_sliding_window(trajectory: Trajectory, atom_indices: list,
 
     n_frames = len(positions)
     if window_size is None:
-        window_size = n_frames // 4
+        window_size = min(n_frames // 2, 5000)
+    shift_t = max(1, window_size // 2)
 
-    shift_t = window_size // 2  # Shift window by half its size
-
-    # Initialize arrays for accumulating MSD values
     msd_x = np.zeros(window_size)
     msd_y = np.zeros(window_size)
     msd_z = np.zeros(window_size)
     msd_total = np.zeros(window_size)
     counts = np.zeros(window_size)
 
-    # Calculate MSD using sliding windows
-    n_windows = n_frames - window_size + 1
     for start in range(0, n_frames - window_size, shift_t):
-        window = slice(start, start + window_size)
-        ref_pos = positions[start]
+        # Calculate MSD for each atom and average over all atoms
+        for dt in range(window_size):
+            for t0 in range(start, start + window_size - dt):
+                disp = positions[t0 + dt] - positions[t0]
 
-        # Calculate displacements
-        disp = positions[window] - ref_pos
+                msd_x[dt] += disp[..., 0]**2
+                msd_y[dt] += disp[..., 1]**2
+                msd_z[dt] += disp[..., 2]**2
+                msd_total[dt] += np.sum(disp**2, axis=-1)
+                counts[dt] += 1
 
-        # Calculate MSD components
-        msd_x += np.mean(disp[..., 0]**2, axis=1)
-        msd_y += np.mean(disp[..., 1]**2, axis=1)
-        msd_z += np.mean(disp[..., 2]**2, axis=1)
-        msd_total += np.mean(np.sum(disp**2, axis=2), axis=1)
-        counts += 1
 
     # Average MSDs
     msd_x /= counts
