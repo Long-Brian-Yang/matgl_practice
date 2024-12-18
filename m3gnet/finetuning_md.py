@@ -6,9 +6,10 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 from ase import Atom, Atoms
+from ase.io import read
 from ase.md.velocitydistribution import MaxwellBoltzmannDistribution
 from ase.io.trajectory import Trajectory
-from ase.optimize import BFGS  # 新增: 用于能量最小化
+from ase.optimize import BFGS 
 from pymatgen.io.ase import AseAtomsAdaptor
 from mp_api.client import MPRester
 from pymatgen.io.vasp import Poscar
@@ -50,10 +51,12 @@ def parse_args():
     Returns:
         args (argparse.Namespace): parsed arguments
     """
-    parser = argparse.ArgumentParser(description='MD Simulation for BaZrO3 with protons')
+    parser = argparse.ArgumentParser(description='MD Simulation with protons')
+    parser.add_argument('--cif-file', type=str, default='./vasp/test.cif',
+                        help='Path to input CIF file')
     parser.add_argument('--temperatures', type=float, nargs='+', default=[1000],
                         help='Temperatures for MD simulation (K), e.g. 800 900 1000')
-    parser.add_argument('--timestep', type=float, default=1.0,
+    parser.add_argument('--timestep', type=float, default=0.5,
                         help='Timestep for MD simulation (fs)')
     parser.add_argument('--friction', type=float, default=0.01,
                         help='Friction coefficient for MD')
@@ -78,7 +81,7 @@ def parse_args():
 
 def add_protons(atoms: Atoms, n_protons: int, pot=None) -> Atoms: 
     """
-    Add protons to the structure based on theoretical understanding.
+    Add protons to the structure near oxygen atoms
 
     Args:
         atoms (Atoms): Initial structure
@@ -171,7 +174,7 @@ def add_protons(atoms: Atoms, n_protons: int, pot=None) -> Atoms:
     logger.info(f"Successfully added {n_protons} protons")
     logger.info(f"Final composition: {atoms.get_chemical_formula()}")
 
-    # 新增: 如果提供了势能模型，进行能量最小化
+
     if pot is not None:
         logger.info("Starting energy minimization...")
         atoms.calc = PESCalculator(potential=pot)
@@ -184,16 +187,38 @@ def add_protons(atoms: Atoms, n_protons: int, pot=None) -> Atoms:
 
     return atoms
 
-
-def get_bazro3_structure():
-    """Get structure with mp-3834 ID from Materials Project database"""
-    mpr = MPRester(api_key="kzum4sPsW7GCRwtOqgDIr3zhYrfpaguK")
-    structure = mpr.get_structure_by_material_id("mp-3834")
-
-    if not structure:
-        raise ValueError("Structure mp-3834 not found in the database")
-
-    return structure
+def get_structure_from_cif(cif_file: str) -> Structure:
+    """
+    Read structure from CIF file
+    
+    Args:
+        cif_file (str): Path to CIF file
+        
+    Returns:
+        Structure: Pymatgen Structure object
+    """
+    logger = logging.getLogger(__name__)
+    try:
+        # Check if directory exists
+        cif_path = Path(cif_file)
+        cif_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        if not cif_path.exists():
+            logger.error(f"CIF file not found: {cif_file}")
+            raise FileNotFoundError(f"CIF file not found: {cif_file}")
+            
+        # Read structure using ASE
+        atoms = read(str(cif_file))
+        logger.info(f"Successfully read structure from {cif_file}")
+        logger.info(f"Initial composition: {atoms.get_chemical_formula()}")
+        
+        # Convert to pymatgen Structure
+        structure = AseAtomsAdaptor().get_structure(atoms)
+        return structure
+        
+    except Exception as e:
+        logger.error(f"Failed to read CIF file: {str(e)}")
+        raise
 
 
 def calculate_msd_sliding_window(trajectory: Trajectory, atom_indices: list,
@@ -204,10 +229,15 @@ def calculate_msd_sliding_window(trajectory: Trajectory, atom_indices: list,
     positions_all = np.array([atoms.get_positions() for atoms in trajectory])
     positions = positions_all[:, atom_indices]
 
+    # n_frames = len(positions)
+    # if window_size is None:
+    #     window_size = min(n_frames // 2, 5000)
+    # shift_t = max(1, window_size // 2)
     n_frames = len(positions)
     if window_size is None:
-        window_size = min(n_frames // 2, 5000)
-    shift_t = max(1, window_size // 2)
+        window_size = n_frames // 4
+
+    shift_t = window_size // 2  # Shift window by half its size
 
     msd_x = np.zeros(window_size)
     msd_y = np.zeros(window_size)
@@ -366,16 +396,16 @@ def run_md_simulation(args) -> None:
             logger.setLevel(logging.DEBUG)
             logger.debug("Debug mode enabled")
 
-        logger.info("Loading BaZrO3 structure...")
-        test_structure = get_bazro3_structure()
-        logger.info("Successfully loaded BaZrO3 structure")
+        logger.info(f"Loading structure from CIF file: {args.cif_file}...")
+        structure = get_structure_from_cif(args.cif_file)
+        logger.info("Successfully loaded structure")
 
         logger.info("Loading potential model...")
         pot = matgl.load_model(args.model_path)
         logger.info(f"Loaded fine-tuned model from {args.model_path}")
 
         ase_adaptor = AseAtomsAdaptor()
-        atoms = ase_adaptor.get_atoms(test_structure)
+        atoms = ase_adaptor.get_atoms(structure)
         atoms = add_protons(atoms, args.n_protons, pot)
         proton_index = len(atoms) - 1
 
@@ -396,7 +426,8 @@ def run_md_simulation(args) -> None:
 
             MaxwellBoltzmannDistribution(current_atoms, temperature_K=temp)
 
-            traj_file = temp_dir / f"md_bazro3h_{temp}K.traj"
+            structure_name = Path(args.cif_file).stem
+            traj_file = temp_dir / f"md_{structure_name}_{temp}K.traj"
             trajectory_files.append(traj_file)
             traj = Trajectory(str(traj_file), 'w', current_atoms)
 

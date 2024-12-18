@@ -1,0 +1,61 @@
+2024-12-18 16:40:53,686 - INFO - Loading structure from CIF file: ./vasp/Y_BaZrO3_MC.cif...
+2024-12-18 16:40:53,711 - INFO - Successfully read structure from ./vasp/Y_BaZrO3_MC.cif
+2024-12-18 16:40:53,712 - INFO - Initial composition: Ba27O81Y10Zr17
+2024-12-18 16:40:53,714 - INFO - Successfully loaded structure
+2024-12-18 16:40:53,714 - INFO - Loading potential model...
+2024-12-18 16:40:53,714 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-12-18 16:40:53,714 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-12-18 16:40:53,714 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-12-18 16:40:53,960 - INFO - Loaded pretrained M3GNet model
+2024-12-18 16:40:53,972 - INFO - Added proton 1/1:
+2024-12-18 16:40:53,972 - INFO -   Near O atom: 44
+2024-12-18 16:40:53,973 - INFO -   Position: [2.096      2.40590321 0.92970963]
+2024-12-18 16:40:53,973 - INFO -   OH distance: 0.980 Å
+2024-12-18 16:40:53,973 - INFO - Successfully added 1 protons
+2024-12-18 16:40:53,973 - INFO - Final composition: HBa27O81Y10Zr17
+2024-12-18 16:40:53,973 - INFO - Starting energy minimization...
+2024-12-18 16:41:25,036 - INFO - Energy minimization completed in 143 steps
+2024-12-18 16:41:25,048 - INFO - 
+Starting simulation at 1000K...
+2024-12-18 16:41:25,052 - INFO - Running MD at 1000K...
+2024-12-18 16:41:25,391 - INFO - Temperature 1000K - Step 0/2000
+2024-12-18 16:41:41,876 - INFO - Temperature 1000K - Step 100/2000
+2024-12-18 16:41:58,238 - INFO - Temperature 1000K - Step 200/2000
+2024-12-18 16:42:14,938 - INFO - Temperature 1000K - Step 300/2000
+2024-12-18 16:42:31,594 - INFO - Temperature 1000K - Step 400/2000
+2024-12-18 16:42:48,012 - INFO - Temperature 1000K - Step 500/2000
+2024-12-18 16:43:04,325 - INFO - Temperature 1000K - Step 600/2000
+2024-12-18 16:43:24,796 - INFO - Temperature 1000K - Step 700/2000
+2024-12-18 16:43:45,569 - INFO - Temperature 1000K - Step 800/2000
+2024-12-18 16:44:03,253 - INFO - Temperature 1000K - Step 900/2000
+2024-12-18 16:44:24,991 - INFO - Temperature 1000K - Step 1000/2000
+2024-12-18 16:44:46,943 - INFO - Temperature 1000K - Step 1100/2000
+2024-12-18 16:45:07,246 - INFO - Temperature 1000K - Step 1200/2000
+2024-12-18 16:45:25,398 - INFO - Temperature 1000K - Step 1300/2000
+2024-12-18 16:45:44,474 - INFO - Temperature 1000K - Step 1400/2000
+2024-12-18 16:46:04,915 - INFO - Temperature 1000K - Step 1500/2000
+2024-12-18 16:46:22,245 - INFO - Temperature 1000K - Step 1600/2000
+2024-12-18 16:46:39,474 - INFO - Temperature 1000K - Step 1700/2000
+2024-12-18 16:46:57,333 - INFO - Temperature 1000K - Step 1800/2000
+2024-12-18 16:47:18,595 - INFO - Temperature 1000K - Step 1900/2000
+2024-12-18 16:47:40,510 - INFO - Analyzing trajectory for 1000K...
+2024-12-18 16:47:41,383 - INFO - Results for 1000K (x-direction):
+2024-12-18 16:47:41,383 - INFO -   Diffusion coefficient: 3.1816e-05 [cm²/s]
+2024-12-18 16:47:41,383 - INFO -   Maximum MSD: 0.23 Å²
+2024-12-18 16:47:41,383 - INFO -   Average MSD: 0.10 Å²
+2024-12-18 16:47:41,385 - INFO - Results for 1000K (y-direction):
+2024-12-18 16:47:41,385 - INFO -   Diffusion coefficient: 3.9928e-05 [cm²/s]
+2024-12-18 16:47:41,385 - INFO -   Maximum MSD: 0.22 Å²
+2024-12-18 16:47:41,385 - INFO -   Average MSD: 0.11 Å²
+2024-12-18 16:47:41,386 - INFO - Results for 1000K (z-direction):
+2024-12-18 16:47:41,387 - INFO -   Diffusion coefficient: 9.4583e-05 [cm²/s]
+2024-12-18 16:47:41,387 - INFO -   Maximum MSD: 0.53 Å²
+2024-12-18 16:47:41,387 - INFO -   Average MSD: 0.25 Å²
+2024-12-18 16:47:41,388 - INFO - Results for 1000K (total-direction):
+2024-12-18 16:47:41,388 - INFO -   Diffusion coefficient: 5.5443e-05 [cm²/s]
+2024-12-18 16:47:41,388 - INFO -   Maximum MSD: 0.85 Å²
+2024-12-18 16:47:41,388 - INFO -   Average MSD: 0.46 Å²
+2024-12-18 16:47:45,512 - INFO - Total Results for 1000K:
+2024-12-18 16:47:45,512 - INFO -   Diffusion coefficient: 5.5443e-05 [cm²/s]
+2024-12-18 16:47:46,140 - INFO - 
+MD simulations completed for all temperatures

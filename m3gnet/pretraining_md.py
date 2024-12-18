@@ -6,6 +6,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 from ase import Atom, Atoms
+from ase.io import read
 from ase.md.velocitydistribution import MaxwellBoltzmannDistribution
 from ase.io.trajectory import Trajectory
 from ase.optimize import BFGS
@@ -50,14 +51,16 @@ def parse_args():
     Returns:
         args (argparse.Namespace): parsed arguments
     """
-    parser = argparse.ArgumentParser(description='MD Simulation for BaZrO3 with protons')
+    parser = argparse.ArgumentParser(description='MD Simulation with protons')
+    parser.add_argument('--cif-file', type=str, default='./vasp/Y_BaZrO3_MC.cif',
+                        help='Path to input CIF file')
     parser.add_argument('--temperatures', type=float, nargs='+', default=[1000],
                         help='Temperatures for MD simulation (K), e.g. 800 900 1000')
-    parser.add_argument('--timestep', type=float, default=1,
+    parser.add_argument('--timestep', type=float, default=0.5,
                         help='Timestep for MD simulation (fs)')
     parser.add_argument('--friction', type=float, default=0.01,
                         help='Friction coefficient for MD')
-    parser.add_argument('--n-steps', type=int, default=5000,
+    parser.add_argument('--n-steps', type=int, default=2000,
                         help='Number of MD steps')
     parser.add_argument('--n-protons', type=int, default=1,
                         help='Number of protons to add')
@@ -181,57 +184,92 @@ def add_protons(atoms: Atoms, n_protons: int, pot=None) -> Atoms:
 
     return atoms
 
-
-def get_bazro3_structure() -> Structure:
+def get_structure_from_cif(cif_file: str) -> Structure:
     """
-    Get BaZrO3 structure from Materials Project
+    Read structure from CIF file
+    
+    Args:
+        cif_file (str): Path to CIF file
+        
+    Returns:
+        Structure: Pymatgen Structure object
     """
-    mpr = MPRester(api_key="kzum4sPsW7GCRwtOqgDIr3zhYrfpaguK")
-    structure = mpr.get_structure_by_material_id("mp-3834")
-
-    if not structure:
-        raise ValueError("Structure mp-3834 not found in the database")
-
-    return structure
-
+    logger = logging.getLogger(__name__)
+    try:
+        # Check if directory exists
+        cif_path = Path(cif_file)
+        cif_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        if not cif_path.exists():
+            logger.error(f"CIF file not found: {cif_file}")
+            raise FileNotFoundError(f"CIF file not found: {cif_file}")
+            
+        # Read structure using ASE
+        atoms = read(str(cif_file))
+        logger.info(f"Successfully read structure from {cif_file}")
+        logger.info(f"Initial composition: {atoms.get_chemical_formula()}")
+        
+        # Convert to pymatgen Structure
+        structure = AseAtomsAdaptor().get_structure(atoms)
+        return structure
+        
+    except Exception as e:
+        logger.error(f"Failed to read CIF file: {str(e)}")
+        raise
 
 def calculate_msd_sliding_window(trajectory: Trajectory, atom_indices: list,
                                  timestep: float = 1.0, window_size: int = None):
     """
     Calculate MSD using sliding window method for both directional and total MSD.
+    
+    Args:
+        trajectory (Trajectory): ASE trajectory object
+        atom_indices (list): indices of atoms to calculate MSD
+        timestep (float): timestep in fs
+        window_size (int): window size for MSD calculation
+        
+    Returns:
+        time (np.ndarray): time array in ps
+        msd_x (np.ndarray): MSD in x-direction
+        msd_y (np.ndarray): MSD in y-direction
+        msd_z (np.ndarray): MSD in z-direction
+        msd_total (np.ndarray): total MSD
+        D_x (float): diffusion coefficient in x-direction
+        D_y (float): diffusion coefficient in y-direction
+        D_z (float): diffusion coefficient in z-direction
+        D_total (float): total diffusion coefficient
     """
     positions_all = np.array([atoms.get_positions() for atoms in trajectory])
     positions = positions_all[:, atom_indices]
 
     n_frames = len(positions)
     if window_size is None:
-        window_size = min(n_frames // 2, 5000)
-    shift_t = max(1, window_size // 2)
+        window_size = n_frames // 4
 
+    shift_t = window_size // 2  # Shift window by half its size
+
+    # Initialize arrays for accumulating MSD values
     msd_x = np.zeros(window_size)
     msd_y = np.zeros(window_size)
     msd_z = np.zeros(window_size)
     msd_total = np.zeros(window_size)
     counts = np.zeros(window_size)
 
+    # Calculate MSD using sliding windows
+    n_windows = n_frames - window_size + 1
     for start in range(0, n_frames - window_size, shift_t):
-        # Calculate MSD for each atom and average over all atoms
-        for dt in range(window_size):
-            for t0 in range(start, start + window_size - dt):
-                disp = positions[t0 + dt] - positions[t0]
+        window = slice(start, start + window_size)
+        ref_pos = positions[start]
 
-                msd_x[dt] += disp[..., 0]**2
-                msd_y[dt] += disp[..., 1]**2
-                msd_z[dt] += disp[..., 2]**2
-                msd_total[dt] += np.sum(disp**2, axis=-1)
-                counts[dt] += 1
+        # Calculate displacements
+        disp = positions[window] - ref_pos
 
-
-    # Average MSDs
-    msd_x /= counts
-    msd_y /= counts
-    msd_z /= counts
-    msd_total /= counts
+        # Calculate MSD components
+        msd_x += np.mean(disp[..., 0]**2, axis=1)
+        msd_y += np.mean(disp[..., 1]**2, axis=1)
+        msd_z += np.mean(disp[..., 2]**2, axis=1)
+        msd_total += np.mean(np.sum(disp**2, axis=2), axis=1)
+        counts += 1
 
     # Average MSDs
     msd_x /= counts
@@ -328,7 +366,7 @@ def analyze_msd(trajectories: list, proton_index: int, temperatures: list,
         )
 
         # Convert D to cm²/s
-        D_cm2s = D_total * 1e-16 / 1e-12
+        D_cm2s = D_total * 1e-16 * 1e12
 
         # Plot MSD with diffusion coefficient in label
         plt.plot(time, msd_total, label=f"{temp}K (D={D_cm2s:.2e} cm²/s)")
@@ -352,7 +390,6 @@ def analyze_msd(trajectories: list, proton_index: int, temperatures: list,
     plt.savefig(output_dir / 'msd_total.png', dpi=300, bbox_inches='tight')
     plt.close()
 
-
 def run_md_simulation(args) -> None:
     """
     Run molecular dynamics simulation at multiple temperatures
@@ -368,9 +405,10 @@ def run_md_simulation(args) -> None:
             logger.setLevel(logging.DEBUG)
             logger.debug("Debug mode enabled")
 
-        logger.info("Loading BaZrO3 structure...")
-        test_structure = get_bazro3_structure()
-        logger.info("Successfully loaded BaZrO3 structure")
+        # Load structure from CIF file
+        logger.info(f"Loading structure from CIF file: {args.cif_file}...")
+        structure = get_structure_from_cif(args.cif_file)
+        logger.info("Successfully loaded structure")
 
         logger.info("Loading potential model...")
         if args.model_path and Path(args.model_path).exists():
@@ -381,7 +419,7 @@ def run_md_simulation(args) -> None:
             logger.info("Loaded pretrained M3GNet model")
 
         ase_adaptor = AseAtomsAdaptor()
-        atoms = ase_adaptor.get_atoms(test_structure)
+        atoms = ase_adaptor.get_atoms(structure)
         atoms = add_protons(atoms, args.n_protons, pot)
         proton_index = len(atoms) - 1
 
@@ -402,25 +440,46 @@ def run_md_simulation(args) -> None:
 
             MaxwellBoltzmannDistribution(current_atoms, temperature_K=temp)
 
-            traj_file = temp_dir / f"md_bazro3h_{temp}K.traj"
+            # Use structure name in trajectory file
+            structure_name = Path(args.cif_file).stem
+            traj_file = temp_dir / f"md_{structure_name}_{temp}K.traj"
             trajectory_files.append(traj_file)
             traj = Trajectory(str(traj_file), 'w', current_atoms)
+
+            # driver = MolecularDynamics(
+            #     current_atoms,
+            #     potential=pot,
+            #     temperature=temp,
+            #     timestep=args.timestep,
+            #     friction=args.friction,
+            #     trajectory=traj
+            # )
+
+            # logger.info(f"Running MD at {temp}K...")
+            # for step in range(args.n_steps):
+            #     driver.run(1)
+            #     if step % 100 == 0:
+            #         logger.info(f"Temperature {temp}K - Step {step}/{args.n_steps}")
+
+            # traj.close()
 
             driver = MolecularDynamics(
                 current_atoms,
                 potential=pot,
                 temperature=temp,
                 timestep=args.timestep,
-                friction=args.friction,
-                trajectory=traj
+                friction=args.friction
+                # trajectory=traj
             )
 
-            logger.info(f"Running MD at {temp}K...")
+            logger.info("Running MD simulation...")
             for step in range(args.n_steps):
                 driver.run(1)
+                current_atoms.set_velocities(driver.atoms.get_velocities())
+                traj.write(current_atoms)
                 if step % 100 == 0:
                     logger.info(f"Temperature {temp}K - Step {step}/{args.n_steps}")
-
+            
             traj.close()
 
         analyze_msd(trajectory_files, proton_index, args.temperatures,

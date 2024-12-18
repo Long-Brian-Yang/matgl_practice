@@ -1,0 +1,80 @@
+2024-12-18 14:12:10,807 - INFO - Loading structure from CIF file: ./vasp/Y_BaZrO3.cif...
+2024-12-18 14:12:10,818 - INFO - Successfully read structure from ./vasp/Y_BaZrO3.cif
+2024-12-18 14:12:10,818 - INFO - Initial composition: BaO3Zr
+2024-12-18 14:12:10,818 - INFO - Successfully loaded structure
+2024-12-18 14:12:10,818 - INFO - Loading potential model...
+2024-12-18 14:12:10,819 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-12-18 14:12:10,819 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-12-18 14:12:10,819 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-12-18 14:12:11,046 - INFO - Loaded pretrained M3GNet model
+2024-12-18 14:12:11,048 - INFO - Added proton 1/1:
+2024-12-18 14:12:11,048 - INFO -   Near O atom: 2
+2024-12-18 14:12:11,049 - INFO -   Position: [1.69591668 1.69591668 3.39183335]
+2024-12-18 14:12:11,049 - INFO -   OH distance: 0.980 Å
+2024-12-18 14:12:11,049 - INFO - Successfully added 1 protons
+2024-12-18 14:12:11,049 - INFO - Final composition: HBaO3Zr
+2024-12-18 14:12:11,049 - INFO - Starting energy minimization...
+2024-12-18 14:12:11,877 - INFO - Energy minimization completed in 16 steps
+2024-12-18 14:12:11,878 - INFO - 
+Starting simulation at 1000K...
+2024-12-18 14:12:11,880 - INFO - Running MD at 1000K...
+2024-12-18 14:12:11,944 - INFO - Temperature 1000K - Step 0/2000
+2024-12-18 14:12:14,942 - INFO - Temperature 1000K - Step 100/2000
+2024-12-18 14:12:17,904 - INFO - Temperature 1000K - Step 200/2000
+2024-12-18 14:12:20,764 - INFO - Temperature 1000K - Step 300/2000
+2024-12-18 14:12:23,656 - INFO - Temperature 1000K - Step 400/2000
+2024-12-18 14:12:26,631 - INFO - Temperature 1000K - Step 500/2000
+2024-12-18 14:12:29,550 - INFO - Temperature 1000K - Step 600/2000
+2024-12-18 14:12:32,462 - INFO - Temperature 1000K - Step 700/2000
+2024-12-18 14:12:35,349 - INFO - Temperature 1000K - Step 800/2000
+2024-12-18 14:12:38,237 - INFO - Temperature 1000K - Step 900/2000
+2024-12-18 14:12:41,164 - INFO - Temperature 1000K - Step 1000/2000
+2024-12-18 14:12:44,262 - INFO - Temperature 1000K - Step 1100/2000
+2024-12-18 14:12:47,211 - INFO - Temperature 1000K - Step 1200/2000
+2024-12-18 14:12:50,121 - INFO - Temperature 1000K - Step 1300/2000
+2024-12-18 14:12:53,212 - INFO - Temperature 1000K - Step 1400/2000
+2024-12-18 14:12:56,792 - INFO - Temperature 1000K - Step 1500/2000
+2024-12-18 14:13:00,054 - INFO - Temperature 1000K - Step 1600/2000
+2024-12-18 14:13:04,271 - INFO - Temperature 1000K - Step 1700/2000
+2024-12-18 14:13:07,988 - INFO - Temperature 1000K - Step 1800/2000
+2024-12-18 14:13:11,504 - INFO - Temperature 1000K - Step 1900/2000
+2024-12-18 14:13:16,135 - INFO - Analyzing trajectory for 1000K...
+2024-12-18 14:13:16,511 - INFO - Results for 1000K (x-direction):
+2024-12-18 14:13:16,511 - INFO -   Diffusion coefficient: 2.5685e-04 [cm²/s]
+2024-12-18 14:13:16,511 - INFO -   Maximum MSD: 2.86 Å²
+2024-12-18 14:13:16,511 - INFO -   Average MSD: 1.41 Å²
+2024-12-18 14:13:16,513 - INFO - Results for 1000K (y-direction):
+2024-12-18 14:13:16,513 - INFO -   Diffusion coefficient: 3.9900e-04 [cm²/s]
+2024-12-18 14:13:16,513 - INFO -   Maximum MSD: 4.03 Å²
+2024-12-18 14:13:16,513 - INFO -   Average MSD: 1.82 Å²
+2024-12-18 14:13:16,514 - INFO - Results for 1000K (z-direction):
+2024-12-18 14:13:16,514 - INFO -   Diffusion coefficient: 1.8926e-04 [cm²/s]
+2024-12-18 14:13:16,515 - INFO -   Maximum MSD: 2.57 Å²
+2024-12-18 14:13:16,515 - INFO -   Average MSD: 0.87 Å²
+2024-12-18 14:13:16,516 - INFO - Results for 1000K (total-direction):
+2024-12-18 14:13:16,516 - INFO -   Diffusion coefficient: 2.8170e-04 [cm²/s]
+2024-12-18 14:13:16,516 - INFO -   Maximum MSD: 8.75 Å²
+2024-12-18 14:13:16,516 - INFO -   Average MSD: 4.10 Å²
+2024-12-18 14:13:20,134 - INFO - Total Results for 1000K:
+2024-12-18 14:13:20,135 - INFO -   Diffusion coefficient: 2.8170e-04 [cm²/s]
+2024-12-18 14:13:20,768 - INFO - 
+MD simulations completed for all temperatures
+2024-12-18 14:14:33,631 - INFO - Loading structure from CIF file: ./vasp/test.cif...
+2024-12-18 14:14:33,656 - INFO - Successfully read structure from ./vasp/test.cif
+2024-12-18 14:14:33,657 - INFO - Initial composition: HBa27O81Y10Zr17
+2024-12-18 14:14:33,657 - INFO - Successfully loaded structure
+2024-12-18 14:14:33,657 - INFO - Loading potential model...
+2024-12-18 14:14:33,658 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-12-18 14:14:33,658 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-12-18 14:14:33,658 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-12-18 14:14:33,887 - INFO - Loaded pretrained M3GNet model
+2024-12-18 14:14:33,899 - INFO - Added proton 1/1:
+2024-12-18 14:14:33,899 - INFO -   Near O atom: 28
+2024-12-18 14:14:33,900 - INFO -   Position: [ 1.6959626   1.29588327 12.17589667]
+2024-12-18 14:14:33,900 - INFO -   OH distance: 0.980 Å
+2024-12-18 14:14:33,900 - INFO - Successfully added 1 protons
+2024-12-18 14:14:33,900 - INFO - Final composition: H2Ba27O81Y10Zr17
+2024-12-18 14:14:33,900 - INFO - Starting energy minimization...
+2024-12-18 14:14:59,635 - INFO - Energy minimization completed in 105 steps
+2024-12-18 14:14:59,639 - ERROR - MD simulation failed: [Errno 2] No such file or directory: 'pretraining_md_results/POSCAR_with_H'
+2024-12-18 14:14:59,639 - ERROR - Program failed: [Errno 2] No such file or directory: 'pretraining_md_results/POSCAR_with_H'
