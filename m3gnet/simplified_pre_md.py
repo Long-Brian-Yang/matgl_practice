@@ -17,6 +17,7 @@ from matgl.ext.ase import PESCalculator, MolecularDynamics
 
 warnings.filterwarnings("ignore")
 
+
 def setup_logging(log_dir: str = "logs") -> None:
     """
     Setup logging system
@@ -37,31 +38,33 @@ def setup_logging(log_dir: str = "logs") -> None:
         ]
     )
 
+
 def parse_args():
     """Parse command line arguments"""
     parser = argparse.ArgumentParser(description='MD Simulation with protons')
-    parser.add_argument('--cif-file', type=str, required=True,
-                       help='Path to input CIF file')
-    parser.add_argument('--temperatures', type=float, nargs='+', 
-                       default=[300, 600, 900],
-                       help='Temperatures for MD simulation (K)')
+    parser.add_argument('--cif-file', type=str, default='./vasp/BaZrO3_333.cif',
+                        help='Path to input CIF file')
+    parser.add_argument('--temperatures', type=float, nargs='+',
+                        default=[300, 600, 900],
+                        help='Temperatures for MD simulation (K)')
     parser.add_argument('--timestep', type=float, default=0.5,
-                       help='Timestep for MD simulation (fs)')
+                        help='Timestep for MD simulation (fs)')
     parser.add_argument('--friction', type=float, default=0.01,
-                       help='Friction coefficient for MD')
+                        help='Friction coefficient for MD')
     parser.add_argument('--n-steps', type=int, default=2000,
-                       help='Number of MD steps')
+                        help='Number of MD steps')
     parser.add_argument('--n-protons', type=int, default=1,
-                       help='Number of protons to add')
+                        help='Number of protons to add')
     parser.add_argument('--output-dir', type=str, default='md_results',
-                       help='Directory to save outputs')
+                        help='Directory to save outputs')
     parser.add_argument('--model-path', type=str, default=None,
-                       help='Path to fine-tuned model (default: use pretrained)')
+                        help='Path to fine-tuned model (default: use pretrained)')
     parser.add_argument('--device', type=str, default='cpu',
-                       help='Device for computation (cpu/cuda)')
+                        help='Device for computation (cpu/cuda)')
     parser.add_argument('--debug', action='store_true',
-                       help='Enable debug mode')
+                        help='Enable debug mode')
     return parser.parse_args()
+
 
 def add_protons(atoms: Atoms, n_protons: int, pot=None) -> Atoms:
     """
@@ -79,8 +82,8 @@ def add_protons(atoms: Atoms, n_protons: int, pot=None) -> Atoms:
     OH_BOND_LENGTH = 0.98  # Å
     MAX_NEIGHBOR_DIST = 3.0  # Å
 
-    o_indices = [i for i, symbol in enumerate(atoms.get_chemical_symbols()) 
-                if symbol == 'O']
+    o_indices = [i for i, symbol in enumerate(atoms.get_chemical_symbols())
+                 if symbol == 'O']
 
     if len(o_indices) < n_protons:
         logger.warning(f"Number of protons ({n_protons}) exceeds number of O atoms ({len(o_indices)})")
@@ -165,6 +168,7 @@ def add_protons(atoms: Atoms, n_protons: int, pot=None) -> Atoms:
 
     return atoms
 
+
 def run_md_simulation(args) -> None:
     """Run molecular dynamics simulation"""
     try:
@@ -181,7 +185,7 @@ def run_md_simulation(args) -> None:
         # Load structure and model
         logger.info(f"Loading structure from: {args.cif_file}")
         atoms = read(args.cif_file)
-        
+
         logger.info("Loading potential model...")
         if args.model_path and Path(args.model_path).exists():
             pot = matgl.load_model(args.model_path)
@@ -202,18 +206,18 @@ def run_md_simulation(args) -> None:
         trajectory_files = []
         for temp in args.temperatures:
             logger.info(f"\nStarting simulation at {temp}K...")
-            
+
             temp_dir = output_dir / f"T_{temp}K"
             temp_dir.mkdir(exist_ok=True)
-            
+
             current_atoms = atoms.copy()
             current_atoms.calc = PESCalculator(potential=pot)
             MaxwellBoltzmannDistribution(current_atoms, temperature_K=temp)
-            
+
             traj_file = temp_dir / f"md_{temp}K.traj"
             trajectory_files.append(traj_file)
             traj = Trajectory(str(traj_file), 'w', current_atoms)
-            
+
             driver = MolecularDynamics(
                 current_atoms,
                 potential=pot,
@@ -230,7 +234,7 @@ def run_md_simulation(args) -> None:
                 traj.write(current_atoms)
                 if step % 100 == 0:
                     logger.info(f"Temperature {temp}K - Step {step}/{args.n_steps}")
-            
+
             traj.close()
 
         # Run analysis
@@ -253,6 +257,7 @@ def run_md_simulation(args) -> None:
     except Exception as e:
         logger.error(f"MD simulation failed: {str(e)}")
         raise
+
 
 if __name__ == "__main__":
     args = parse_args()

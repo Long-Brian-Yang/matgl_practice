@@ -1,0 +1,133 @@
+2024-12-18 20:49:39,405 - INFO - Loading structure from: ./vasp/Y_BaZrO3_MC.cif
+2024-12-18 20:49:39,433 - INFO - Loading potential model...
+2024-12-18 20:49:39,434 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-12-18 20:49:39,434 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-12-18 20:49:39,434 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-12-18 20:49:39,970 - INFO - Loaded pretrained M3GNet model
+2024-12-18 20:49:39,980 - INFO - Added proton 1/1:
+2024-12-18 20:49:39,980 - INFO -   Near O atom: 44
+2024-12-18 20:49:39,981 - INFO -   Position: [2.096      2.40590321 0.92970963]
+2024-12-18 20:49:39,981 - INFO -   OH distance: 0.980 Å
+2024-12-18 20:49:39,981 - INFO - Starting energy minimization...
+2024-12-18 20:50:11,952 - INFO - Energy minimization completed in 143 steps
+2024-12-18 20:50:11,961 - INFO - 
+Starting simulation at 300K...
+2024-12-18 20:50:11,965 - INFO - Running MD simulation...
+2024-12-18 20:50:12,285 - INFO - Temperature 300K - Step 0/1000
+2024-12-18 20:50:28,516 - INFO - Temperature 300K - Step 100/1000
+2024-12-18 20:50:44,768 - INFO - Temperature 300K - Step 200/1000
+2024-12-18 20:51:01,147 - INFO - Temperature 300K - Step 300/1000
+2024-12-18 20:51:17,214 - INFO - Temperature 300K - Step 400/1000
+2024-12-18 20:51:33,173 - INFO - Temperature 300K - Step 500/1000
+2024-12-18 20:51:49,421 - INFO - Temperature 300K - Step 600/1000
+2024-12-18 20:52:05,320 - INFO - Temperature 300K - Step 700/1000
+2024-12-18 20:52:21,309 - INFO - Temperature 300K - Step 800/1000
+2024-12-18 20:52:37,267 - INFO - Temperature 300K - Step 900/1000
+2024-12-18 20:52:53,302 - INFO - 
+Starting simulation at 600K...
+2024-12-18 20:52:53,307 - INFO - Running MD simulation...
+2024-12-18 20:52:53,629 - INFO - Temperature 600K - Step 0/1000
+2024-12-18 20:53:09,809 - INFO - Temperature 600K - Step 100/1000
+2024-12-18 20:53:25,997 - INFO - Temperature 600K - Step 200/1000
+2024-12-18 20:53:42,240 - INFO - Temperature 600K - Step 300/1000
+2024-12-18 20:53:58,355 - INFO - Temperature 600K - Step 400/1000
+2024-12-18 20:54:14,683 - INFO - Temperature 600K - Step 500/1000
+2024-12-18 20:54:30,865 - INFO - Temperature 600K - Step 600/1000
+2024-12-18 20:54:47,102 - INFO - Temperature 600K - Step 700/1000
+2024-12-18 20:55:03,602 - INFO - Temperature 600K - Step 800/1000
+2024-12-18 20:55:19,679 - INFO - Temperature 600K - Step 900/1000
+2024-12-18 20:55:35,824 - INFO - 
+Starting simulation at 900K...
+2024-12-18 20:55:35,826 - INFO - Running MD simulation...
+2024-12-18 20:55:36,151 - INFO - Temperature 900K - Step 0/1000
+2024-12-18 20:55:52,342 - INFO - Temperature 900K - Step 100/1000
+2024-12-18 20:56:08,507 - INFO - Temperature 900K - Step 200/1000
+2024-12-18 20:56:24,701 - INFO - Temperature 900K - Step 300/1000
+2024-12-18 20:56:40,979 - INFO - Temperature 900K - Step 400/1000
+2024-12-18 20:56:57,259 - INFO - Temperature 900K - Step 500/1000
+2024-12-18 20:57:13,619 - INFO - Temperature 900K - Step 600/1000
+2024-12-18 20:57:29,949 - INFO - Temperature 900K - Step 700/1000
+2024-12-18 20:57:46,116 - INFO - Temperature 900K - Step 800/1000
+2024-12-18 20:58:02,445 - INFO - Temperature 900K - Step 900/1000
+2024-12-18 20:58:19,698 - INFO - 
+Starting analysis...
+2024-12-18 20:58:19,698 - INFO - Starting MSD analysis...
+2024-12-18 20:58:20,870 - INFO - Analyzing trajectory for 300K...
+2024-12-18 20:58:21,251 - INFO - Results for 300K (x-direction):
+2024-12-18 20:58:21,251 - INFO -   Diffusion coefficient: 5.0707e-06 [cm²/s]
+2024-12-18 20:58:21,251 - INFO -   Maximum MSD: 0.02 Å²
+2024-12-18 20:58:21,251 - INFO -   Average MSD: 0.01 Å²
+2024-12-18 20:58:21,252 - INFO - Results for 300K (y-direction):
+2024-12-18 20:58:21,252 - INFO -   Diffusion coefficient: 1.1725e-05 [cm²/s]
+2024-12-18 20:58:21,252 - INFO -   Maximum MSD: 0.06 Å²
+2024-12-18 20:58:21,252 - INFO -   Average MSD: 0.02 Å²
+2024-12-18 20:58:21,253 - INFO - Results for 300K (z-direction):
+2024-12-18 20:58:21,253 - INFO -   Diffusion coefficient: 8.1729e-07 [cm²/s]
+2024-12-18 20:58:21,254 - INFO -   Maximum MSD: 0.02 Å²
+2024-12-18 20:58:21,254 - INFO -   Average MSD: 0.01 Å²
+2024-12-18 20:58:21,255 - INFO - Results for 300K (total-direction):
+2024-12-18 20:58:21,255 - INFO -   Diffusion coefficient: 5.8712e-06 [cm²/s]
+2024-12-18 20:58:21,255 - INFO -   Maximum MSD: 0.09 Å²
+2024-12-18 20:58:21,255 - INFO -   Average MSD: 0.04 Å²
+2024-12-18 20:58:21,255 - INFO - Analyzing trajectory for 600K...
+2024-12-18 20:58:21,624 - INFO - Results for 600K (x-direction):
+2024-12-18 20:58:21,624 - INFO -   Diffusion coefficient: 2.1667e-05 [cm²/s]
+2024-12-18 20:58:21,624 - INFO -   Maximum MSD: 0.07 Å²
+2024-12-18 20:58:21,624 - INFO -   Average MSD: 0.02 Å²
+2024-12-18 20:58:21,625 - INFO - Results for 600K (y-direction):
+2024-12-18 20:58:21,626 - INFO -   Diffusion coefficient: 3.5505e-05 [cm²/s]
+2024-12-18 20:58:21,626 - INFO -   Maximum MSD: 0.13 Å²
+2024-12-18 20:58:21,626 - INFO -   Average MSD: 0.07 Å²
+2024-12-18 20:58:21,627 - INFO - Results for 600K (z-direction):
+2024-12-18 20:58:21,627 - INFO -   Diffusion coefficient: 4.0594e-05 [cm²/s]
+2024-12-18 20:58:21,627 - INFO -   Maximum MSD: 0.14 Å²
+2024-12-18 20:58:21,627 - INFO -   Average MSD: 0.08 Å²
+2024-12-18 20:58:21,628 - INFO - Results for 600K (total-direction):
+2024-12-18 20:58:21,628 - INFO -   Diffusion coefficient: 3.2589e-05 [cm²/s]
+2024-12-18 20:58:21,629 - INFO -   Maximum MSD: 0.30 Å²
+2024-12-18 20:58:21,629 - INFO -   Average MSD: 0.17 Å²
+2024-12-18 20:58:21,629 - INFO - Analyzing trajectory for 900K...
+2024-12-18 20:58:21,973 - INFO - Results for 900K (x-direction):
+2024-12-18 20:58:21,973 - INFO -   Diffusion coefficient: 7.5050e-06 [cm²/s]
+2024-12-18 20:58:21,973 - INFO -   Maximum MSD: 0.03 Å²
+2024-12-18 20:58:21,973 - INFO -   Average MSD: 0.01 Å²
+2024-12-18 20:58:21,975 - INFO - Results for 900K (y-direction):
+2024-12-18 20:58:21,975 - INFO -   Diffusion coefficient: 1.3053e-04 [cm²/s]
+2024-12-18 20:58:21,975 - INFO -   Maximum MSD: 0.39 Å²
+2024-12-18 20:58:21,975 - INFO -   Average MSD: 0.14 Å²
+2024-12-18 20:58:21,977 - INFO - Results for 900K (z-direction):
+2024-12-18 20:58:21,977 - INFO -   Diffusion coefficient: 1.7673e-04 [cm²/s]
+2024-12-18 20:58:21,977 - INFO -   Maximum MSD: 0.48 Å²
+2024-12-18 20:58:21,977 - INFO -   Average MSD: 0.16 Å²
+2024-12-18 20:58:21,978 - INFO - Results for 900K (total-direction):
+2024-12-18 20:58:21,978 - INFO -   Diffusion coefficient: 1.0492e-04 [cm²/s]
+2024-12-18 20:58:21,978 - INFO -   Maximum MSD: 0.76 Å²
+2024-12-18 20:58:21,978 - INFO -   Average MSD: 0.32 Å²
+2024-12-18 20:58:25,596 - INFO - Total Results for 300K:
+2024-12-18 20:58:25,596 - INFO -   Diffusion coefficient: 5.8712e-06 [cm²/s]
+2024-12-18 20:58:25,949 - INFO - Total Results for 600K:
+2024-12-18 20:58:25,949 - INFO -   Diffusion coefficient: 3.2589e-05 [cm²/s]
+2024-12-18 20:58:26,300 - INFO - Total Results for 900K:
+2024-12-18 20:58:26,300 - INFO -   Diffusion coefficient: 1.0492e-04 [cm²/s]
+2024-12-18 20:58:26,955 - INFO - Plotting proton pathways...
+2024-12-18 20:58:29,589 - INFO - Calculating diffusion coefficients...
+2024-12-18 20:58:30,636 - INFO - Calculating activation energy...
+2024-12-18 20:58:31,071 - INFO - Activation energy: 0.106 eV
+2024-12-18 20:58:31,071 - INFO - Pre-exponential factor: 3.37e-04 cm²/s
+2024-12-18 20:58:31,071 - INFO - Calculating VACF...
+2024-12-18 20:58:31,081 - INFO - Calculating VACF for 300K...
+2024-12-18 20:58:31,724 - INFO - Calculating VACF for 600K...
+2024-12-18 20:58:32,541 - INFO - Calculating VACF for 900K...
+2024-12-18 20:58:33,661 - INFO - All analyses completed successfully!
+2024-12-18 20:58:33,661 - INFO - Analysis completed!
+2024-12-18 21:46:51,633 - INFO - Loading structure from: ./vasp/BaZrO3_333.cif
+2024-12-18 21:46:51,668 - INFO - Loading potential model...
+2024-12-18 21:46:51,668 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-12-18 21:46:51,668 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-12-18 21:46:51,668 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-12-18 21:46:52,220 - INFO - Loaded pretrained M3GNet model
+2024-12-18 21:46:52,230 - INFO - Added proton 1/1:
+2024-12-18 21:46:52,230 - INFO -   Near O atom: 2
+2024-12-18 21:46:52,230 - INFO -   Position: [2.40590321 2.096      0.92970963]
+2024-12-18 21:46:52,230 - INFO -   OH distance: 0.980 Å
+2024-12-18 21:46:52,231 - INFO - Starting energy minimization...

@@ -1,0 +1,122 @@
+2024-12-18 21:47:11,044 - INFO - Loading structure from: ./vasp/BaZrO3_333.cif
+2024-12-18 21:47:11,231 - INFO - Loading potential model...
+2024-12-18 21:47:11,232 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-12-18 21:47:11,232 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-12-18 21:47:11,232 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-12-18 21:47:11,953 - INFO - Loaded pretrained M3GNet model
+2024-12-18 21:47:11,966 - INFO - Added proton 1/1:
+2024-12-18 21:47:11,966 - INFO -   Near O atom: 2
+2024-12-18 21:47:11,967 - INFO -   Position: [2.40590321 2.096      0.92970963]
+2024-12-18 21:47:11,967 - INFO -   OH distance: 0.980 Å
+2024-12-18 21:47:11,967 - INFO - Starting energy minimization...
+2024-12-18 21:47:19,201 - INFO - Energy minimization completed in 31 steps
+2024-12-18 21:47:19,213 - INFO - 
+Starting simulation at 300K...
+2024-12-18 21:47:19,220 - INFO - Running MD simulation...
+2024-12-18 21:47:19,723 - INFO - Temperature 300K - Step 0/1000
+2024-12-18 21:47:39,976 - INFO - Temperature 300K - Step 100/1000
+2024-12-18 21:47:59,240 - INFO - Temperature 300K - Step 200/1000
+2024-12-18 21:48:16,519 - INFO - Temperature 300K - Step 300/1000
+2024-12-18 21:48:32,734 - INFO - Temperature 300K - Step 400/1000
+2024-12-18 21:48:49,298 - INFO - Temperature 300K - Step 500/1000
+2024-12-18 21:49:06,124 - INFO - Temperature 300K - Step 600/1000
+2024-12-18 21:49:22,774 - INFO - Temperature 300K - Step 700/1000
+2024-12-18 21:49:39,362 - INFO - Temperature 300K - Step 800/1000
+2024-12-18 21:49:55,830 - INFO - Temperature 300K - Step 900/1000
+2024-12-18 21:50:12,130 - INFO - 
+Starting simulation at 600K...
+2024-12-18 21:50:12,139 - INFO - Running MD simulation...
+2024-12-18 21:50:12,438 - INFO - Temperature 600K - Step 0/1000
+2024-12-18 21:50:28,309 - INFO - Temperature 600K - Step 100/1000
+2024-12-18 21:50:47,520 - INFO - Temperature 600K - Step 200/1000
+2024-12-18 21:51:08,489 - INFO - Temperature 600K - Step 300/1000
+2024-12-18 21:51:45,711 - INFO - Temperature 600K - Step 400/1000
+2024-12-18 21:52:05,885 - INFO - Temperature 600K - Step 500/1000
+2024-12-18 21:52:22,663 - INFO - Temperature 600K - Step 600/1000
+2024-12-18 21:52:39,181 - INFO - Temperature 600K - Step 700/1000
+2024-12-18 21:52:55,545 - INFO - Temperature 600K - Step 800/1000
+2024-12-18 21:53:13,080 - INFO - Temperature 600K - Step 900/1000
+2024-12-18 21:53:38,216 - INFO - 
+Starting simulation at 900K...
+2024-12-18 21:53:38,225 - INFO - Running MD simulation...
+2024-12-18 21:53:38,555 - INFO - Temperature 900K - Step 0/1000
+2024-12-18 21:53:58,563 - INFO - Temperature 900K - Step 100/1000
+2024-12-18 21:54:19,776 - INFO - Temperature 900K - Step 200/1000
+2024-12-18 21:54:41,232 - INFO - Temperature 900K - Step 300/1000
+2024-12-18 21:55:04,470 - INFO - Temperature 900K - Step 400/1000
+2024-12-18 21:55:24,072 - INFO - Temperature 900K - Step 500/1000
+2024-12-18 21:55:40,961 - INFO - Temperature 900K - Step 600/1000
+2024-12-18 21:55:57,911 - INFO - Temperature 900K - Step 700/1000
+2024-12-18 21:56:14,956 - INFO - Temperature 900K - Step 800/1000
+2024-12-18 21:56:33,565 - INFO - Temperature 900K - Step 900/1000
+2024-12-18 21:56:57,623 - INFO - 
+Starting analysis...
+2024-12-18 21:56:57,624 - INFO - Starting MSD analysis...
+2024-12-18 21:56:58,399 - INFO - Analyzing trajectory for 300K...
+2024-12-18 21:56:58,781 - INFO - Results for 300K (x-direction):
+2024-12-18 21:56:58,781 - INFO -   Diffusion coefficient: 1.1646e-06 [cm²/s]
+2024-12-18 21:56:58,781 - INFO -   Maximum MSD: 0.02 Å²
+2024-12-18 21:56:58,781 - INFO -   Average MSD: 0.01 Å²
+2024-12-18 21:56:58,782 - INFO - Results for 300K (y-direction):
+2024-12-18 21:56:58,782 - INFO -   Diffusion coefficient: 1.1693e-07 [cm²/s]
+2024-12-18 21:56:58,782 - INFO -   Maximum MSD: 0.00 Å²
+2024-12-18 21:56:58,783 - INFO -   Average MSD: 0.00 Å²
+2024-12-18 21:56:58,784 - INFO - Results for 300K (z-direction):
+2024-12-18 21:56:58,784 - INFO -   Diffusion coefficient: 3.3803e-07 [cm²/s]
+2024-12-18 21:56:58,784 - INFO -   Maximum MSD: 0.05 Å²
+2024-12-18 21:56:58,784 - INFO -   Average MSD: 0.02 Å²
+2024-12-18 21:56:58,785 - INFO - Results for 300K (total-direction):
+2024-12-18 21:56:58,785 - INFO -   Diffusion coefficient: 5.3987e-07 [cm²/s]
+2024-12-18 21:56:58,785 - INFO -   Maximum MSD: 0.07 Å²
+2024-12-18 21:56:58,785 - INFO -   Average MSD: 0.04 Å²
+2024-12-18 21:56:58,785 - INFO - Analyzing trajectory for 600K...
+2024-12-18 21:56:59,151 - INFO - Results for 600K (x-direction):
+2024-12-18 21:56:59,151 - INFO -   Diffusion coefficient: 7.1950e-05 [cm²/s]
+2024-12-18 21:56:59,151 - INFO -   Maximum MSD: 0.20 Å²
+2024-12-18 21:56:59,151 - INFO -   Average MSD: 0.10 Å²
+2024-12-18 21:56:59,153 - INFO - Results for 600K (y-direction):
+2024-12-18 21:56:59,153 - INFO -   Diffusion coefficient: 1.6226e-05 [cm²/s]
+2024-12-18 21:56:59,153 - INFO -   Maximum MSD: 0.07 Å²
+2024-12-18 21:56:59,153 - INFO -   Average MSD: 0.03 Å²
+2024-12-18 21:56:59,154 - INFO - Results for 600K (z-direction):
+2024-12-18 21:56:59,154 - INFO -   Diffusion coefficient: 1.1185e-04 [cm²/s]
+2024-12-18 21:56:59,154 - INFO -   Maximum MSD: 0.34 Å²
+2024-12-18 21:56:59,154 - INFO -   Average MSD: 0.15 Å²
+2024-12-18 21:56:59,156 - INFO - Results for 600K (total-direction):
+2024-12-18 21:56:59,156 - INFO -   Diffusion coefficient: 6.6677e-05 [cm²/s]
+2024-12-18 21:56:59,156 - INFO -   Maximum MSD: 0.51 Å²
+2024-12-18 21:56:59,156 - INFO -   Average MSD: 0.28 Å²
+2024-12-18 21:56:59,156 - INFO - Analyzing trajectory for 900K...
+2024-12-18 21:56:59,516 - INFO - Results for 900K (x-direction):
+2024-12-18 21:56:59,516 - INFO -   Diffusion coefficient: 3.2257e-05 [cm²/s]
+2024-12-18 21:56:59,516 - INFO -   Maximum MSD: 0.10 Å²
+2024-12-18 21:56:59,516 - INFO -   Average MSD: 0.06 Å²
+2024-12-18 21:56:59,518 - INFO - Results for 900K (y-direction):
+2024-12-18 21:56:59,518 - INFO -   Diffusion coefficient: -2.4957e-06 [cm²/s]
+2024-12-18 21:56:59,518 - INFO -   Maximum MSD: 0.12 Å²
+2024-12-18 21:56:59,518 - INFO -   Average MSD: 0.06 Å²
+2024-12-18 21:56:59,519 - INFO - Results for 900K (z-direction):
+2024-12-18 21:56:59,519 - INFO -   Diffusion coefficient: 2.2007e-05 [cm²/s]
+2024-12-18 21:56:59,519 - INFO -   Maximum MSD: 0.15 Å²
+2024-12-18 21:56:59,519 - INFO -   Average MSD: 0.06 Å²
+2024-12-18 21:56:59,521 - INFO - Results for 900K (total-direction):
+2024-12-18 21:56:59,521 - INFO -   Diffusion coefficient: 1.7256e-05 [cm²/s]
+2024-12-18 21:56:59,521 - INFO -   Maximum MSD: 0.28 Å²
+2024-12-18 21:56:59,521 - INFO -   Average MSD: 0.18 Å²
+2024-12-18 21:57:03,334 - INFO - Total Results for 300K:
+2024-12-18 21:57:03,334 - INFO -   Diffusion coefficient: 5.3987e-07 [cm²/s]
+2024-12-18 21:57:03,696 - INFO - Total Results for 600K:
+2024-12-18 21:57:03,696 - INFO -   Diffusion coefficient: 6.6677e-05 [cm²/s]
+2024-12-18 21:57:04,055 - INFO - Total Results for 900K:
+2024-12-18 21:57:04,055 - INFO -   Diffusion coefficient: 1.7256e-05 [cm²/s]
+2024-12-18 21:57:04,718 - INFO - Plotting proton pathways...
+2024-12-18 21:57:07,787 - INFO - Calculating diffusion coefficients...
+2024-12-18 21:57:08,992 - INFO - Calculating activation energy...
+2024-12-18 21:57:09,451 - INFO - Activation energy: 0.161 eV
+2024-12-18 21:57:09,451 - INFO - Pre-exponential factor: 3.82e-04 cm²/s
+2024-12-18 21:57:09,451 - INFO - Calculating VACF...
+2024-12-18 21:57:09,463 - INFO - Calculating VACF for 300K...
+2024-12-18 21:57:10,191 - INFO - Calculating VACF for 600K...
+2024-12-18 21:57:11,158 - INFO - Calculating VACF for 900K...
+2024-12-18 21:57:12,389 - INFO - All analyses completed successfully!
+2024-12-18 21:57:12,390 - INFO - Analysis completed!
