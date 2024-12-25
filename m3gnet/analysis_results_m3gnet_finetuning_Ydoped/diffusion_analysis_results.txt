@@ -1,0 +1,15 @@
+Diffusion Analysis Results
+==========================
+
+Activation Energy: 0.478 ± 0.057 eV
+Activation Energy: 46.1 ± 5.5 kJ/mol
+Pre-exponential factor: 4.22e-02 ± 3.39e-02 cm²/s
+R-squared: 0.9720
+
+Raw Data:
+Temperature (K) | Diffusion Coefficient (cm²/s)
+--------------------------------------------------
+        700.0 | 1.629400e-05
+        800.0 | 4.162700e-05
+        900.0 | 7.033600e-05
+       1000.0 | 1.968000e-04

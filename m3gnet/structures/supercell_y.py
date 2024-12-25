@@ -7,35 +7,6 @@ import math
 from typing import List, Dict, Union, Optional
 from ase.atoms import Atoms
 
-# def calculate_local_energy(structure: Atoms,
-#                          index: int,
-#                          neighbors: np.ndarray,
-#                          dopant_indices: List[int],
-#                          min_distance: float = 6.0) -> float:
-#     """
-#     Calculate local energy based on dopant-dopant interactions
-
-#     Args:
-#         structure: ASE Atoms object representing the crystal structure
-#         index: Index of the atom to calculate energy for
-#         neighbors: Indices of neighboring atoms
-#         dopant_indices: List of indices where dopants are located
-#         min_distance: Minimum preferred distance between dopants
-
-#     Returns:
-#         float: Calculated local energy
-#     """
-#     energy = 0.0
-#     repulsion_strength = 1.0  # Arbitrary energy unit
-
-#     if index in dopant_indices:
-#         for neighbor_idx in neighbors:
-#             if neighbor_idx in dopant_indices:
-#                 dist = structure.get_distance(index, neighbor_idx, mic=True)
-#                 if dist < min_distance:
-#                     energy += repulsion_strength * (min_distance - dist)
-
-#     return energy
 
 
 def calculate_local_energy(structure, index, neighbors, dopant_indices, min_distance=6.0):
@@ -239,9 +210,9 @@ if __name__ == "__main__":
     # Example usage
     composition = monte_carlo_doping(
         input_file="BaZrO3.cif",
-        output_file="Y_BaZrO3_MC.cif",
-        supercell_matrix=[3, 3, 3],
-        doping_fraction=0.37,
+        output_file="BaZrO3_125.cif",
+        supercell_matrix=[2, 2, 2],
+        doping_fraction=0.125,
         temperature=800,
         mc_steps=1000,
         cutoff_radius=8.0
