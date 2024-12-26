@@ -19,11 +19,11 @@ lattice = Lattice.cubic(a)
 # Define the atomic positions for BaZrO3
 species = ["Ba", "Zr", "O", "O", "O"]
 coords = [
-    [0.0, 0.0, 0.0],    
-    [0.5, 0.5, 0.5],   
-    [0.5, 0.0, 0.0],       
-    [0.0, 0.5, 0.0],       
-    [0.0, 0.0, 0.5],        
+    [0.0, 0.0, 0.0],
+    [0.5, 0.5, 0.5],
+    [0.5, 0.0, 0.0],
+    [0.0, 0.5, 0.0],
+    [0.0, 0.0, 0.5],
 ]
 
 # Create the Structure object

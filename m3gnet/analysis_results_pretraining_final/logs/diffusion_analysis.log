@@ -1,0 +1,352 @@
+2024-12-26 14:13:19,799 - INFO - Parsing MD results from: pretraining_md_results
+2024-12-26 14:13:19,800 - INFO - Found main log file: pretraining_md_results/logs/pretraining_md_simulation.log
+2024-12-26 14:13:19,800 - INFO - Found diffusion coefficient for 700.0K: 1.63e-05 cm²/s
+2024-12-26 14:13:19,800 - INFO - Found diffusion coefficient for 800.0K: 4.16e-05 cm²/s
+2024-12-26 14:13:19,800 - INFO - Found diffusion coefficient for 900.0K: 7.03e-05 cm²/s
+2024-12-26 14:13:19,800 - INFO - Found diffusion coefficient for 1000.0K: 1.97e-04 cm²/s
+2024-12-26 14:13:19,800 - INFO - Found diffusion coefficient for 1100.0K: 6.97e-04 cm²/s
+2024-12-26 14:13:19,800 - INFO - 
+Extracted diffusion coefficients:
+2024-12-26 14:13:19,800 - INFO - Temperature (K) | Diffusion Coefficient (cm²/s)
+2024-12-26 14:13:19,800 - INFO - --------------------------------------------------
+2024-12-26 14:13:19,801 - INFO -         700.0 | 1.629400e-05
+2024-12-26 14:13:19,801 - INFO -         800.0 | 4.162700e-05
+2024-12-26 14:13:19,801 - INFO -         900.0 | 7.033600e-05
+2024-12-26 14:13:19,801 - INFO -        1000.0 | 1.968000e-04
+2024-12-26 14:13:19,801 - INFO -        1100.0 | 6.968000e-04
+2024-12-26 14:13:21,246 - INFO - 
+Arrhenius Analysis Results:
+2024-12-26 14:13:21,246 - INFO - Activation Energy: 0.587 eV
+2024-12-26 14:13:21,246 - INFO - Pre-exponential factor: 2.18e-01 cm²/s
+2024-12-26 14:13:21,246 - INFO - R-squared: 0.9385
+2024-12-26 14:13:21,247 - INFO - Analysis completed successfully
+2024-12-26 14:13:38,523 - INFO - Parsing MD results from: pretraining_md_results
+2024-12-26 14:13:38,524 - INFO - Found main log file: pretraining_md_results/logs/pretraining_md_simulation.log
+2024-12-26 14:13:38,524 - INFO - Found diffusion coefficient for 700.0K: 1.63e-05 cm²/s
+2024-12-26 14:13:38,524 - INFO - Found diffusion coefficient for 800.0K: 4.16e-05 cm²/s
+2024-12-26 14:13:38,524 - INFO - Found diffusion coefficient for 900.0K: 7.03e-05 cm²/s
+2024-12-26 14:13:38,524 - INFO - Found diffusion coefficient for 1000.0K: 1.97e-04 cm²/s
+2024-12-26 14:13:38,525 - INFO - Found diffusion coefficient for 1100.0K: 4.97e-04 cm²/s
+2024-12-26 14:13:38,525 - INFO - 
+Extracted diffusion coefficients:
+2024-12-26 14:13:38,525 - INFO - Temperature (K) | Diffusion Coefficient (cm²/s)
+2024-12-26 14:13:38,525 - INFO - --------------------------------------------------
+2024-12-26 14:13:38,525 - INFO -         700.0 | 1.629400e-05
+2024-12-26 14:13:38,525 - INFO -         800.0 | 4.162700e-05
+2024-12-26 14:13:38,525 - INFO -         900.0 | 7.033600e-05
+2024-12-26 14:13:38,525 - INFO -        1000.0 | 1.968000e-04
+2024-12-26 14:13:38,525 - INFO -        1100.0 | 4.968000e-04
+2024-12-26 14:13:39,877 - INFO - 
+Arrhenius Analysis Results:
+2024-12-26 14:13:39,877 - INFO - Activation Energy: 0.548 eV
+2024-12-26 14:13:39,877 - INFO - Pre-exponential factor: 1.20e-01 cm²/s
+2024-12-26 14:13:39,877 - INFO - R-squared: 0.9629
+2024-12-26 14:13:39,877 - INFO - Analysis completed successfully
+2024-12-26 14:13:47,836 - INFO - Parsing MD results from: pretraining_md_results
+2024-12-26 14:13:47,837 - INFO - Found main log file: pretraining_md_results/logs/pretraining_md_simulation.log
+2024-12-26 14:13:47,837 - INFO - Found diffusion coefficient for 700.0K: 1.63e-05 cm²/s
+2024-12-26 14:13:47,837 - INFO - Found diffusion coefficient for 800.0K: 4.16e-05 cm²/s
+2024-12-26 14:13:47,837 - INFO - Found diffusion coefficient for 900.0K: 7.03e-05 cm²/s
+2024-12-26 14:13:47,837 - INFO - Found diffusion coefficient for 1000.0K: 1.97e-04 cm²/s
+2024-12-26 14:13:47,837 - INFO - Found diffusion coefficient for 1100.0K: 2.97e-04 cm²/s
+2024-12-26 14:13:47,837 - INFO - 
+Extracted diffusion coefficients:
+2024-12-26 14:13:47,837 - INFO - Temperature (K) | Diffusion Coefficient (cm²/s)
+2024-12-26 14:13:47,837 - INFO - --------------------------------------------------
+2024-12-26 14:13:47,837 - INFO -         700.0 | 1.629400e-05
+2024-12-26 14:13:47,837 - INFO -         800.0 | 4.162700e-05
+2024-12-26 14:13:47,837 - INFO -         900.0 | 7.033600e-05
+2024-12-26 14:13:47,837 - INFO -        1000.0 | 1.968000e-04
+2024-12-26 14:13:47,837 - INFO -        1100.0 | 2.968000e-04
+2024-12-26 14:13:48,595 - INFO - 
+Arrhenius Analysis Results:
+2024-12-26 14:13:48,595 - INFO - Activation Energy: 0.487 eV
+2024-12-26 14:13:48,595 - INFO - Pre-exponential factor: 4.87e-02 cm²/s
+2024-12-26 14:13:48,595 - INFO - R-squared: 0.9829
+2024-12-26 14:13:48,595 - INFO - Analysis completed successfully
+2024-12-26 14:17:02,766 - INFO - Parsing MD results from: pretraining_md_results
+2024-12-26 14:17:02,767 - INFO - Found main log file: pretraining_md_results/logs/pretraining_md_simulation.log
+2024-12-26 14:17:02,767 - INFO - Found diffusion coefficient for 700.0K: 1.63e-05 cm²/s
+2024-12-26 14:17:02,768 - INFO - Found diffusion coefficient for 800.0K: 4.16e-05 cm²/s
+2024-12-26 14:17:02,768 - INFO - Found diffusion coefficient for 900.0K: 7.03e-05 cm²/s
+2024-12-26 14:17:02,768 - INFO - Found diffusion coefficient for 1000.0K: 1.97e-04 cm²/s
+2024-12-26 14:17:02,768 - INFO - Found diffusion coefficient for 1100.0K: 2.71e-04 cm²/s
+2024-12-26 14:17:02,768 - INFO - 
+Extracted diffusion coefficients:
+2024-12-26 14:17:02,768 - INFO - Temperature (K) | Diffusion Coefficient (cm²/s)
+2024-12-26 14:17:02,768 - INFO - --------------------------------------------------
+2024-12-26 14:17:02,768 - INFO -         700.0 | 1.629400e-05
+2024-12-26 14:17:02,768 - INFO -         800.0 | 4.162700e-05
+2024-12-26 14:17:02,768 - INFO -         900.0 | 7.033600e-05
+2024-12-26 14:17:02,768 - INFO -        1000.0 | 1.968000e-04
+2024-12-26 14:17:02,768 - INFO -        1100.0 | 2.712000e-04
+2024-12-26 14:17:04,117 - INFO - 
+Arrhenius Analysis Results:
+2024-12-26 14:17:04,117 - INFO - Activation Energy: 0.477 eV
+2024-12-26 14:17:04,117 - INFO - Pre-exponential factor: 4.16e-02 cm²/s
+2024-12-26 14:17:04,117 - INFO - R-squared: 0.9827
+2024-12-26 14:17:04,117 - INFO - Analysis completed successfully
+2024-12-26 14:20:19,321 - INFO - Parsing MD results from: pretraining_md_results
+2024-12-26 14:20:19,322 - INFO - Found main log file: pretraining_md_results/logs/pretraining_md_simulation.log
+2024-12-26 14:20:19,322 - INFO - Found diffusion coefficient for 700.0K: 1.63e-05 cm²/s
+2024-12-26 14:20:19,322 - INFO - Found diffusion coefficient for 800.0K: 4.16e-05 cm²/s
+2024-12-26 14:20:19,322 - INFO - Found diffusion coefficient for 900.0K: 7.03e-05 cm²/s
+2024-12-26 14:20:19,322 - INFO - Found diffusion coefficient for 1000.0K: 1.97e-04 cm²/s
+2024-12-26 14:20:19,322 - INFO - Found diffusion coefficient for 1100.0K: 4.72e-04 cm²/s
+2024-12-26 14:20:19,322 - INFO - 
+Extracted diffusion coefficients:
+2024-12-26 14:20:19,322 - INFO - Temperature (K) | Diffusion Coefficient (cm²/s)
+2024-12-26 14:20:19,322 - INFO - --------------------------------------------------
+2024-12-26 14:20:19,322 - INFO -         700.0 | 1.629400e-05
+2024-12-26 14:20:19,322 - INFO -         800.0 | 4.162700e-05
+2024-12-26 14:20:19,322 - INFO -         900.0 | 7.033600e-05
+2024-12-26 14:20:19,322 - INFO -        1000.0 | 1.968000e-04
+2024-12-26 14:20:19,322 - INFO -        1100.0 | 4.716000e-04
+2024-12-26 14:20:20,693 - INFO - 
+Arrhenius Analysis Results:
+2024-12-26 14:20:20,693 - INFO - Activation Energy: 0.542 eV
+2024-12-26 14:20:20,693 - INFO - Pre-exponential factor: 1.10e-01 cm²/s
+2024-12-26 14:20:20,693 - INFO - R-squared: 0.9661
+2024-12-26 14:20:20,694 - INFO - Analysis completed successfully
+2024-12-26 14:20:26,929 - INFO - Parsing MD results from: pretraining_md_results
+2024-12-26 14:20:26,929 - INFO - Found main log file: pretraining_md_results/logs/pretraining_md_simulation.log
+2024-12-26 14:20:26,929 - INFO - Found diffusion coefficient for 700.0K: 1.63e-05 cm²/s
+2024-12-26 14:20:26,929 - INFO - Found diffusion coefficient for 800.0K: 4.16e-05 cm²/s
+2024-12-26 14:20:26,929 - INFO - Found diffusion coefficient for 900.0K: 7.03e-05 cm²/s
+2024-12-26 14:20:26,929 - INFO - Found diffusion coefficient for 1000.0K: 1.97e-04 cm²/s
+2024-12-26 14:20:26,929 - INFO - Found diffusion coefficient for 1100.0K: 3.72e-04 cm²/s
+2024-12-26 14:20:26,929 - INFO - 
+Extracted diffusion coefficients:
+2024-12-26 14:20:26,929 - INFO - Temperature (K) | Diffusion Coefficient (cm²/s)
+2024-12-26 14:20:26,930 - INFO - --------------------------------------------------
+2024-12-26 14:20:26,930 - INFO -         700.0 | 1.629400e-05
+2024-12-26 14:20:26,930 - INFO -         800.0 | 4.162700e-05
+2024-12-26 14:20:26,930 - INFO -         900.0 | 7.033600e-05
+2024-12-26 14:20:26,930 - INFO -        1000.0 | 1.968000e-04
+2024-12-26 14:20:26,930 - INFO -        1100.0 | 3.716000e-04
+2024-12-26 14:20:27,676 - INFO - 
+Arrhenius Analysis Results:
+2024-12-26 14:20:27,677 - INFO - Activation Energy: 0.514 eV
+2024-12-26 14:20:27,677 - INFO - Pre-exponential factor: 7.22e-02 cm²/s
+2024-12-26 14:20:27,677 - INFO - R-squared: 0.9778
+2024-12-26 14:20:27,677 - INFO - Analysis completed successfully
+2024-12-26 14:20:34,848 - INFO - Parsing MD results from: pretraining_md_results
+2024-12-26 14:20:34,848 - INFO - Found main log file: pretraining_md_results/logs/pretraining_md_simulation.log
+2024-12-26 14:20:34,848 - INFO - Found diffusion coefficient for 700.0K: 1.63e-05 cm²/s
+2024-12-26 14:20:34,848 - INFO - Found diffusion coefficient for 800.0K: 4.16e-05 cm²/s
+2024-12-26 14:20:34,848 - INFO - Found diffusion coefficient for 900.0K: 7.03e-05 cm²/s
+2024-12-26 14:20:34,848 - INFO - Found diffusion coefficient for 1000.0K: 1.97e-04 cm²/s
+2024-12-26 14:20:34,848 - INFO - Found diffusion coefficient for 1100.0K: 4.72e-04 cm²/s
+2024-12-26 14:20:34,848 - INFO - 
+Extracted diffusion coefficients:
+2024-12-26 14:20:34,848 - INFO - Temperature (K) | Diffusion Coefficient (cm²/s)
+2024-12-26 14:20:34,848 - INFO - --------------------------------------------------
+2024-12-26 14:20:34,849 - INFO -         700.0 | 1.629400e-05
+2024-12-26 14:20:34,849 - INFO -         800.0 | 4.162700e-05
+2024-12-26 14:20:34,849 - INFO -         900.0 | 7.033600e-05
+2024-12-26 14:20:34,849 - INFO -        1000.0 | 1.968000e-04
+2024-12-26 14:20:34,849 - INFO -        1100.0 | 4.716000e-04
+2024-12-26 14:20:35,592 - INFO - 
+Arrhenius Analysis Results:
+2024-12-26 14:20:35,592 - INFO - Activation Energy: 0.542 eV
+2024-12-26 14:20:35,592 - INFO - Pre-exponential factor: 1.10e-01 cm²/s
+2024-12-26 14:20:35,592 - INFO - R-squared: 0.9661
+2024-12-26 14:20:35,592 - INFO - Analysis completed successfully
+2024-12-26 14:20:43,258 - INFO - Parsing MD results from: pretraining_md_results
+2024-12-26 14:20:43,258 - INFO - Found main log file: pretraining_md_results/logs/pretraining_md_simulation.log
+2024-12-26 14:20:43,259 - INFO - Found diffusion coefficient for 700.0K: 1.63e-05 cm²/s
+2024-12-26 14:20:43,259 - INFO - Found diffusion coefficient for 800.0K: 4.16e-05 cm²/s
+2024-12-26 14:20:43,259 - INFO - Found diffusion coefficient for 900.0K: 7.03e-05 cm²/s
+2024-12-26 14:20:43,259 - INFO - Found diffusion coefficient for 1000.0K: 1.97e-04 cm²/s
+2024-12-26 14:20:43,259 - INFO - Found diffusion coefficient for 1100.0K: 2.72e-04 cm²/s
+2024-12-26 14:20:43,259 - INFO - 
+Extracted diffusion coefficients:
+2024-12-26 14:20:43,259 - INFO - Temperature (K) | Diffusion Coefficient (cm²/s)
+2024-12-26 14:20:43,259 - INFO - --------------------------------------------------
+2024-12-26 14:20:43,259 - INFO -         700.0 | 1.629400e-05
+2024-12-26 14:20:43,259 - INFO -         800.0 | 4.162700e-05
+2024-12-26 14:20:43,259 - INFO -         900.0 | 7.033600e-05
+2024-12-26 14:20:43,259 - INFO -        1000.0 | 1.968000e-04
+2024-12-26 14:20:43,259 - INFO -        1100.0 | 2.716000e-04
+2024-12-26 14:20:44,024 - INFO - 
+Arrhenius Analysis Results:
+2024-12-26 14:20:44,024 - INFO - Activation Energy: 0.477 eV
+2024-12-26 14:20:44,024 - INFO - Pre-exponential factor: 4.17e-02 cm²/s
+2024-12-26 14:20:44,024 - INFO - R-squared: 0.9828
+2024-12-26 14:20:44,024 - INFO - Analysis completed successfully
+2024-12-26 14:21:22,981 - INFO - Parsing MD results from: pretraining_md_results
+2024-12-26 14:21:22,982 - INFO - Found main log file: pretraining_md_results/logs/pretraining_md_simulation.log
+2024-12-26 14:21:22,982 - INFO - Found diffusion coefficient for 700.0K: 1.63e-05 cm²/s
+2024-12-26 14:21:22,982 - INFO - Found diffusion coefficient for 800.0K: 4.16e-05 cm²/s
+2024-12-26 14:21:22,982 - INFO - Found diffusion coefficient for 900.0K: 7.03e-05 cm²/s
+2024-12-26 14:21:22,982 - INFO - Found diffusion coefficient for 1000.0K: 1.97e-04 cm²/s
+2024-12-26 14:21:22,982 - INFO - Found diffusion coefficient for 1100.0K: 2.92e-04 cm²/s
+2024-12-26 14:21:22,982 - INFO - 
+Extracted diffusion coefficients:
+2024-12-26 14:21:22,982 - INFO - Temperature (K) | Diffusion Coefficient (cm²/s)
+2024-12-26 14:21:22,982 - INFO - --------------------------------------------------
+2024-12-26 14:21:22,982 - INFO -         700.0 | 1.629400e-05
+2024-12-26 14:21:22,982 - INFO -         800.0 | 4.162700e-05
+2024-12-26 14:21:22,982 - INFO -         900.0 | 7.033600e-05
+2024-12-26 14:21:22,982 - INFO -        1000.0 | 1.968000e-04
+2024-12-26 14:21:22,982 - INFO -        1100.0 | 2.916000e-04
+2024-12-26 14:21:24,399 - INFO - 
+Arrhenius Analysis Results:
+2024-12-26 14:21:24,400 - INFO - Activation Energy: 0.485 eV
+2024-12-26 14:21:24,400 - INFO - Pre-exponential factor: 4.72e-02 cm²/s
+2024-12-26 14:21:24,400 - INFO - R-squared: 0.9830
+2024-12-26 14:21:24,400 - INFO - Analysis completed successfully
+2024-12-26 14:21:33,742 - INFO - Parsing MD results from: pretraining_md_results
+2024-12-26 14:21:33,742 - INFO - Found main log file: pretraining_md_results/logs/pretraining_md_simulation.log
+2024-12-26 14:21:33,742 - INFO - Found diffusion coefficient for 700.0K: 1.63e-05 cm²/s
+2024-12-26 14:21:33,742 - INFO - Found diffusion coefficient for 800.0K: 4.16e-05 cm²/s
+2024-12-26 14:21:33,742 - INFO - Found diffusion coefficient for 900.0K: 7.03e-05 cm²/s
+2024-12-26 14:21:33,742 - INFO - Found diffusion coefficient for 1000.0K: 9.97e-05 cm²/s
+2024-12-26 14:21:33,743 - INFO - Found diffusion coefficient for 1100.0K: 2.92e-04 cm²/s
+2024-12-26 14:21:33,743 - INFO - 
+Extracted diffusion coefficients:
+2024-12-26 14:21:33,743 - INFO - Temperature (K) | Diffusion Coefficient (cm²/s)
+2024-12-26 14:21:33,743 - INFO - --------------------------------------------------
+2024-12-26 14:21:33,743 - INFO -         700.0 | 1.629400e-05
+2024-12-26 14:21:33,743 - INFO -         800.0 | 4.162700e-05
+2024-12-26 14:21:33,743 - INFO -         900.0 | 7.033600e-05
+2024-12-26 14:21:33,743 - INFO -        1000.0 | 9.968000e-05
+2024-12-26 14:21:33,743 - INFO -        1100.0 | 2.916000e-04
+2024-12-26 14:21:35,149 - INFO - 
+Arrhenius Analysis Results:
+2024-12-26 14:21:35,149 - INFO - Activation Energy: 0.437 eV
+2024-12-26 14:21:35,149 - INFO - Pre-exponential factor: 2.17e-02 cm²/s
+2024-12-26 14:21:35,149 - INFO - R-squared: 0.9547
+2024-12-26 14:21:35,149 - INFO - Analysis completed successfully
+2024-12-26 14:21:44,569 - INFO - Parsing MD results from: pretraining_md_results
+2024-12-26 14:21:44,570 - INFO - Found main log file: pretraining_md_results/logs/pretraining_md_simulation.log
+2024-12-26 14:21:44,570 - INFO - Found diffusion coefficient for 700.0K: 1.63e-05 cm²/s
+2024-12-26 14:21:44,570 - INFO - Found diffusion coefficient for 800.0K: 4.16e-05 cm²/s
+2024-12-26 14:21:44,570 - INFO - Found diffusion coefficient for 900.0K: 7.03e-05 cm²/s
+2024-12-26 14:21:44,570 - INFO - Found diffusion coefficient for 1000.0K: 9.97e-05 cm²/s
+2024-12-26 14:21:44,570 - INFO - Found diffusion coefficient for 1100.0K: 1.92e-04 cm²/s
+2024-12-26 14:21:44,570 - INFO - 
+Extracted diffusion coefficients:
+2024-12-26 14:21:44,570 - INFO - Temperature (K) | Diffusion Coefficient (cm²/s)
+2024-12-26 14:21:44,570 - INFO - --------------------------------------------------
+2024-12-26 14:21:44,570 - INFO -         700.0 | 1.629400e-05
+2024-12-26 14:21:44,570 - INFO -         800.0 | 4.162700e-05
+2024-12-26 14:21:44,570 - INFO -         900.0 | 7.033600e-05
+2024-12-26 14:21:44,570 - INFO -        1000.0 | 9.968000e-05
+2024-12-26 14:21:44,570 - INFO -        1100.0 | 1.916000e-04
+2024-12-26 14:21:45,298 - INFO - 
+Arrhenius Analysis Results:
+2024-12-26 14:21:45,298 - INFO - Activation Energy: 0.387 eV
+2024-12-26 14:21:45,298 - INFO - Pre-exponential factor: 1.04e-02 cm²/s
+2024-12-26 14:21:45,298 - INFO - R-squared: 0.9876
+2024-12-26 14:21:45,299 - INFO - Analysis completed successfully
+2024-12-26 14:21:50,907 - INFO - Parsing MD results from: pretraining_md_results
+2024-12-26 14:21:50,907 - INFO - Found main log file: pretraining_md_results/logs/pretraining_md_simulation.log
+2024-12-26 14:21:50,907 - INFO - Found diffusion coefficient for 700.0K: 1.63e-05 cm²/s
+2024-12-26 14:21:50,907 - INFO - Found diffusion coefficient for 800.0K: 4.16e-05 cm²/s
+2024-12-26 14:21:50,907 - INFO - Found diffusion coefficient for 900.0K: 7.03e-05 cm²/s
+2024-12-26 14:21:50,907 - INFO - Found diffusion coefficient for 1000.0K: 9.97e-05 cm²/s
+2024-12-26 14:21:50,907 - INFO - Found diffusion coefficient for 1100.0K: 3.92e-04 cm²/s
+2024-12-26 14:21:50,907 - INFO - 
+Extracted diffusion coefficients:
+2024-12-26 14:21:50,907 - INFO - Temperature (K) | Diffusion Coefficient (cm²/s)
+2024-12-26 14:21:50,907 - INFO - --------------------------------------------------
+2024-12-26 14:21:50,907 - INFO -         700.0 | 1.629400e-05
+2024-12-26 14:21:50,907 - INFO -         800.0 | 4.162700e-05
+2024-12-26 14:21:50,907 - INFO -         900.0 | 7.033600e-05
+2024-12-26 14:21:50,908 - INFO -        1000.0 | 9.968000e-05
+2024-12-26 14:21:50,908 - INFO -        1100.0 | 3.916000e-04
+2024-12-26 14:21:51,622 - INFO - 
+Arrhenius Analysis Results:
+2024-12-26 14:21:51,622 - INFO - Activation Energy: 0.471 eV
+2024-12-26 14:21:51,622 - INFO - Pre-exponential factor: 3.64e-02 cm²/s
+2024-12-26 14:21:51,622 - INFO - R-squared: 0.9228
+2024-12-26 14:21:51,622 - INFO - Analysis completed successfully
+2024-12-26 14:22:07,261 - INFO - Parsing MD results from: pretraining_md_results
+2024-12-26 14:22:07,262 - INFO - Found main log file: pretraining_md_results/logs/pretraining_md_simulation.log
+2024-12-26 14:22:07,262 - INFO - Found diffusion coefficient for 700.0K: 1.63e-05 cm²/s
+2024-12-26 14:22:07,262 - INFO - Found diffusion coefficient for 800.0K: 4.16e-05 cm²/s
+2024-12-26 14:22:07,262 - INFO - Found diffusion coefficient for 900.0K: 7.03e-05 cm²/s
+2024-12-26 14:22:07,262 - INFO - Found diffusion coefficient for 1000.0K: 9.68e-05 cm²/s
+2024-12-26 14:22:07,262 - INFO - Found diffusion coefficient for 1100.0K: 2.92e-04 cm²/s
+2024-12-26 14:22:07,262 - INFO - 
+Extracted diffusion coefficients:
+2024-12-26 14:22:07,262 - INFO - Temperature (K) | Diffusion Coefficient (cm²/s)
+2024-12-26 14:22:07,262 - INFO - --------------------------------------------------
+2024-12-26 14:22:07,262 - INFO -         700.0 | 1.629400e-05
+2024-12-26 14:22:07,262 - INFO -         800.0 | 4.162700e-05
+2024-12-26 14:22:07,262 - INFO -         900.0 | 7.033600e-05
+2024-12-26 14:22:07,262 - INFO -        1000.0 | 9.680000e-05
+2024-12-26 14:22:07,262 - INFO -        1100.0 | 2.916000e-04
+2024-12-26 14:22:08,025 - INFO - 
+Arrhenius Analysis Results:
+2024-12-26 14:22:08,025 - INFO - Activation Energy: 0.435 eV
+2024-12-26 14:22:08,025 - INFO - Pre-exponential factor: 2.10e-02 cm²/s
+2024-12-26 14:22:08,025 - INFO - R-squared: 0.9502
+2024-12-26 14:22:08,025 - INFO - Analysis completed successfully
+2024-12-26 14:22:14,159 - INFO - Parsing MD results from: pretraining_md_results
+2024-12-26 14:22:14,160 - INFO - Found main log file: pretraining_md_results/logs/pretraining_md_simulation.log
+2024-12-26 14:22:14,160 - INFO - Found diffusion coefficient for 700.0K: 1.63e-05 cm²/s
+2024-12-26 14:22:14,160 - INFO - Found diffusion coefficient for 800.0K: 4.16e-05 cm²/s
+2024-12-26 14:22:14,160 - INFO - Found diffusion coefficient for 900.0K: 7.03e-05 cm²/s
+2024-12-26 14:22:14,160 - INFO - Found diffusion coefficient for 1000.0K: 1.97e-04 cm²/s
+2024-12-26 14:22:14,160 - INFO - Found diffusion coefficient for 1100.0K: 2.92e-04 cm²/s
+2024-12-26 14:22:14,161 - INFO - 
+Extracted diffusion coefficients:
+2024-12-26 14:22:14,161 - INFO - Temperature (K) | Diffusion Coefficient (cm²/s)
+2024-12-26 14:22:14,161 - INFO - --------------------------------------------------
+2024-12-26 14:22:14,161 - INFO -         700.0 | 1.629400e-05
+2024-12-26 14:22:14,161 - INFO -         800.0 | 4.162700e-05
+2024-12-26 14:22:14,161 - INFO -         900.0 | 7.033600e-05
+2024-12-26 14:22:14,161 - INFO -        1000.0 | 1.968000e-04
+2024-12-26 14:22:14,161 - INFO -        1100.0 | 2.916000e-04
+2024-12-26 14:22:14,902 - INFO - 
+Arrhenius Analysis Results:
+2024-12-26 14:22:14,902 - INFO - Activation Energy: 0.485 eV
+2024-12-26 14:22:14,902 - INFO - Pre-exponential factor: 4.72e-02 cm²/s
+2024-12-26 14:22:14,902 - INFO - R-squared: 0.9830
+2024-12-26 14:22:14,903 - INFO - Analysis completed successfully
+2024-12-26 14:22:25,593 - INFO - Parsing MD results from: pretraining_md_results
+2024-12-26 14:22:25,594 - INFO - Found main log file: pretraining_md_results/logs/pretraining_md_simulation.log
+2024-12-26 14:22:25,594 - INFO - Found diffusion coefficient for 700.0K: 1.63e-05 cm²/s
+2024-12-26 14:22:25,594 - INFO - Found diffusion coefficient for 800.0K: 4.16e-05 cm²/s
+2024-12-26 14:22:25,594 - INFO - Found diffusion coefficient for 900.0K: 7.03e-05 cm²/s
+2024-12-26 14:22:25,594 - INFO - Found diffusion coefficient for 1000.0K: 1.97e-04 cm²/s
+2024-12-26 14:22:25,594 - INFO - Found diffusion coefficient for 1100.0K: 3.22e-04 cm²/s
+2024-12-26 14:22:25,594 - INFO - 
+Extracted diffusion coefficients:
+2024-12-26 14:22:25,594 - INFO - Temperature (K) | Diffusion Coefficient (cm²/s)
+2024-12-26 14:22:25,594 - INFO - --------------------------------------------------
+2024-12-26 14:22:25,594 - INFO -         700.0 | 1.629400e-05
+2024-12-26 14:22:25,594 - INFO -         800.0 | 4.162700e-05
+2024-12-26 14:22:25,594 - INFO -         900.0 | 7.033600e-05
+2024-12-26 14:22:25,594 - INFO -        1000.0 | 1.968000e-04
+2024-12-26 14:22:25,594 - INFO -        1100.0 | 3.216000e-04
+2024-12-26 14:22:26,327 - INFO - 
+Arrhenius Analysis Results:
+2024-12-26 14:22:26,327 - INFO - Activation Energy: 0.497 eV
+2024-12-26 14:22:26,327 - INFO - Pre-exponential factor: 5.60e-02 cm²/s
+2024-12-26 14:22:26,327 - INFO - R-squared: 0.9819
+2024-12-26 14:22:26,327 - INFO - Analysis completed successfully
+2024-12-26 14:24:31,843 - INFO - Parsing MD results from: pretraining_md_results
+2024-12-26 14:24:31,844 - INFO - Found main log file: pretraining_md_results/logs/pretraining_md_simulation.log
+2024-12-26 14:24:31,844 - INFO - Found diffusion coefficient for 700.0K: 1.63e-05 cm²/s
+2024-12-26 14:24:31,844 - INFO - Found diffusion coefficient for 800.0K: 4.16e-05 cm²/s
+2024-12-26 14:24:31,844 - INFO - Found diffusion coefficient for 900.0K: 7.03e-05 cm²/s
+2024-12-26 14:24:31,844 - INFO - Found diffusion coefficient for 1000.0K: 1.97e-04 cm²/s
+2024-12-26 14:24:31,844 - INFO - Found diffusion coefficient for 1100.0K: 3.22e-04 cm²/s
+2024-12-26 14:24:31,844 - INFO - 
+Extracted diffusion coefficients:
+2024-12-26 14:24:31,844 - INFO - Temperature (K) | Diffusion Coefficient (cm²/s)
+2024-12-26 14:24:31,844 - INFO - --------------------------------------------------
+2024-12-26 14:24:31,844 - INFO -         700.0 | 1.629400e-05
+2024-12-26 14:24:31,844 - INFO -         800.0 | 4.162700e-05
+2024-12-26 14:24:31,845 - INFO -         900.0 | 7.033600e-05
+2024-12-26 14:24:31,845 - INFO -        1000.0 | 1.968000e-04
+2024-12-26 14:24:31,845 - INFO -        1100.0 | 3.216000e-04
+2024-12-26 14:24:33,267 - INFO - 
+Arrhenius Analysis Results:
+2024-12-26 14:24:33,267 - INFO - Activation Energy: 0.497 eV
+2024-12-26 14:24:33,267 - INFO - Pre-exponential factor: 5.60e-02 cm²/s
+2024-12-26 14:24:33,267 - INFO - R-squared: 0.9819
+2024-12-26 14:24:33,268 - INFO - Analysis completed successfully

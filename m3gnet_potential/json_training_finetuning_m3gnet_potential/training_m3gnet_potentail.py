@@ -118,16 +118,16 @@ lit_module_finetune = PotentialLightningModule(
 # Setup the trainer for fine-tuning
 logger = CSVLogger("logs", name="M3GNet_finetuning")
 trainer = pl.Trainer(
-    max_epochs=1, 
-    accelerator="cpu", 
-    logger=logger, 
+    max_epochs=1,
+    accelerator="cpu",
+    logger=logger,
     inference_mode=False
 )
 
 # Perform fine-tuning
 trainer.fit(
-    model=lit_module_finetune, 
-    train_dataloaders=train_loader, 
+    model=lit_module_finetune,
+    train_dataloaders=train_loader,
     val_dataloaders=val_loader
 )
 

@@ -21,12 +21,13 @@ from matgl.graph.data import MGLDataset, MGLDataLoader, collate_fn_graph
 from matgl.models import M3GNet
 from matgl.utils.training import ModelLightningModule
 
+
 class FineTuningModelModule(ModelLightningModule):
     def __init__(self, model: torch.nn.Module, include_line_graph: bool = True,
                  learning_rate: float = 1e-4, frozen_layers: Optional[list[str]] = None):
         super().__init__(model=model, include_line_graph=include_line_graph)
         self.learning_rate = learning_rate
-        
+
         # Freeze specified layers if any
         if frozen_layers:
             for name, param in self.model.named_parameters():
@@ -49,6 +50,7 @@ class FineTuningModelModule(ModelLightningModule):
             },
         }
 
+
 def load_pretrained_model(checkpoint_path: str, element_types: tuple) -> M3GNet:
     """Load pretrained M3GNet model with weights from checkpoint."""
     model = M3GNet(
@@ -56,42 +58,43 @@ def load_pretrained_model(checkpoint_path: str, element_types: tuple) -> M3GNet:
         is_intensive=True,
         readout_type="set2set",
     )
-    
+
     # Load pretrained weights
     checkpoint = torch.load(checkpoint_path, map_location='cpu')
     model.load_state_dict(checkpoint['state_dict'])
     print(f"Loaded pretrained weights from {checkpoint_path}")
-    
+
     return model
 
-def main(json_path: str = "dataset.json", 
+
+def main(json_path: str = "dataset.json",
          pretrained_path: str = "pretrained_model.ckpt",
-         num_samples: int = 100, 
-         max_epochs: int = 10, 
+         num_samples: int = 100,
+         max_epochs: int = 10,
          batch_size: int = 1,
          learning_rate: float = 1e-4,
          frozen_layers: Optional[list[str]] = None):
     """Main fine-tuning function."""
-    
+
     # Load and prepare dataset (reusing existing code)
     structures, mp_ids, eform_per_atom = load_dataset(json_path)
-    
+
     if num_samples is not None:
         structures = structures[:num_samples]
         eform_per_atom = eform_per_atom[:num_samples]
-    
+
     print(f"Fine-tuning with {len(structures)} structures")
-    
+
     # Validate structures and setup (reusing existing code)
     dataset_elements = validate_structures(structures)
     elem_list = get_element_list(structures)
-    
+
     if not verify_element_coverage(dataset_elements, elem_list):
         raise ValueError("Element coverage verification failed")
-    
+
     # Load pretrained model
     model = load_pretrained_model(pretrained_path, elem_list)
-    
+
     # Setup dataset and data loaders (reusing existing code)
     converter = Structure2Graph(element_types=elem_list, cutoff=4.0)
     mp_dataset = MGLDataset(
@@ -101,14 +104,14 @@ def main(json_path: str = "dataset.json",
         labels={"eform": eform_per_atom},
         include_line_graph=True,
     )
-    
+
     train_data, val_data, test_data = split_dataset(
         mp_dataset,
         frac_list=[0.8, 0.1, 0.1],
         shuffle=True,
         random_state=42,
     )
-    
+
     my_collate_fn = partial(collate_fn_graph, include_line_graph=True)
     train_loader, val_loader, test_loader = MGLDataLoader(
         train_data=train_data,
@@ -118,7 +121,7 @@ def main(json_path: str = "dataset.json",
         batch_size=batch_size,
         num_workers=0,
     )
-    
+
     # Setup fine-tuning module with custom learning rate and frozen layers
     lit_module = FineTuningModelModule(
         model=model,
@@ -126,7 +129,7 @@ def main(json_path: str = "dataset.json",
         learning_rate=learning_rate,
         frozen_layers=frozen_layers
     )
-    
+
     # Setup logging and checkpointing
     logger = CSVLogger("logs", name="M3GNet_finetuning")
     checkpoint_callback = ModelCheckpoint(
@@ -136,7 +139,7 @@ def main(json_path: str = "dataset.json",
         mode="min",
         save_top_k=3,
     )
-    
+
     # Setup trainer with reduced learning rate and early stopping
     trainer = pl.Trainer(
         max_epochs=max_epochs,
@@ -146,7 +149,7 @@ def main(json_path: str = "dataset.json",
         enable_progress_bar=True,
         enable_model_summary=True,
     )
-    
+
     # Fine-tuning
     try:
         trainer.fit(
@@ -154,41 +157,42 @@ def main(json_path: str = "dataset.json",
             train_dataloaders=train_loader,
             val_dataloaders=val_loader
         )
-        
+
         # Save final model
         torch.save({
             'state_dict': model.state_dict(),
             'element_types': elem_list,
         }, 'final_finetuned_model.pt')
-        
+
     except Exception as e:
         print(f"Fine-tuning failed: {str(e)}")
         import traceback
         traceback.print_exc()
         raise
-    
+
     # Plot metrics and cleanup
     plot_training_metrics(logger.version)
     cleanup_files()
 
+
 if __name__ == "__main__":
     import argparse
-    
+
     parser = argparse.ArgumentParser(description='Fine-tune M3GNet model on custom dataset')
     parser.add_argument('json_path', type=str, help='Path to the JSON dataset file')
     parser.add_argument('pretrained_path', type=str, help='Path to pretrained model checkpoint')
     parser.add_argument('--num_samples', type=int, default=None,
-                       help='Number of samples to use (default: all)')
+                        help='Number of samples to use (default: all)')
     parser.add_argument('--max_epochs', type=int, default=10,
-                       help='Maximum number of training epochs (default: 10)')
+                        help='Maximum number of training epochs (default: 10)')
     parser.add_argument('--batch_size', type=int, default=1,
-                       help='Batch size for training (default: 1)')
+                        help='Batch size for training (default: 1)')
     parser.add_argument('--learning_rate', type=float, default=1e-4,
-                       help='Learning rate for fine-tuning (default: 1e-4)')
+                        help='Learning rate for fine-tuning (default: 1e-4)')
     parser.add_argument('--freeze_layers', nargs='+', default=None,
-                       help='List of layer names to freeze (default: None)')
-    
+                        help='List of layer names to freeze (default: None)')
+
     args = parser.parse_args()
-    main(args.json_path, args.pretrained_path, args.num_samples, 
+    main(args.json_path, args.pretrained_path, args.num_samples,
          args.max_epochs, args.batch_size, args.learning_rate,
          args.freeze_layers)

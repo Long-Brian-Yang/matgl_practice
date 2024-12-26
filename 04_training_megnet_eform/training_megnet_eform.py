@@ -1,4 +1,5 @@
 from __future__ import annotations
+from dgl import batch as dgl_batch
 
 import os
 import shutil
@@ -14,7 +15,7 @@ from pymatgen.core import Structure
 from pytorch_lightning.loggers import CSVLogger
 from tqdm import tqdm
 from matgl.ext.pymatgen import Structure2Graph, get_element_list
-from matgl.graph.data import MGLDataset, MGLDataLoader, collate_fn #Version of matgl is 1.0.0
+from matgl.graph.data import MGLDataset, MGLDataLoader, collate_fn  # Version of matgl is 1.0.0
 from matgl.layers import BondExpansion
 from matgl.models import MEGNet
 from matgl.utils.io import RemoteFile
@@ -23,10 +24,9 @@ from matgl.utils.training import ModelLightningModule
 # To suppress warnings for clearer output
 warnings.simplefilter("ignore")
 
-from dgl import batch as dgl_batch
-import torch
 
 # Dataset preparation
+
 def load_dataset() -> tuple[list[Structure], list[str], list[float]]:
     """Raw data loading function.
 

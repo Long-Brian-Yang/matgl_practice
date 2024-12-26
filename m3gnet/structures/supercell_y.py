@@ -8,7 +8,6 @@ from typing import List, Dict, Union, Optional
 from ase.atoms import Atoms
 
 
-
 def calculate_local_energy(structure, index, neighbors, dopant_indices, min_distance=6.0):
     """
     Calculate local energy based on physical principles

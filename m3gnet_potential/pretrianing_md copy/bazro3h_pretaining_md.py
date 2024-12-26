@@ -15,10 +15,11 @@ from pymatgen.core import Structure
 import matgl
 from matgl.ext.ase import PESCalculator, MolecularDynamics
 
+
 class StructureModifier:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
-        
+
     def add_protons(self, atoms: Atoms, n_protons: int) -> Atoms:
         """
         Add protons to the structure based on theoretical understanding.
@@ -142,124 +143,127 @@ class StructureModifier:
 #     """Get BaZrO3 structure from Materials Project database"""
 #     mpr = MPRester(api_key="kzum4sPsW7GCRwtOqgDIr3zhYrfpaguK")
 #     entries = mpr.get_entries("BaZrO3", property_data=["energy_per_atom"])
-    
+
 #     if not entries:
 #         raise ValueError("No BaZrO3 structure found in the database")
-        
+
 #     # Sort by formation energy to get the most stable structure
 #     sorted_entries = sorted(entries, key=lambda e: e.energy_per_atom)
 #     structure = sorted_entries[0].structure
-    
+
 #     # Ensure it is a standardized structure
 #     structure.make_supercell([1, 1, 1])  # Adjust supercell size as needed
 #     structure = structure.get_primitive_structure()
-    
+
 #     return structure
+
 
 def get_bazro3_structure():
     """Get structure with mp-3834 ID from Materials Project database"""
-    mpr = MPRester(api_key="kzum4sPsW7GCRwtOqgDIr3zhYrfpaguK") 
+    mpr = MPRester(api_key="kzum4sPsW7GCRwtOqgDIr3zhYrfpaguK")
     structure = mpr.get_structure_by_material_id("mp-3834")
-    
+
     if not structure:
         raise ValueError("Structure mp-3834 not found in the database")
-    
+
     return structure
+
 
 def calculate_msd(trajectory, atom_index, timestep=1.0):
     """Calculate Mean Square Displacement for a specific atom
-    
+
     Args:
         trajectory: ASE trajectory
         atom_index: Index of the atom to track
         timestep: MD timestep in fs
     """
     positions = []
-    
+
     # Extract positions of the target atom from trajectory
     for atoms in trajectory:
         positions.append(atoms.positions[atom_index])
-    
+
     positions = np.array(positions)
     initial_pos = positions[0]
-    
+
     # Calculate displacement
     displacements = positions - initial_pos
-    
+
     # Calculate MSD with periodic boundary conditions
     msd = np.sum(displacements**2, axis=1)
-    
+
     # Create time axis in ps
     time = np.arange(len(msd)) * timestep / 1000  # Convert fs to ps
-    
+
     return time, msd
+
 
 def main():
     # Setup logging
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger(__name__)
-    
+
     # Get BaZrO3 structure
     test_structure = get_bazro3_structure()
     logger.info("Successfully loaded BaZrO3 structure")
-    
+
     # Load pre-train model and convert structure
     pot = matgl.load_model("M3GNet-MP-2021.2.8-DIRECT-PES")
     ase_adaptor = AseAtomsAdaptor()
     atoms = ase_adaptor.get_atoms(test_structure)
     logger.info("Successfully loaded pre-train model")
-    
+
     # Add proton
     modifier = StructureModifier()
     atoms = modifier.add_protons(atoms, n_protons=1)
     proton_index = len(atoms) - 1
     logger.info(f"Modified structure composition: {atoms.get_chemical_formula()}")
-    
+
     # I want to check the structure with added H
     pmg_structure = AseAtomsAdaptor().get_structure(atoms)
     poscar = Poscar(pmg_structure)
     poscar.write_file("POSCAR_with_H")
     logger.info("Saved structure with added H as POSCAR_with_H")
-    
+
     # Setup MD
     atoms.calc = PESCalculator(potential=pot)
     MaxwellBoltzmannDistribution(atoms, temperature_K=900)
-    
+
     # Create trajectory file
     traj = Trajectory('md_bazro3h.traj', 'w', atoms)
-    
+
     # Setup MD simulation with adjusted parameters
     driver = MolecularDynamics(
         atoms,
         potential=pot,
-        temperature=900, 
-        timestep=1.0,   
-        friction=0.002,  
+        temperature=900,
+        timestep=1.0,
+        friction=0.002,
         trajectory=traj
     )
-    
+
     # Run longer MD simulation
     n_steps = 2000  # Increase number of steps
     logger.info("Starting MD simulation...")
-    
+
     for step in range(n_steps):
         driver.run(1)
         if step % 100 == 0:
             logger.info(f"Step {step}/{n_steps} completed")
-    
+
     traj.close()
-    
+
     # Load trajectory for analysis
     trajectory = Trajectory('md_bazro3h.traj', 'r')
-    
+
     # Calculate MSD
     time, msd = calculate_msd(trajectory, proton_index, timestep=1.0)
-    
+
     # Plot MSD
     fontsize = 24
     plt.figure(figsize=(10, 6))
     plt.plot(time, msd, label="MSD")
-    
+
     # Add linear fit
     model = sm.OLS(msd, time)
     result = model.fit()
@@ -271,17 +275,18 @@ def main():
     plt.tick_params(labelsize=fontsize)
     plt.legend(fontsize=fontsize-4)
     plt.tight_layout()
-    
+
     # Calculate and print diffusion coefficient
     D = slope / 6  # divide by degree of freedom (x, y, z, -x, -y, -z)
     print(f"Diffusion coefficient: {D*1e-16*1e12:6.4e} [cm^2/s]")
-    
+
     plt.savefig('msd_evolution_finetuned.png', dpi=300, bbox_inches='tight')
     plt.close()
-    
+
     logger.info("Diffusion analysis completed")
     logger.info(f"Maximum MSD: {np.max(msd):.2f} Å²")
     logger.info(f"Average MSD: {np.mean(msd):.2f} Å²")
+
 
 if __name__ == "__main__":
     main()

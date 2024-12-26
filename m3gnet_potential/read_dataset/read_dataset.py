@@ -3,6 +3,7 @@ import numpy as np
 from pymatgen.core import Structure
 from mp_api.client import MPRester
 
+
 def save_dataset_to_json(structures, energies, forces, stresses, filename="dataset.json"):
     """
     Save dataset information to JSON file
@@ -15,7 +16,7 @@ def save_dataset_to_json(structures, energies, forces, stresses, filename="datas
             "stresses": []
         }
     }
-    
+
     # Convert structures
     for i, struct in enumerate(structures):
         struct_dict = {
@@ -24,14 +25,15 @@ def save_dataset_to_json(structures, energies, forces, stresses, filename="datas
             "coords": [site.coords.tolist() for site in struct]
         }
         dataset["structures"].append(struct_dict)
-        
+
         dataset["labels"]["energies"].append(float(energies[i]))
         dataset["labels"]["forces"].append(forces[i].tolist())
         dataset["labels"]["stresses"].append(stresses[i].tolist())
-    
+
     # Save with indent for readability
     with open(filename, 'w') as f:
         json.dump(dataset, f, indent=2)
+
 
 def load_dataset_from_json(filename="dataset.json"):
     """
@@ -39,7 +41,7 @@ def load_dataset_from_json(filename="dataset.json"):
     """
     with open(filename, 'r') as f:
         dataset = json.load(f)
-    
+
     # Convert back to structures
     structures = []
     for struct_dict in dataset["structures"]:
@@ -49,12 +51,12 @@ def load_dataset_from_json(filename="dataset.json"):
             coords=struct_dict["coords"]
         )
         structures.append(struct)
-    
+
     # Convert back to numpy arrays
     energies = np.array(dataset["labels"]["energies"], dtype=np.float32)
     forces = [np.array(force, dtype=np.float32) for force in dataset["labels"]["forces"]]
     stresses = [np.array(stress, dtype=np.float32) for stress in dataset["labels"]["stresses"]]
-    
+
     return structures, energies, forces, stresses
 
 

@@ -22,9 +22,10 @@ from matgl.utils.training import ModelLightningModule
 # To suppress warnings for clearer output
 warnings.simplefilter("ignore")
 
+
 def load_dataset() -> tuple[list[Structure], list[str], list[float]]:
     """Raw data loading function.
-    
+
     Returns:
         tuple[list[Structure], list[str], list[float]]: structures, mp_id, Eform_per_atom
     """
@@ -32,7 +33,7 @@ def load_dataset() -> tuple[list[Structure], list[str], list[float]]:
         f = RemoteFile("https://figshare.com/ndownloader/files/15087992")
         with zipfile.ZipFile(f.local_path) as zf:
             zf.extractall(".")
-    
+
     data = pd.read_json("mp.2018.6.1.json")
     structures = []
     mp_ids = []
@@ -46,12 +47,13 @@ def load_dataset() -> tuple[list[Structure], list[str], list[float]]:
             break
     return structures, mp_ids, data["formation_energy_per_atom"].tolist()
 
+
 def main():
     structures, mp_ids, eform_per_atom = load_dataset()
-    
+
     structures = structures[:100]
     eform_per_atom = eform_per_atom[:100]
-    
+
     # get element types in the dataset
     elem_list = get_element_list(structures)
     # setup a graph converter
@@ -64,14 +66,14 @@ def main():
         labels={"eform": eform_per_atom},
         include_line_graph=True,
     )
-    
+
     train_data, val_data, test_data = split_dataset(
         mp_dataset,
         frac_list=[0.8, 0.1, 0.1],
         shuffle=True,
         random_state=42,
     )
-    
+
     my_collate_fn = partial(collate_fn_graph, include_line_graph=True)
     train_loader, val_loader, test_loader = MGLDataLoader(
         train_data=train_data,
@@ -81,7 +83,7 @@ def main():
         batch_size=2,
         num_workers=1,
     )
-    
+
     # setup the architecture of M3GNet model
     model = M3GNet(
         element_types=elem_list,
@@ -90,35 +92,35 @@ def main():
     )
     # setup the M3GNetTrainer
     lit_module = ModelLightningModule(model=model, include_line_graph=True)
-    
+
     logger = CSVLogger("logs", name="M3GNet_training")
     trainer = pl.Trainer(max_epochs=20, accelerator="cpu", logger=logger)
     trainer.fit(model=lit_module, train_dataloaders=train_loader, val_dataloaders=val_loader)
-    
+
     # Get the version directory
     version = logger.version  # Get the actual version number used
     metrics_path = f"logs/M3GNet_training/version_{version}/metrics.csv"
-    
+
     try:
         metrics = pd.read_csv(metrics_path)
-        
+
         # Create a new figure for clarity
         plt.figure(figsize=(10, 6))
-        
+
         # Plot training and validation metrics
         metrics["train_MAE"].dropna().plot(label='Training MAE')
         metrics["val_MAE"].dropna().plot(label='Validation MAE')
-        
+
         plt.xlabel('Epoch')
         plt.ylabel('Mean Absolute Error')
         plt.title('Training Progress')
         plt.legend()
         plt.grid(True)
-        
+
         # Save the plot before cleanup
         plt.savefig('training_progress.png')
         plt.close()
-        
+
     except FileNotFoundError:
         print(f"Could not find metrics file at {metrics_path}")
         print("Available files in logs directory:")
@@ -126,15 +128,16 @@ def main():
             print(f"\nDirectory: {root}")
             for file in files:
                 print(f"- {file}")
-    
+
     # Cleanup
     for fn in ("dgl_graph.bin", "lattice.pt", "dgl_line_graph.bin", "state_attr.pt", "labels.json"):
         try:
             os.remove(fn)
         except FileNotFoundError:
             pass
-    
+
     shutil.rmtree("logs")
+
 
 if __name__ == "__main__":
     main()

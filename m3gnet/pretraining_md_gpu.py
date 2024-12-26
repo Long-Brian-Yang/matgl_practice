@@ -57,7 +57,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='MD Simulation with protons')
     parser.add_argument('--cif-file', type=str, default='./structures/BaZrO3_333.cif',
                         help='Path to input CIF file')
-    parser.add_argument('--temperatures', type=float, nargs='+', default=[800,900,1000],
+    parser.add_argument('--temperatures', type=float, nargs='+', default=[800, 900, 1000],
                         help='Temperatures for MD simulation (K), e.g. 800 900 1000')
     parser.add_argument('--timestep', type=float, default=0.5,
                         help='Timestep for MD simulation (fs)')
@@ -74,7 +74,7 @@ def parse_args():
     parser.add_argument('--window-size', type=int, default=None,
                         help='Window size for MSD calculation')
     parser.add_argument('--loginterval', type=int, default=10,
-                    help='Logging interval for MD simulation')
+                        help='Logging interval for MD simulation')
     parser.add_argument('--device', type=str, default='cuda',
                         help='Device for computation (cpu/cuda)')
     parser.add_argument('--debug', action='store_true',
@@ -308,7 +308,7 @@ def get_structure_from_cif(cif_file: str) -> Structure:
 #                 window_size: int = None) -> None:
 #     """
 #     Analyze MSD for all components and plot results
-    
+
 #     Args:
 #         trajectories (list): List of trajectory files
 #         proton_index (int): Index of the proton atom
@@ -317,7 +317,7 @@ def get_structure_from_cif(cif_file: str) -> Structure:
 #         output_dir (Path): Output directory
 #         logger (logging.Logger): Logger object
 #         window_size (int): Window size for MSD calculation
-        
+
 #     Returns:
 #         None
 #     """
@@ -410,7 +410,7 @@ def get_structure_from_cif(cif_file: str) -> Structure:
 #     plt.close()
 def calculate_msd_sliding_window(trajectory: Trajectory, proton_indices: list,
                                  timestep: float = 0.5,  window_size: int = None,
-                                 loginterval: int =10):
+                                 loginterval: int = 10):
     """
     Calculate mean squared displacement (MSD) using a sliding window approach
 
@@ -425,11 +425,11 @@ def calculate_msd_sliding_window(trajectory: Trajectory, proton_indices: list,
         tuple: time, msd_x, msd_y, msd_z, msd_total, D_x, D_y, D_z, D_total
     """
     logging.debug(f"Calculating MSD for protons: {proton_indices}")
-    
+
     positions_all = np.array([atoms.get_positions() for atoms in trajectory])
     positions = positions_all[:, proton_indices]
     n_frames = len(positions)
-    
+
     if window_size is None:
         window_size = min(n_frames // 2, 2000)
     shift_t = window_size // 6
@@ -440,18 +440,18 @@ def calculate_msd_sliding_window(trajectory: Trajectory, proton_indices: list,
     msd_z = np.zeros(window_size)
     msd_total = np.zeros(window_size)
     counts = np.zeros(window_size)
-    
+
     # Calculate box size for periodic boundary conditions
     box_size = trajectory[0].get_cell().diagonal()
-    
+
     # MSD calculation
     for start in range(0, n_frames - window_size, shift_t):
         window = slice(start, start + window_size)
         ref_pos = positions[start]
-        
+
         # Calculate displacements
         disp = positions[window] - ref_pos[None, :, :]
-        
+
         # Apply periodic boundary conditions for each dimension
         for i in range(3):
             mask = np.abs(disp[..., i]) > box_size[i]/2
@@ -469,7 +469,7 @@ def calculate_msd_sliding_window(trajectory: Trajectory, proton_indices: list,
     msd_y /= counts
     msd_z /= counts
     msd_total /= counts
-    
+
     # Minimal smoothing to handle obvious noise
     window_length = min(11, window_size // 40)
     if window_length > 3 and window_length % 2 == 0:
@@ -479,23 +479,23 @@ def calculate_msd_sliding_window(trajectory: Trajectory, proton_indices: list,
 
     time_per_frame = (timestep * loginterval) / 1000.0  # ps
     time = np.arange(window_size) * time_per_frame
-    
+
     # Fit process
     # Use the middle 80% of data
     start_fit = int(window_size * 0.1)
     end_fit = int(window_size * 0.9)
     X = sm.add_constant(time[start_fit:end_fit])
-    
+
     # Use ordinary least squares
     model_x = sm.OLS(msd_x[start_fit:end_fit], X).fit()
     D_x = model_x.params[1] / 2
-    
+
     model_y = sm.OLS(msd_y[start_fit:end_fit], X).fit()
     D_y = model_y.params[1] / 2
-    
+
     model_z = sm.OLS(msd_z[start_fit:end_fit], X).fit()
     D_z = model_z.params[1] / 2
-    
+
     model_total = sm.OLS(msd_total[start_fit:end_fit], X).fit()
     D_total = model_total.params[1] / 6
 
@@ -614,13 +614,14 @@ def analyze_msd(trajectories: list, proton_indices: list, temperatures: list,
     plt.savefig(output_dir / 'msd_total.png', dpi=300, bbox_inches='tight')
     plt.close()
 
+
 def run_md_simulation(args) -> None:
     """
     Run molecular dynamics simulation at multiple temperatures
 
     Args:
         args (argparse.Namespace): command line arguments
-        
+
     Returns:
         None
     """

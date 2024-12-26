@@ -15,10 +15,11 @@ import os
 import matgl
 from matgl.ext.ase import PESCalculator, MolecularDynamics
 
+
 class StructureModifier:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
-        
+
     def add_protons(self, atoms: Atoms, n_protons: int) -> Atoms:
         """
         Add protons to the structure based on theoretical understanding.
@@ -142,70 +143,74 @@ class StructureModifier:
 #     """Get BaZrO3 structure from Materials Project database"""
 #     mpr = MPRester(api_key="kzum4sPsW7GCRwtOqgDIr3zhYrfpaguK")
 #     entries = mpr.get_entries("BaZrO3", property_data=["energy_per_atom"])
-    
+
 #     if not entries:
 #         raise ValueError("No BaZrO3 structure found in the database")
-        
+
 #     sorted_entries = sorted(entries, key=lambda e: e.energy_per_atom)
 #     structure = sorted_entries[0].structure
 #     structure = structure.get_primitive_structure()
-    
+
 #     return structure
+
+
 def get_bazro3_structure():
     """Get structure with mp-3834 ID from Materials Project database"""
-    mpr = MPRester(api_key="kzum4sPsW7GCRwtOqgDIr3zhYrfpaguK") 
+    mpr = MPRester(api_key="kzum4sPsW7GCRwtOqgDIr3zhYrfpaguK")
     structure = mpr.get_structure_by_material_id("mp-3834")
-    
+
     if not structure:
         raise ValueError("Structure mp-3834 not found in the database")
-    
+
     return structure
+
 
 def calculate_msd(trajectory, atom_index, timestep=1.0):
     """Calculate Mean Square Displacement for a specific atom"""
     positions = []
-    
+
     for atoms in trajectory:
         positions.append(atoms.positions[atom_index])
-    
+
     positions = np.array(positions)
     initial_pos = positions[0]
     displacements = positions - initial_pos
     msd = np.sum(displacements**2, axis=1)
     time = np.arange(len(msd)) * timestep / 1000  # Convert fs to ps
-    
+
     return time, msd
+
 
 def main():
     # Setup logging
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger(__name__)
-    
+
     # Get BaZrO3 structure
     test_structure = get_bazro3_structure()
     logger.info("Successfully loaded BaZrO3 structure")
-    
+
     # Load fine-tuned model directly from saved model
     model_path = "/Users/brian/Documents/matgl_practice/m3gnet_potential/vasp_json_training_finetuning_m3gnet_potential/finetuned_model"
     pot = matgl.load_model(model_path)
     logger.info("Successfully loaded fine-tuned model")
-    
+
     ase_adaptor = AseAtomsAdaptor()
     atoms = ase_adaptor.get_atoms(test_structure)
-    
+
     # Add proton to the structure
     modifier = StructureModifier()
     atoms = modifier.add_protons(atoms, n_protons=1)
     proton_index = len(atoms) - 1
     logger.info(f"Modified structure composition: {atoms.get_chemical_formula()}")
-    
+
     # Setup MD
     atoms.calc = PESCalculator(potential=pot)
     MaxwellBoltzmannDistribution(atoms, temperature_K=900)
-    
+
     # Create trajectory file
     traj = Trajectory('md_bazro3h_finetuned.traj', 'w', atoms)
-    
+
     # Setup MD simulation
     driver = MolecularDynamics(
         atoms,
@@ -215,29 +220,29 @@ def main():
         friction=0.002,
         trajectory=traj
     )
-    
+
     # Run MD
     n_steps = 2000
     logger.info("Starting MD simulation with fine-tuned model...")
-    
+
     for step in range(n_steps):
         driver.run(1)
         if step % 100 == 0:
             logger.info(f"Step {step}/{n_steps} completed")
-    
+
     traj.close()
-    
+
     # Load trajectory for analysis
     trajectory = Trajectory('md_bazro3h_finetuned.traj', 'r')
-    
+
     # Calculate and plot MSD with consistent style
     time, msd = calculate_msd(trajectory, proton_index, timestep=1.0)
-    
+
     # Plot MSD
     fontsize = 24
     plt.figure(figsize=(10, 6))
     plt.plot(time, msd, label="MSD")
-    
+
     # Add linear fit
     model = sm.OLS(msd, time)
     result = model.fit()
@@ -249,17 +254,18 @@ def main():
     plt.tick_params(labelsize=fontsize)
     plt.legend(fontsize=fontsize-4)
     plt.tight_layout()
-    
+
     # Calculate and print diffusion coefficient
     D = slope / 6  # divide by degree of freedom (x, y, z, -x, -y, -z)
     print(f"Diffusion coefficient: {D*1e-16*1e12:6.4e} [cm^2/s]")
-    
+
     plt.savefig('msd_evolution_finetuned.png', dpi=300, bbox_inches='tight')
     plt.close()
-    
+
     logger.info("Diffusion analysis completed")
     logger.info(f"Maximum MSD: {np.max(msd):.2f} Å²")
     logger.info(f"Average MSD: {np.mean(msd):.2f} Å²")
+
 
 if __name__ == "__main__":
     main()
