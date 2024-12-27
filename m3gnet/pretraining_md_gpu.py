@@ -55,17 +55,17 @@ def parse_args():
         args (argparse.Namespace): parsed arguments
     """
     parser = argparse.ArgumentParser(description='MD Simulation with protons')
-    parser.add_argument('--cif-file', type=str, default='./structures/BaZrO3_333.cif',
+    parser.add_argument('--cif-file', type=str, default='./structures/BaZrO3_125.cif',
                         help='Path to input CIF file')
-    parser.add_argument('--temperatures', type=float, nargs='+', default=[800, 900, 1000],
+    parser.add_argument('--temperatures', type=float, nargs='+', default=[1000],
                         help='Temperatures for MD simulation (K), e.g. 800 900 1000')
     parser.add_argument('--timestep', type=float, default=0.5,
                         help='Timestep for MD simulation (fs)')
     parser.add_argument('--friction', type=float, default=0.01,
                         help='Friction coefficient for MD')
-    parser.add_argument('--n-steps', type=int, default=1000,
+    parser.add_argument('--n-steps', type=int, default=20000,
                         help='Number of MD steps')
-    parser.add_argument('--n-protons', type=int, default=1,
+    parser.add_argument('--n-protons', type=int, default=2,
                         help='Number of protons to add')
     parser.add_argument('--output-dir', type=str, default='./pretraining_md_results',
                         help='Directory to save outputs')
@@ -73,7 +73,7 @@ def parse_args():
                         help='Path to fine-tuned model (default: use pretrained)')
     parser.add_argument('--window-size', type=int, default=None,
                         help='Window size for MSD calculation')
-    parser.add_argument('--loginterval', type=int, default=10,
+    parser.add_argument('--loginterval', type=int, default=1,
                         help='Logging interval for MD simulation')
     parser.add_argument('--device', type=str, default='cuda',
                         help='Device for computation (cpu/cuda)')
@@ -433,6 +433,9 @@ def calculate_msd_sliding_window(trajectory: Trajectory, proton_indices: list,
     if window_size is None:
         window_size = min(n_frames // 2, 2000)
     shift_t = window_size // 6
+    # if window_size is None:
+    #     window_size = min(n_frames // 3, 8000)  
+    # shift_t = window_size // 8  
 
     # Initialize arrays
     msd_x = np.zeros(window_size)
@@ -472,6 +475,7 @@ def calculate_msd_sliding_window(trajectory: Trajectory, proton_indices: list,
 
     # Minimal smoothing to handle obvious noise
     window_length = min(11, window_size // 40)
+    # window_length = min(21, window_size // 30)
     if window_length > 3 and window_length % 2 == 0:
         window_length += 1
         # Only slightly smooth the total MSD
@@ -483,7 +487,7 @@ def calculate_msd_sliding_window(trajectory: Trajectory, proton_indices: list,
     # Fit process
     # Use the middle 80% of data
     start_fit = int(window_size * 0.1)
-    end_fit = int(window_size * 0.9)
+    end_fit = int(window_size * 0.95)
     X = sm.add_constant(time[start_fit:end_fit])
 
     # Use ordinary least squares

@@ -55,15 +55,15 @@ def parse_args():
         args (argparse.Namespace): parsed arguments
     """
     parser = argparse.ArgumentParser(description='MD Simulation with protons')
-    parser.add_argument('--cif-file', type=str, default='./structures/BaZrO3_333.cif',
+    parser.add_argument('--cif-file', type=str, default='./structures/BaZrO3_125.cif',
                         help='Path to input CIF file')
-    parser.add_argument('--temperatures', type=float, nargs='+', default=[800],
+    parser.add_argument('--temperatures', type=float, nargs='+', default=[1000],
                         help='Temperatures for MD simulation (K), e.g. 800 900 1000')
     parser.add_argument('--timestep', type=float, default=0.5,
                         help='Timestep for MD simulation (fs)')
     parser.add_argument('--friction', type=float, default=0.01,
                         help='Friction coefficient for MD')
-    parser.add_argument('--n-steps', type=int, default=10000,
+    parser.add_argument('--n-steps', type=int, default=20000,
                         help='Number of MD steps')
     parser.add_argument('--n-protons', type=int, default=2,
                         help='Number of protons to add')
@@ -366,10 +366,10 @@ def analyze_msd(trajectories: list, proton_indices: list, temperatures: list,
         )
 
         # Convert diffusion coefficients to cm²/s
-        D_x_cm2s = D_x * 1e-16 * 1e12
-        D_y_cm2s = D_y * 1e-16 * 1e12
-        D_z_cm2s = D_z * 1e-16 * 1e12
-        D_total_cm2s = D_total * 1e-16 * 1e12
+        D_x_cm2s = D_x * 1e-16 / 1e-12
+        D_y_cm2s = D_y * 1e-16 / 1e-12
+        D_z_cm2s = D_z * 1e-16 / 1e-12
+        D_total_cm2s = D_total * 1e-16 / 1e-12
 
         # Plot each component
         msds = [msd_x, msd_y, msd_z, msd_total]
