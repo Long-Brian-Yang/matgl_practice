@@ -209,8 +209,8 @@ if __name__ == "__main__":
     # Example usage
     composition = monte_carlo_doping(
         input_file="BaZrO3.cif",
-        output_file="BaZrO3_125.cif",
-        supercell_matrix=[2, 2, 2],
+        output_file="BaZrO3_125_3.cif",
+        supercell_matrix=[3, 3, 3],
         doping_fraction=0.125,
         temperature=800,
         mc_steps=1000,

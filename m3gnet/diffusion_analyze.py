@@ -13,7 +13,6 @@ EV_TO_KJ_PER_MOL = 96.485  # Conversion factor from eV to kJ/mol
 
 warnings.filterwarnings("ignore")
 
-
 def setup_logging(log_dir: str = "logs") -> None:
     """
     Setup logging system
@@ -33,7 +32,6 @@ def setup_logging(log_dir: str = "logs") -> None:
             logging.StreamHandler()
         ]
     )
-
 
 def parse_md_logs(md_dir: Path) -> tuple:
     """
@@ -113,7 +111,6 @@ def parse_md_logs(md_dir: Path) -> tuple:
 
     return list(temperatures), list(diffusion_coeffs)
 
-
 def parse_single_log(log_file: Path, temperature: float) -> float:
     """
     Parse a single MD log file to extract the diffusion coefficient
@@ -145,7 +142,6 @@ def parse_single_log(log_file: Path, temperature: float) -> float:
 
     return None
 
-
 def analyze_arrhenius(temperatures: list, diffusion_coeffs: list,
                       output_dir: Path, logger: logging.Logger) -> None:
     """
@@ -157,7 +153,7 @@ def analyze_arrhenius(temperatures: list, diffusion_coeffs: list,
         output_dir (Path): Output directory for plots and results
         logger (logging.Logger): Logger object
     """
-    # --- 1. Arrhenius 拟合 ---
+    # --- 1. Arrhenius fitting ---
     temps = np.array(temperatures)
     D_values = np.array(diffusion_coeffs)
     inv_T = 1.0 / temps
@@ -167,71 +163,64 @@ def analyze_arrhenius(temperatures: list, diffusion_coeffs: list,
     slope, intercept = popt
     slope_err, intercept_err = np.sqrt(np.diag(pcov))
 
-    # 计算激活能和前指数因子
+    # Calculate activation energy and pre-exponential factor
     Ea = -slope * KB  # eV
     A = np.exp(intercept)  # cm²/s
     R_squared = np.corrcoef(inv_T, ln_D)[0, 1]**2
 
-    # --- 2. 创建双轴图 ---
+    # --- 2. Create dual-axis plot ---
     fontsize = 16
     fig, ax_bottom = plt.subplots(figsize=(10, 8))
-    ax_top = ax_bottom.twiny()  # 共享 y 轴，独立 x 轴
+    ax_top = ax_bottom.twiny()  # Share y-axis, independent x-axis
 
-    # 下方 x 轴数据: x_bottom = 1000 / T
+    # Bottom x-axis data: x_bottom = 1000 / T
     x_bottom = 1000.0 * inv_T
     y_data = ln_D
 
-    # --- 2.1 作散点 ---
+    # --- 2.1 Plot scatter ---
     ax_bottom.scatter(x_bottom, y_data, color='blue', label='MD results')
 
-    # 拟合直线: 为了和散点范围一致，这里只取你有的温度范围
+    # Fitted line: To match the range of scatter points, only take the temperature range you have
     x_fit = np.linspace(x_bottom.min(), x_bottom.max(), 50)
-    # 反推回去 -> invT_fit = x_fit / 1000
+    # Back-calculate -> invT_fit = x_fit / 1000
     invT_fit = x_fit / 1000.0
     ln_D_fit = slope * invT_fit + intercept
     ax_bottom.plot(x_fit, ln_D_fit, 'r--', label='Arrhenius fit')
 
-    # --- 2.2 设置下方坐标轴 (1000/T) ---
+    # --- 2.2 Set bottom axis (1000/T) ---
     ax_bottom.set_xlabel('1000/T (K⁻¹)', fontsize=fontsize-2)
     ax_bottom.set_ylabel('ln(D) [D in cm²/s]', fontsize=fontsize-2)
     ax_bottom.set_title('Arrhenius Plot for Proton Diffusion (M3GNet Pre-training)', fontsize=fontsize)
     ax_bottom.grid(True, alpha=0.3)
     ax_bottom.legend(fontsize=fontsize-4)
 
-    # 根据你的温度，手动指定刻度位置
+    # Manually specify tick positions based on your temperatures
     x_ticks_bottom = [1000.0 / T for T in temps]
-    # 如果你想让 700K 在右、1100K 在左，就 reverse=True
+    # If you want 700K on the right and 1100K on the left, set reverse=True
     x_ticks_bottom = sorted(x_ticks_bottom, reverse=True)
     ax_bottom.set_xticks(x_ticks_bottom)
     ax_bottom.set_xticklabels([f"{v:.2f}" for v in x_ticks_bottom])
 
-    # 调整下方显示范围
+    # Adjust bottom display range
     margin = 0.1*(max(x_bottom) - min(x_bottom))
     ax_bottom.set_xlim(min(x_bottom)-margin, max(x_bottom)+margin)
 
-    # --- 2.3 设置上方坐标轴 (T in K) ---
-    # 与下方共享相同的 x 范围
+    # --- 2.3 Set top axis (T in K) ---
+    # Share the same x range as the bottom axis
     ax_top.set_xlim(ax_bottom.get_xlim())
 
-    # 定义一个函数：将 (1000/T) -> T
+    # Define a function: convert (1000/T) -> T
     def bottom_to_top(xvals):
         return [1000.0 / x if x != 0 else 0 for x in xvals]
 
-    # 顶轴刻度位置与下轴相同，但标签要变成温度
+    # Top axis tick positions are the same as the bottom, but labels should be temperatures
     ax_top.set_xticks(x_ticks_bottom)
     ax_top.set_xticklabels([f"{int(bottom_to_top([xt])[0])} K" for xt in x_ticks_bottom])
 
-    # 如果你不想显示顶轴的 "Temperature (K)"，可以注释掉下面这行
+    # If you don't want to display the top axis "Temperature (K)", you can comment out the following line
     # ax_top.set_xlabel('Temperature (K)', fontsize=fontsize-2)
 
     # Add text box with results
-    # textstr = '\n'.join((
-    #     f'Ea = {Ea:.3f} ± {Ea_err:.3f} eV',
-    #     f'Ea = {Ea_kJ_mol:.1f} ± {Ea_err_kJ_mol:.1f} kJ/mol',
-    #     f'A = {A:.2e} ± {A_err:.2e} cm²/s',
-    #     f'R² = {R_squared:.4f}'
-    # ))
-    # --- 2.4 在图上添加文本框 ---
     textstr = '\n'.join((
         f'Ea = {Ea:.3f} eV',
         f'Do = {A:.2e} cm²/s',
@@ -247,12 +236,12 @@ def analyze_arrhenius(temperatures: list, diffusion_coeffs: list,
         bbox=dict(boxstyle='round', facecolor='white', alpha=0.8)
     )
 
-    # --- 3. 保存并关闭 ---
+    # --- 3. Save and close ---
     plt.tight_layout()
     plt.savefig(output_dir / 'arrhenius_plot.png', dpi=300, bbox_inches='tight')
     plt.close()
 
-    # --- 4. 打印或保存日志 ---
+    # --- 4. Print or save log ---
     logger.info("\nArrhenius Analysis Results:")
     logger.info(f"Activation Energy: {Ea:.3f} eV")
     logger.info(f"Pre-exponential factor: {A:.2e} cm²/s")
@@ -270,7 +259,6 @@ def analyze_arrhenius(temperatures: list, diffusion_coeffs: list,
         for T, D in zip(temperatures, diffusion_coeffs):
             f.write(f"{T:13.1f} | {D:.6e}\n")
 
-
 def parse_args():
     """Parse command line arguments"""
     parser = argparse.ArgumentParser(description='Analyze MD simulation results')
@@ -281,7 +269,6 @@ def parse_args():
     parser.add_argument('--debug', action='store_true',
                         help='Enable debug mode')
     return parser.parse_args()
-
 
 def main():
     """Main function"""
@@ -309,7 +296,6 @@ def main():
     except Exception as e:
         logger.error(f"Analysis failed: {str(e)}")
         raise
-
 
 if __name__ == "__main__":
     try:

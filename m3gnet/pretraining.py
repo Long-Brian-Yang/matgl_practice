@@ -43,11 +43,11 @@ def parse_args():
         args (argparse.Namespace): parsed arguments
     """
     parser = argparse.ArgumentParser(description='Pretrain M3GNet model')
-    parser.add_argument('--max-epochs', type=int, default=1,
+    parser.add_argument('--max-epochs', type=int, default=100,
                         help='Maximum number of training epochs')
-    parser.add_argument('--batch-size', type=int, default=1,
+    parser.add_argument('--batch-size', type=int, default=4,
                         help='Training batch size')
-    parser.add_argument('--learning-rate', type=float, default=1e-3,
+    parser.add_argument('--learning-rate', type=float, default=5e-4,
                         help='Learning rate for training')
     parser.add_argument('--force-weight', type=float, default=1.0,
                         help='Weight for force loss')
@@ -61,7 +61,7 @@ def parse_args():
                         help='Patience for early stopping')
     parser.add_argument('--output-dir', type=str, default='./trained_model',
                         help='Directory to save outputs')
-    parser.add_argument('--dataset-path', type=str, default='./data/dataset.json',
+    parser.add_argument('--dataset-path', type=str, default='./data/perovskite_dataset.json',
                         help='Path to dataset JSON file')
     parser.add_argument('--device', type=str, default='cpu',
                         help='Training device (cpu/cuda)')

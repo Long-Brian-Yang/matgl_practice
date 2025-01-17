@@ -83,76 +83,245 @@ def parse_args():
     return parser.parse_args()
 
 
+# def add_protons(atoms: Atoms, n_protons: int, pot=None) -> Atoms:
+#     """
+#     Add protons to the structure near oxygen atoms
+
+#     Args:
+#         atoms (Atoms): input structure
+#         n_protons (int): number of protons to add
+#         pot (matgl.Potential): potential model for energy minimization
+
+#     Returns:
+#         atoms (Atoms): structure with protons added
+#     """
+#     logger = logging.getLogger(__name__)
+#     OH_BOND_LENGTH = 0.98  # Å
+#     MAX_NEIGHBOR_DIST = 3.0  # Å
+
+#     o_indices = [i for i, symbol in enumerate(atoms.get_chemical_symbols()) if symbol == 'O']
+
+#     if len(o_indices) < n_protons:
+#         logger.warning(f"Number of protons ({n_protons}) exceeds number of O atoms ({len(o_indices)})")
+#         n_protons = len(o_indices)
+
+#     used_oxygens = []
+#     cell = atoms.get_cell()
+#     pbc = atoms.get_pbc()
+
+#     for i in range(n_protons):
+#         available_oxygens = [idx for idx in o_indices if idx not in used_oxygens]
+#         if not available_oxygens:
+#             logger.warning("No more available oxygen atoms for proton incorporation")
+#             break
+
+#         o_idx = available_oxygens[0]
+#         used_oxygens.append(o_idx)
+#         o_pos = atoms.positions[o_idx]
+
+#         # Find neighboring oxygen atoms
+#         neighbors = []
+#         for other_idx in o_indices:
+#             if other_idx != o_idx:
+#                 dist = atoms.get_distance(o_idx, other_idx, mic=True)
+#                 if dist < MAX_NEIGHBOR_DIST:
+#                     vec = atoms.get_distance(o_idx, other_idx, vector=True, mic=True)
+#                     neighbors.append({'idx': other_idx, 'dist': dist, 'vec': vec})
+
+#         # Calculate proton position direction
+#         direction = np.zeros(3)
+#         if neighbors:
+#             for n in sorted(neighbors, key=lambda x: x['dist'])[:3]:
+#                 weight = 1.0 / max(n['dist'], 0.1)
+#                 direction -= n['vec'] * weight
+
+#             norm = np.linalg.norm(direction)
+#             if norm > 1e-6:
+#                 direction = direction / norm
+#             else:
+#                 direction = np.array([0, 0, 1])
+#         else:
+#             direction = np.array([0, 0, 1])
+
+#         h_pos = o_pos + direction * OH_BOND_LENGTH
+
+#         # Check position validity
+#         is_valid = True
+#         min_allowed_dist = 0.8  # Å
+#         for pos in atoms.positions:
+#             dist = np.linalg.norm(h_pos - pos)
+#             if dist < min_allowed_dist:
+#                 is_valid = False
+#                 break
+
+#         # Apply periodic boundary conditions if needed
+#         if any(pbc):
+#             scaled_pos = np.linalg.solve(cell.T, h_pos.T).T
+#             scaled_pos = scaled_pos % 1.0
+#             h_pos = cell.T @ scaled_pos
+
+#         if not is_valid:
+#             logger.warning(f"Invalid proton position near O atom {o_idx}, trying different direction")
+#             continue
+
+#         # Add proton
+#         atoms.append(Atom('H', position=h_pos))
+#         oh_dist = atoms.get_distance(-1, o_idx, mic=True)
+
+#         logger.info(f"Added proton {i+1}/{n_protons}:")
+#         logger.info(f"  Near O atom: {o_idx}")
+#         logger.info(f"  Position: {h_pos}")
+#         logger.info(f"  OH distance: {oh_dist:.3f} Å")
+
+#     logger.info(f"Successfully added {n_protons} protons")
+#     logger.info(f"Final composition: {atoms.get_chemical_formula()}")
+
+#     # Perform energy minimization if potential is provided
+#     if pot is not None:
+#         logger.info("Starting energy minimization...")
+#         atoms.calc = PESCalculator(potential=pot)
+#         optimizer = BFGS(atoms)
+#         try:
+#             optimizer.run(fmax=0.05, steps=200)
+#             logger.info(f"Energy minimization completed in {optimizer.get_number_of_steps()} steps")
+#         except Exception as e:
+#             logger.warning(f"Energy minimization failed: {str(e)}")
+
+#     return atoms
+
+# def add_protons(atoms: Atoms, n_protons: int) -> Atoms:
+#     logger = logging.getLogger(__name__)
+#     OH_BOND_LENGTH = 0.98  # Å
+#     MAX_NEIGHBOR_DIST = 3.0  # Å
+
+#     # 1. 找出所有氧原子
+#     o_indices = [i for i, symbol in enumerate(atoms.get_chemical_symbols()) if symbol == 'O']
+
+#     # 2. 计算晶胞中心
+#     cell_center = np.mean(atoms.get_cell(), axis=0) / 2
+
+#     # 3. 计算并排序氧原子到中心的距离
+#     o_distances = []
+#     for idx in o_indices:
+#         pos = atoms.positions[idx]
+#         # 使用 mic=True 来考虑周期性边界条件
+#         dist = atoms.get_distance(idx, -1, mic=True, vector=True)
+#         dist_to_center = np.linalg.norm(dist)
+#         o_distances.append((dist_to_center, idx))
+
+#     # 4. 选择最靠近中心的氧原子
+#     o_distances.sort()  # 按距离排序
+#     candidate_o_indices = [idx for _, idx in o_distances[:n_protons*2]]  # 选择更多候选点
+
+#     used_oxygens = []
+#     cell = atoms.get_cell()
+#     pbc = atoms.get_pbc()
+
+#     for i in range(n_protons):
+#         # 从候选氧原子中选择未使用的
+#         available_oxygens = [idx for idx in candidate_o_indices if idx not in used_oxygens]
+#         if not available_oxygens:
+#             break
+
+#         o_idx = available_oxygens[0]
+#         used_oxygens.append(o_idx)
+#         o_pos = atoms.positions[o_idx]
+
+#         # 寻找邻近氧原子
+#         neighbors = []
+#         for other_idx in o_indices:
+#             if other_idx != o_idx:
+#                 dist = atoms.get_distance(o_idx, other_idx, mic=True)
+#                 if dist < MAX_NEIGHBOR_DIST:
+#                     vec = atoms.get_distance(o_idx, other_idx, vector=True, mic=True)
+#                     neighbors.append({'idx': other_idx, 'dist': dist, 'vec': vec})
+
+#         # 计算质子位置，偏向体相内部
+#         direction = np.zeros(3)
+#         if neighbors:
+#             # 结合邻近氧原子方向和朝向中心的方向
+#             center_dir = cell_center - o_pos
+#             center_dir = center_dir / np.linalg.norm(center_dir)
+
+#             for n in sorted(neighbors, key=lambda x: x['dist'])[:3]:
+#                 weight = 1.0 / max(n['dist'], 0.1)
+#                 direction -= n['vec'] * weight
+
+#             # 添加朝向中心的分量
+#             direction += center_dir * 0.5
+#             direction = direction / np.linalg.norm(direction)
+#         else:
+#             # 如果没有邻近氧原子，使用朝向中心的方向
+#             direction = cell_center - o_pos
+#             direction = direction / np.linalg.norm(direction)
+
+#         h_pos = o_pos + direction * OH_BOND_LENGTH
+
+#         # 检查位置有效性
+#         is_valid = True
+#         min_allowed_dist = 0.8  # Å
+#         for pos in atoms.positions:
+#             dist = np.linalg.norm(h_pos - pos)
+#             if dist < min_allowed_dist:
+#                 is_valid = False
+#                 break
+
+#         if any(pbc):
+#             scaled_pos = np.linalg.solve(cell.T, h_pos.T).T
+#             scaled_pos = scaled_pos % 1.0
+#             h_pos = cell.T @ scaled_pos
+
+#         if not is_valid:
+#             logger.warning(f"Invalid proton position near O atom {o_idx}, trying different direction")
+#             continue
+
+#         atoms.append(Atom('H', position=h_pos))
+#         oh_dist = atoms.get_distance(-1, o_idx, mic=True)
+
+#         logger.info(f"Added proton {i+1}/{n_protons}:")
+#         logger.info(f"  Near O atom: {o_idx}")
+#         logger.info(f"  Position: {h_pos}")
+#         logger.info(f"  OH distance: {oh_dist:.3f} Å")
+#         logger.info(f"  Distance to center: {np.linalg.norm(h_pos - cell_center):.3f} Å")
+
+#     return atoms
 def add_protons(atoms: Atoms, n_protons: int, pot=None) -> Atoms:
     """
-    Add protons to the structure near oxygen atoms
+    Add protons to the structure near oxygen atoms with potential-guided relaxation
 
     Args:
-        atoms (Atoms): input structure
-        n_protons (int): number of protons to add
-        pot (matgl.Potential): potential model for energy minimization
+        atoms (Atoms): Input structure
+        n_protons (int): Number of protons to add
+        pot (matgl.Potential): Potential for energy minimization
 
     Returns:
-        atoms (Atoms): structure with protons added
+        atoms (Atoms): Structure with protons added
     """
     logger = logging.getLogger(__name__)
-    OH_BOND_LENGTH = 0.98  # Å
-    MAX_NEIGHBOR_DIST = 3.0  # Å
+    OH_BOND_LENGTH = 0.98  # Initial O-H bond length in Å
 
+    # Find all oxygen atoms
     o_indices = [i for i, symbol in enumerate(atoms.get_chemical_symbols()) if symbol == 'O']
 
     if len(o_indices) < n_protons:
         logger.warning(f"Number of protons ({n_protons}) exceeds number of O atoms ({len(o_indices)})")
         n_protons = len(o_indices)
 
-    used_oxygens = []
+    # Randomly select oxygen atoms to attach protons
+    selected_o_indices = np.random.choice(o_indices, n_protons, replace=False)
+
     cell = atoms.get_cell()
     pbc = atoms.get_pbc()
 
-    for i in range(n_protons):
-        available_oxygens = [idx for idx in o_indices if idx not in used_oxygens]
-        if not available_oxygens:
-            logger.warning("No more available oxygen atoms for proton incorporation")
-            break
-
-        o_idx = available_oxygens[0]
-        used_oxygens.append(o_idx)
+    for i, o_idx in enumerate(selected_o_indices):
         o_pos = atoms.positions[o_idx]
 
-        # Find neighboring oxygen atoms
-        neighbors = []
-        for other_idx in o_indices:
-            if other_idx != o_idx:
-                dist = atoms.get_distance(o_idx, other_idx, mic=True)
-                if dist < MAX_NEIGHBOR_DIST:
-                    vec = atoms.get_distance(o_idx, other_idx, vector=True, mic=True)
-                    neighbors.append({'idx': other_idx, 'dist': dist, 'vec': vec})
+        # Use random direction for initial proton placement
+        direction = np.random.randn(3)
+        direction = direction / np.linalg.norm(direction)
 
-        # Calculate proton position direction
-        direction = np.zeros(3)
-        if neighbors:
-            for n in sorted(neighbors, key=lambda x: x['dist'])[:3]:
-                weight = 1.0 / max(n['dist'], 0.1)
-                direction -= n['vec'] * weight
-
-            norm = np.linalg.norm(direction)
-            if norm > 1e-6:
-                direction = direction / norm
-            else:
-                direction = np.array([0, 0, 1])
-        else:
-            direction = np.array([0, 0, 1])
-
+        # Place proton at initial position
         h_pos = o_pos + direction * OH_BOND_LENGTH
-
-        # Check position validity
-        is_valid = True
-        min_allowed_dist = 0.8  # Å
-        for pos in atoms.positions:
-            dist = np.linalg.norm(h_pos - pos)
-            if dist < min_allowed_dist:
-                is_valid = False
-                break
 
         # Apply periodic boundary conditions if needed
         if any(pbc):
@@ -160,29 +329,25 @@ def add_protons(atoms: Atoms, n_protons: int, pot=None) -> Atoms:
             scaled_pos = scaled_pos % 1.0
             h_pos = cell.T @ scaled_pos
 
-        if not is_valid:
-            logger.warning(f"Invalid proton position near O atom {o_idx}, trying different direction")
-            continue
-
         # Add proton
         atoms.append(Atom('H', position=h_pos))
         oh_dist = atoms.get_distance(-1, o_idx, mic=True)
 
         logger.info(f"Added proton {i+1}/{n_protons}:")
         logger.info(f"  Near O atom: {o_idx}")
-        logger.info(f"  Position: {h_pos}")
         logger.info(f"  OH distance: {oh_dist:.3f} Å")
 
     logger.info(f"Successfully added {n_protons} protons")
     logger.info(f"Final composition: {atoms.get_chemical_formula()}")
 
-    # Perform energy minimization if potential is provided
+    # Perform very gentle energy minimization if potential is provided
     if pot is not None:
-        logger.info("Starting energy minimization...")
+        logger.info("Starting gentle energy minimization...")
         atoms.calc = PESCalculator(potential=pot)
         optimizer = BFGS(atoms)
         try:
-            optimizer.run(fmax=0.05, steps=200)
+            # Use very loose convergence criteria
+            optimizer.run(fmax=0.5, steps=100)  # 更宽松的力收敛标准，更少的步数
             logger.info(f"Energy minimization completed in {optimizer.get_number_of_steps()} steps")
         except Exception as e:
             logger.warning(f"Energy minimization failed: {str(e)}")
@@ -434,8 +599,8 @@ def calculate_msd_sliding_window(trajectory: Trajectory, proton_indices: list,
         window_size = min(n_frames // 2, 2000)
     shift_t = window_size // 6
     # if window_size is None:
-    #     window_size = min(n_frames // 3, 8000)  
-    # shift_t = window_size // 8  
+    #     window_size = min(n_frames // 3, 8000)
+    # shift_t = window_size // 8
 
     # Initialize arrays
     msd_x = np.zeros(window_size)
