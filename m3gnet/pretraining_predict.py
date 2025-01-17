@@ -15,6 +15,11 @@ import matgl
 
 
 def setup_logging(log_dir: str = "logs") -> None:
+    """
+    Set up logging configuration
+    Args:
+        log_dir: Directory for log files
+    """
     Path(log_dir).mkdir(exist_ok=True)
     logging.basicConfig(
         level=logging.INFO,
@@ -28,13 +33,17 @@ def setup_logging(log_dir: str = "logs") -> None:
 
 def load_dataset(dataset_path: str) -> tuple:
     """
-    加载数据集和DFT能量值
+    Load dataset and DFT energy values
+    Args:
+        dataset_path: Path to the dataset file
+    Returns:
+        structures: List of structures and corresponding DFT energy values
     """
     with open(dataset_path, "r") as f:
         data = json.load(f)
 
     structures = []
-    dft_energies = data["labels"]["energies"]  # 读取DFT能量值
+    dft_energies = data["labels"]["energies"]  # Read DFT energy values
 
     for idx, item in enumerate(data["structures"]):
         structures.append({
@@ -49,6 +58,15 @@ def load_dataset(dataset_path: str) -> tuple:
 
 
 def predict_properties(model_path: str, dataset_path: str, output_dir: str) -> str:
+    """
+    Predict properties using the model and compare with DFT results
+    Args:
+        model_path: Path to the model
+        dataset_path: Path to the dataset
+        output_dir: Output directory
+    Returns:
+        Path to the output file
+    """
     setup_logging()
     logger = logging.getLogger(__name__)
 
@@ -90,7 +108,15 @@ def predict_properties(model_path: str, dataset_path: str, output_dir: str) -> s
 
 
 def calculate_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> tuple:
-    """计算R²和MAE"""
+    """
+    Calculate R² and MAE
+    Args:
+        y_true: True values
+        y_pred: Predicted values
+    Returns:
+        r2: R² value
+        mae: Mean absolute error
+    """
     mae = np.mean(np.abs(y_true - y_pred))
     mean_y = np.mean(y_true)
     ss_tot = np.sum((y_true - mean_y) ** 2)
@@ -100,23 +126,29 @@ def calculate_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> tuple:
 
 
 def plot_predictions(predictions_file: str, output_dir: str) -> None:
+    """
+    Plot the comparison between predicted values and DFT results
+    Args:
+        predictions_file: Path to the predictions file
+        output_dir: Output directory
+    """
     with open(predictions_file, "r") as f:
         predictions = json.load(f)
 
-    # 提取DFT和预测的能量值
+    # Extract DFT and predicted energy values
     dft_energies = np.array([p["dft_energy"] for p in predictions])
     predicted_energies = np.array([p["predicted_energy"] for p in predictions])
 
-    # 计算R²和MAE
+    # Calculate R² and MAE
     r2, mae = calculate_metrics(dft_energies, predicted_energies)
 
-    # 创建图形
+    # Create the plot
     plt.figure(figsize=(10, 8))
 
     plt.scatter(dft_energies, predicted_energies, color=(150/255, 155/255, 199/255),
                 alpha=0.5, s=50)
 
-    # 添加对角线
+    # Add diagonal line
     min_val = min(dft_energies.min(), predicted_energies.min())
     max_val = max(dft_energies.max(), predicted_energies.max())
     plt.plot([min_val, max_val], [min_val, max_val],
@@ -126,7 +158,7 @@ def plot_predictions(predictions_file: str, output_dir: str) -> None:
     plt.ylabel('Predicted Energy (eV)')
     plt.title('Pre-training M3GNet Prediction vs DFT')
 
-    # 添加R²和MAE信息
+    # Add R² and MAE information
     plt.text(0.05, 0.95, f'R² = {r2:.3f}\nMAE = {mae:.3f} eV',
              transform=plt.gca().transAxes,
              bbox=dict(facecolor='white', alpha=0.8),
@@ -138,7 +170,7 @@ def plot_predictions(predictions_file: str, output_dir: str) -> None:
     plt.savefig(output_plot_path, dpi=300, bbox_inches='tight')
     plt.show()
 
-    # 打印统计信息
+    # Print statistics
     print("\nPrediction Statistics:")
     print(f"Energy: R² = {r2:.3f}, MAE = {mae:.3f} eV")
 

@@ -12,12 +12,11 @@ from matgl.ext.ase import PESCalculator, MolecularDynamics, Relaxer
 from matgl.utils.training import PotentialLightningModule
 import matgl
 
-
 def setup_logging(log_dir: str = "logs") -> None:
     """
-    设置日志配置
+    Set up logging configuration
     Args:
-        log_dir: 日志文件目录
+        log_dir: Directory for log files
     """
     Path(log_dir).mkdir(exist_ok=True)
     logging.basicConfig(
@@ -29,31 +28,30 @@ def setup_logging(log_dir: str = "logs") -> None:
         ]
     )
 
-
 def load_dataset(dataset_path: str) -> list:
     """
-    加载数据集和能量值
+    Load dataset and energy values
     Args:
-        dataset_path: 数据集文件路径
+        dataset_path: Path to the dataset file
     Returns:
-        structures: 结构列表和对应的能量值
+        structures: List of structures and corresponding energy values
     """
     with open(dataset_path, "r") as f:
         data = json.load(f)
 
     structures = []
-    # 获取能量值列表
+    # Get the list of energy values
     energies = data["labels"]["energies"]
 
     for idx, item in enumerate(data["structures"]):
-        # 创建结构对象
+        # Create a structure object
         structure = Structure(
             lattice=item["lattice"],
             species=item["species"],
             coords=item["coords"]
         )
 
-        # 获取对应的能量值
+        # Get the corresponding energy value
         energy = energies[idx] if idx < len(energies) else None
 
         structures.append({
@@ -63,16 +61,15 @@ def load_dataset(dataset_path: str) -> list:
 
     return structures
 
-
 def predict_properties(model_path: str, dataset_path: str, output_dir: str) -> str:
     """
-    使用模型预测属性并与DFT结果对比
+    Predict properties using the model and compare with DFT results
     Args:
-        model_path: 模型路径
-        dataset_path: 数据集路径
-        output_dir: 输出目录
+        model_path: Path to the model
+        dataset_path: Path to the dataset
+        output_dir: Output directory
     Returns:
-        输出文件路径
+        Path to the output file
     """
     setup_logging()
     logger = logging.getLogger(__name__)
@@ -99,13 +96,13 @@ def predict_properties(model_path: str, dataset_path: str, output_dir: str) -> s
                 "predicted_forces": predicted_forces.tolist()
             }
 
-            # 如果有DFT能量，添加到预测结果中
+            # If there is DFT energy, add it to the prediction results
             if struct_data['energy'] is not None:
                 prediction["dft_energy"] = float(struct_data['energy'])
 
             predictions.append(prediction)
 
-        # 保存预测结果
+        # Save prediction results
         output_file = Path(output_dir) / "predictions.json"
         output_file.parent.mkdir(parents=True, exist_ok=True)
         with open(output_file, "w") as f:
@@ -118,16 +115,15 @@ def predict_properties(model_path: str, dataset_path: str, output_dir: str) -> s
         logger.error(f"Prediction failed: {str(e)}")
         raise
 
-
 def calculate_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> tuple:
     """
-    计算R²和MAE
+    Calculate R² and MAE
     Args:
-        y_true: 真实值
-        y_pred: 预测值
+        y_true: True values
+        y_pred: Predicted values
     Returns:
-        r2: R²值
-        mae: 平均绝对误差
+        r2: R² value
+        mae: Mean absolute error
     """
     mae = np.mean(np.abs(y_true - y_pred))
     mean_y = np.mean(y_true)
@@ -136,35 +132,34 @@ def calculate_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> tuple:
     r2 = 1 - (ss_res / ss_tot)
     return r2, mae
 
-
 def plot_predictions(predictions_file: str, output_dir: str) -> None:
     """
-    绘制预测值与DFT结果的对比图
+    Plot the comparison between predicted values and DFT results
     Args:
-        predictions_file: 预测结果文件路径
-        output_dir: 输出目录
+        predictions_file: Path to the predictions file
+        output_dir: Output directory
     """
     with open(predictions_file, "r") as f:
         predictions = json.load(f)
 
-    # 检查是否有DFT能量值用于比较
+    # Check if there are DFT energy values for comparison
     has_dft = all("dft_energy" in p for p in predictions)
 
     if has_dft:
-        # 提取DFT和预测的能量值
+        # Extract DFT and predicted energy values
         dft_energies = np.array([p["dft_energy"] for p in predictions])
         predicted_energies = np.array([p["predicted_energy"] for p in predictions])
 
-        # 计算R²和MAE
+        # Calculate R² and MAE
         r2, mae = calculate_metrics(dft_energies, predicted_energies)
 
-        # 创建图形
+        # Create the plot
         plt.figure(figsize=(10, 8))
 
-        # 能量预测对比图
+        # Energy prediction comparison plot
         plt.scatter(dft_energies, predicted_energies, alpha=0.5)
 
-        # 添加对角线
+        # Add diagonal line
         min_val = min(dft_energies.min(), predicted_energies.min())
         max_val = max(dft_energies.max(), predicted_energies.max())
         plt.plot([min_val, max_val], [min_val, max_val], 'k--', label='Perfect prediction')
@@ -173,7 +168,7 @@ def plot_predictions(predictions_file: str, output_dir: str) -> None:
         plt.ylabel('Predicted Energy (eV)')
         plt.title('Fine-tuning M3GNet Prediction vs DFT')
 
-        # 添加R²和MAE信息
+        # Add R² and MAE information
         plt.text(0.05, 0.95, f'R² = {r2:.3f}\nMAE = {mae:.3f} eV',
                  transform=plt.gca().transAxes,
                  bbox=dict(facecolor='white', alpha=0.8),
@@ -181,16 +176,16 @@ def plot_predictions(predictions_file: str, output_dir: str) -> None:
 
         plt.tight_layout()
 
-        # 保存图片
-        output_plot_path = Path(output_dir) / "energy_prediction_comparison.png"
+        # Save the plot
+        output_plot_path = Path(output_dir) / "finetuning_prediction.png"
         plt.savefig(output_plot_path, dpi=300, bbox_inches='tight')
         plt.show()
 
-        # 打印统计信息
+        # Print statistics
         print("\nPrediction Statistics:")
         print(f"Energy: R² = {r2:.3f}, MAE = {mae:.3f} eV")
     else:
-        # 如果没有DFT数据，只显示预测值的分布
+        # If there is no DFT data, only show the distribution of predicted values
         predicted_energies = [p["predicted_energy"] for p in predictions]
 
         plt.figure(figsize=(10, 6))
@@ -199,16 +194,15 @@ def plot_predictions(predictions_file: str, output_dir: str) -> None:
         plt.ylabel('Count')
         plt.title('Distribution of Predicted Energies')
 
-        # 保存图片
-        output_plot_path = Path(output_dir) / "energy_predictions_distribution.png"
+        # Save the plot
+        output_plot_path = Path(output_dir) / "fintuning_prediction.png"
         plt.savefig(output_plot_path, dpi=300, bbox_inches='tight')
         plt.show()
 
-        # 打印统计信息
+        # Print statistics
         print("\nPrediction Statistics:")
         print(f"Mean Predicted Energy: {np.mean(predicted_energies):.3f} eV")
         print(f"Std of Predicted Energy: {np.std(predicted_energies):.3f} eV")
-
 
 if __name__ == "__main__":
     import argparse
