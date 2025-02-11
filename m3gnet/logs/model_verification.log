@@ -1,0 +1,74 @@
+2025-01-27 11:52:38,466 - INFO - Loading fine-tuned model from ./trained_model/final_model
+2025-01-27 11:52:38,466 - ERROR - Model verification failed: [Errno 21] Is a directory: './trained_model/final_model'
+2025-01-27 11:53:07,260 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 11:53:07,274 - WARNING - Failed to parse vasprun.xml: [Errno 2] No such file or directory: './matgl_practice/dataset/read_dataset/vasprun.xml'
+2025-01-27 11:53:07,274 - INFO - Trying to parse OUTCAR instead...
+2025-01-27 11:53:07,275 - ERROR - Model verification failed: [Errno 2] No such file or directory: './matgl_practice/dataset/read_dataset/OUTCAR'
+2025-01-27 11:53:28,902 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 11:53:28,913 - WARNING - Failed to parse vasprun.xml: [Errno 2] No such file or directory: './matgl_practice/dataset/get_dataset/vasprun.xml'
+2025-01-27 11:53:28,913 - INFO - Trying to parse OUTCAR instead...
+2025-01-27 11:53:28,913 - ERROR - Model verification failed: [Errno 2] No such file or directory: './matgl_practice/dataset/get_dataset/OUTCAR'
+2025-01-27 11:54:27,100 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 11:54:27,112 - WARNING - Failed to parse vasprun.xml: [Errno 2] No such file or directory: './matgl_practice/dataset/get_dataset/vasprun.xml'
+2025-01-27 11:54:27,112 - INFO - Trying to parse OUTCAR instead...
+2025-01-27 11:54:27,113 - ERROR - Model verification failed: [Errno 2] No such file or directory: './matgl_practice/dataset/get_dataset/OUTCAR'
+2025-01-27 11:54:47,729 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 11:54:47,741 - WARNING - Failed to parse vasprun.xml: [Errno 2] No such file or directory: '../matgl_practice/dataset/get_dataset/vasprun.xml'
+2025-01-27 11:54:47,742 - INFO - Trying to parse OUTCAR instead...
+2025-01-27 11:54:47,742 - ERROR - Model verification failed: [Errno 2] No such file or directory: '../matgl_practice/dataset/get_dataset/OUTCAR'
+2025-01-27 11:55:12,618 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 11:55:12,632 - WARNING - Failed to parse vasprun.xml: [Errno 2] No such file or directory: './ dataset/get_dataset/vasprun.xml'
+2025-01-27 11:55:12,632 - INFO - Trying to parse OUTCAR instead...
+2025-01-27 11:55:12,632 - ERROR - Model verification failed: [Errno 2] No such file or directory: './dataset/get_dataset/OUTCAR'
+2025-01-27 11:55:40,903 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 11:55:40,915 - WARNING - Failed to parse vasprun.xml: [Errno 2] No such file or directory: './ dataset/get_dataset/vasprun.xml'
+2025-01-27 11:55:40,915 - INFO - Trying to parse OUTCAR instead...
+2025-01-27 11:55:40,999 - ERROR - Model verification failed: 'Outcar' object has no attribute 'structure'
+2025-01-27 11:56:53,769 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 11:56:53,778 - WARNING - Failed to parse vasprun.xml: [Errno 2] No such file or directory: './dataset/vasprun.xml'
+2025-01-27 11:56:53,778 - INFO - Trying to parse OUTCAR instead...
+2025-01-27 11:56:53,778 - ERROR - Model verification failed: [Errno 2] No such file or directory: './dataset/OUTCAR'
+2025-01-27 11:57:06,525 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 11:57:06,537 - WARNING - Failed to parse vasprun.xml: [Errno 2] No such file or directory: '/dataset/vasprun.xml'
+2025-01-27 11:57:06,537 - INFO - Trying to parse OUTCAR instead...
+2025-01-27 11:57:06,537 - ERROR - Model verification failed: [Errno 2] No such file or directory: '/dataset/OUTCAR'
+2025-01-27 11:57:15,857 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 11:57:15,872 - WARNING - Failed to parse vasprun.xml: [Errno 2] No such file or directory: './dataset/vasprun.xml'
+2025-01-27 11:57:15,872 - INFO - Trying to parse OUTCAR instead...
+2025-01-27 11:57:15,873 - ERROR - Model verification failed: [Errno 2] No such file or directory: './dataset/OUTCAR'
+2025-01-27 11:57:33,366 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 11:57:33,378 - WARNING - Failed to parse vasprun.xml: [Errno 2] No such file or directory: './dataset/get_dataset_vasprun.xml'
+2025-01-27 11:57:33,378 - INFO - Trying to parse OUTCAR instead...
+2025-01-27 11:57:33,379 - ERROR - Model verification failed: [Errno 2] No such file or directory: './dataset/OUTCAR'
+2025-01-27 11:57:40,184 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 11:57:40,345 - INFO - Extracted data from vasprun.xml
+2025-01-27 11:57:40,346 - ERROR - Model verification failed: 'dict' object has no attribute 'calc_stresses'
+2025-01-27 11:57:48,281 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 11:57:48,364 - INFO - Extracted data from vasprun.xml
+2025-01-27 11:57:48,364 - ERROR - Model verification failed: 'dict' object has no attribute 'calc_stresses'
+2025-01-27 11:58:02,703 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 11:58:02,713 - WARNING - Failed to parse vasprun.xml: syntax error: line 1, column 1
+2025-01-27 11:58:02,713 - INFO - Trying to parse OUTCAR instead...
+2025-01-27 11:58:02,757 - ERROR - Model verification failed: 'Outcar' object has no attribute 'structure'
+2025-01-27 11:58:09,622 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 11:58:09,716 - INFO - Extracted data from vasprun.xml
+2025-01-27 11:58:09,717 - ERROR - Model verification failed: 'dict' object has no attribute 'calc_stresses'
+2025-01-27 12:03:50,494 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 12:03:50,498 - ERROR - Model verification failed: Attempting to deserialize object on a CUDA device but torch.cuda.is_available() is False. If you are running on a CPU-only machine, please use torch.load with map_location=torch.device('cpu') to map your storages to the CPU.
+2025-01-27 12:03:57,681 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 12:03:57,692 - INFO - Successfully loaded data from ./dataset/get_dataset/vasp_dataset.json
+2025-01-27 12:03:57,693 - ERROR - Model verification failed: 'dict' object has no attribute 'calc_stresses'
+2025-01-27 12:07:32,041 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 12:07:32,053 - INFO - Successfully loaded data from ./dataset/get_dataset/vasp_dataset.json
+2025-01-27 12:07:32,054 - ERROR - Model verification failed: 'dict' object has no attribute 'calc_stresses'
+2025-01-27 12:11:52,400 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 12:11:52,411 - INFO - Loaded state_dict. Reconstructing M3GNet model...
+2025-01-27 12:11:52,411 - ERROR - Model verification failed: type object 'M3GNet' has no attribute 'from_state_dict'
+2025-01-27 12:16:35,327 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 12:16:35,335 - INFO - Loaded state_dict. Reconstructing M3GNet model...
+2025-01-27 12:16:35,342 - ERROR - Model verification failed: Torch not compiled with CUDA enabled
+2025-01-27 12:16:53,080 - INFO - Loading fine-tuned model from ./trained_model/final_model/model.pt
+2025-01-27 12:16:53,086 - INFO - Loaded state_dict. Reconstructing M3GNet model...
+2025-01-27 12:16:53,200 - ERROR - Model verification failed: Error(s) in loading state_dict for M3GNet:
+	Missing key(s) in state_dict: "bond_expansion.rbf.cutoff", "embedding.layer_node_embedding.weight", "embedding.layer_edge_embedding.layers.0.weight", "embedding.layer_edge_embedding.layers.0.bias", "basis_expansion.sbf.cutoff", "three_body_interactions.0.update_network_atom.layers.0.weight", "three_body_interactions.0.update_network_atom.layers.0.bias", "three_body_interactions.0.update_network_bond.layers.0.weight", "three_body_interactions.0.update_network_bond.gates.0.weight", "three_body_interactions.1.update_network_atom.layers.0.weight", "three_body_interactions.1.update_network_atom.layers.0.bias", "three_body_interactions.1.update_network_bond.layers.0.weight", "three_body_interactions.1.update_network_bond.gates.0.weight", "three_body_interactions.2.update_network_atom.layers.0.weight", "three_body_interactions.2.update_network_atom.layers.0.bias", "three_body_interactions.2.update_network_bond.layers.0.weight", "three_body_interactions.2.update_network_bond.gates.0.weight", "graph_layers.0.conv.edge_update_func.layers.0.weight", "graph_layers.0.conv.edge_update_func.layers.0.bias", "graph_layers.0.conv.edge_update_func.layers.2.weight", "graph_layers.0.conv.edge_update_func.layers.2.bias", "graph_layers.0.conv.edge_update_func.layers.4.weight", "graph_layers.0.conv.edge_update_func.layers.4.bias", "graph_layers.0.conv.edge_update_func.gates.0.weight", "graph_layers.0.conv.edge_update_func.gates.0.bias", "graph_layers.0.conv.edge_update_func.gates.2.weight", "graph_layers.0.conv.edge_update_func.gates.2.bias", "graph_layers.0.conv.edge_update_func.gates.4.weight", "graph_layers.0.conv.edge_update_func.gates.4.bias", "graph_layers.0.conv.edge_weight_func.weight", "graph_layers.0.conv.node_update_func.layers.0.weight", "graph_layers.0.conv.node_update_func.layers.0.bias", "graph_layers.0.conv.node_update_func.layers.2.weight", "graph_layers.0.conv.node_update_func.layers.2.bias", "graph_layers.0.conv.node_update_func.layers.4.weight", "graph_layers.0.conv.node_update_func.layers.4.bias", "graph_layers.0.conv.node_update_func.gates.0.weight", "graph_layers.0.conv.node_update_func.gates.0.bias", "graph_layers.0.conv.node_update_func.gates.2.weight", "graph_layers.0.conv.node_update_func.gates.2.bias", "graph_layers.0.conv.node_update_func.gates.4.weight", "graph_layers.0.conv.node_update_func.gates.4.bias", "graph_layers.0.conv.node_weight_func.weight", "graph_layers.1.conv.edge_update_func.layers.0.weight", "graph_layers.1.conv.edge_update_func.layers.0.bias", "graph_layers.1.conv.edge_update_func.layers.2.weight", "graph_layers.1.conv.edge_update_func.layers.2.bias", "graph_layers.1.conv.edge_update_func.layers.4.weight", "graph_layers.1.conv.edge_update_func.layers.4.bias", "graph_layers.1.conv.edge_update_func.gates.0.weight", "graph_layers.1.conv.edge_update_func.gates.0.bias", "graph_layers.1.conv.edge_update_func.gates.2.weight", "graph_layers.1.conv.edge_update_func.gates.2.bias", "graph_layers.1.conv.edge_update_func.gates.4.weight", "graph_layers.1.conv.edge_update_func.gates.4.bias", "graph_layers.1.conv.edge_weight_func.weight", "graph_layers.1.conv.node_update_func.layers.0.weight", "graph_layers.1.conv.node_update_func.layers.0.bias", "graph_layers.1.conv.node_update_func.layers.2.weight", "graph_layers.1.conv.node_update_func.layers.2.bias", "graph_layers.1.conv.node_update_func.layers.4.weight", "graph_layers.1.conv.node_update_func.layers.4.bias", "graph_layers.1.conv.node_update_func.gates.0.weight", "graph_layers.1.conv.node_update_func.gates.0.bias", "graph_layers.1.conv.node_update_func.gates.2.weight", "graph_layers.1.conv.node_update_func.gates.2.bias", "graph_layers.1.conv.node_update_func.gates.4.weight", "graph_layers.1.conv.node_update_func.gates.4.bias", "graph_layers.1.conv.node_weight_func.weight", "graph_layers.2.conv.edge_update_func.layers.0.weight", "graph_layers.2.conv.edge_update_func.layers.0.bias", "graph_layers.2.conv.edge_update_func.layers.2.weight", "graph_layers.2.conv.edge_update_func.layers.2.bias", "graph_layers.2.conv.edge_update_func.layers.4.weight", "graph_layers.2.conv.edge_update_func.layers.4.bias", "graph_layers.2.conv.edge_update_func.gates.0.weight", "graph_layers.2.conv.edge_update_func.gates.0.bias", "graph_layers.2.conv.edge_update_func.gates.2.weight", "graph_layers.2.conv.edge_update_func.gates.2.bias", "graph_layers.2.conv.edge_update_func.gates.4.weight", "graph_layers.2.conv.edge_update_func.gates.4.bias", "graph_layers.2.conv.edge_weight_func.weight", "graph_layers.2.conv.node_update_func.layers.0.weight", "graph_layers.2.conv.node_update_func.layers.0.bias", "graph_layers.2.conv.node_update_func.layers.2.weight", "graph_layers.2.conv.node_update_func.layers.2.bias", "graph_layers.2.conv.node_update_func.layers.4.weight", "graph_layers.2.conv.node_update_func.layers.4.bias", "graph_layers.2.conv.node_update_func.gates.0.weight", "graph_layers.2.conv.node_update_func.gates.0.bias", "graph_layers.2.conv.node_update_func.gates.2.weight", "graph_layers.2.conv.node_update_func.gates.2.bias", "graph_layers.2.conv.node_update_func.gates.4.weight", "graph_layers.2.conv.node_update_func.gates.4.bias", "graph_layers.2.conv.node_weight_func.weight", "final_layer.gated.layers.0.weight", "final_layer.gated.layers.0.bias", "final_layer.gated.layers.2.weight", "final_layer.gated.layers.2.bias", "final_layer.gated.layers.4.weight", "final_layer.gated.layers.4.bias", "final_layer.gated.layers.6.weight", "final_layer.gated.layers.6.bias", "final_layer.gated.gates.0.weight", "final_layer.gated.gates.0.bias", "final_layer.gated.gates.2.weight", "final_layer.gated.gates.2.bias", "final_layer.gated.gates.4.weight", "final_layer.gated.gates.4.bias", "final_layer.gated.gates.6.weight", "final_layer.gated.gates.6.bias". 
+	Unexpected key(s) in state_dict: "model", "data_mean", "data_std", "element_refs", "calc_forces", "calc_stresses", "calc_hessian", "calc_magmom", "calc_repuls", "zbl_trainable", "debug_mode". 

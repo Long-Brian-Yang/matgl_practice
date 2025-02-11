@@ -43,21 +43,21 @@ def parse_args():
         args (argparse.Namespace): parsed arguments
     """
     parser = argparse.ArgumentParser(description='Pretrain M3GNet model')
-    parser.add_argument('--max-epochs', type=int, default=100,
+    parser.add_argument('--max-epochs', type=int, default=300,
                         help='Maximum number of training epochs')
     parser.add_argument('--batch-size', type=int, default=4,
                         help='Training batch size')
-    parser.add_argument('--learning-rate', type=float, default=5e-4,
+    parser.add_argument('--learning-rate', type=float, default=1e-4,
                         help='Learning rate for training')
-    parser.add_argument('--force-weight', type=float, default=1.0,
+    parser.add_argument('--force-weight', type=float, default=0.5,
                         help='Weight for force loss')
-    parser.add_argument('--stress-weight', type=float, default=0.1,
+    parser.add_argument('--stress-weight', type=float, default=0.05,
                         help='Weight for stress loss')
-    parser.add_argument('--decay-steps', type=int, default=100,
+    parser.add_argument('--decay-steps', type=int, default=50,
                         help='Learning rate decay steps')
-    parser.add_argument('--decay-alpha', type=float, default=0.01,
+    parser.add_argument('--decay-alpha', type=float, default=0.1,
                         help='Learning rate decay factor')
-    parser.add_argument('--patience', type=int, default=10,
+    parser.add_argument('--patience', type=int, default=20,
                         help='Patience for early stopping')
     parser.add_argument('--output-dir', type=str, default='./trained_model',
                         help='Directory to save outputs')

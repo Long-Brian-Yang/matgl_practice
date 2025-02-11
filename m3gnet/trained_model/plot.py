@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # read the metrics.csv file
-df = pd.read_csv('./logs/M3GNet_training/version_1/metrics.csv')
+df = pd.read_csv('./logs/M3GNet_training/version_5/metrics.csv')
 
 # Create separate dataframes for training and validation metrics
 train_df = df[df['train_Total_Loss'].notna()].copy()
