@@ -13,6 +13,7 @@ EV_TO_KJ_PER_MOL = 96.485  # Conversion factor from eV to kJ/mol
 
 warnings.filterwarnings("ignore")
 
+
 def setup_logging(log_dir: str = "logs") -> None:
     """
     Setup logging system
@@ -32,6 +33,7 @@ def setup_logging(log_dir: str = "logs") -> None:
             logging.StreamHandler()
         ]
     )
+
 
 def parse_md_logs(md_dir: Path) -> tuple:
     """
@@ -111,6 +113,7 @@ def parse_md_logs(md_dir: Path) -> tuple:
 
     return list(temperatures), list(diffusion_coeffs)
 
+
 def parse_single_log(log_file: Path, temperature: float) -> float:
     """
     Parse a single MD log file to extract the diffusion coefficient
@@ -141,6 +144,7 @@ def parse_single_log(log_file: Path, temperature: float) -> float:
                         return D_total
 
     return None
+
 
 def analyze_arrhenius(temperatures: list, diffusion_coeffs: list,
                       output_dir: Path, logger: logging.Logger) -> None:
@@ -190,7 +194,7 @@ def analyze_arrhenius(temperatures: list, diffusion_coeffs: list,
     # --- 2.2 Set bottom axis (1000/T) ---
     ax_bottom.set_xlabel('1000/T (K⁻¹)', fontsize=fontsize-2)
     ax_bottom.set_ylabel('ln(D) [D in cm²/s]', fontsize=fontsize-2)
-    ax_bottom.set_title('Arrhenius Plot for Proton Diffusion (M3GNet Pre-training)', fontsize=fontsize)
+    ax_bottom.set_title('Arrhenius Plot for Proton Diffusion (M3GNet Fine-tuning)', fontsize=fontsize)
     ax_bottom.grid(True, alpha=0.3)
     ax_bottom.legend(fontsize=fontsize-4)
 
@@ -259,6 +263,7 @@ def analyze_arrhenius(temperatures: list, diffusion_coeffs: list,
         for T, D in zip(temperatures, diffusion_coeffs):
             f.write(f"{T:13.1f} | {D:.6e}\n")
 
+
 def parse_args():
     """Parse command line arguments"""
     parser = argparse.ArgumentParser(description='Analyze MD simulation results')
@@ -269,6 +274,7 @@ def parse_args():
     parser.add_argument('--debug', action='store_true',
                         help='Enable debug mode')
     return parser.parse_args()
+
 
 def main():
     """Main function"""
@@ -296,6 +302,7 @@ def main():
     except Exception as e:
         logger.error(f"Analysis failed: {str(e)}")
         raise
+
 
 if __name__ == "__main__":
     try:

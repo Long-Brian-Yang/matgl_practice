@@ -252,7 +252,7 @@ def add_protons(atoms: Atoms, n_protons: int, pot=None) -> Atoms:
         optimizer = BFGS(atoms)
         try:
             # Use very loose convergence criteria
-            optimizer.run(fmax=0.5, steps=100) 
+            optimizer.run(fmax=0.5, steps=100)
             logger.info(f"Energy minimization completed in {optimizer.get_number_of_steps()} steps")
         except Exception as e:
             logger.warning(f"Energy minimization failed: {str(e)}")

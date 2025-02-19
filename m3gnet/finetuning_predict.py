@@ -12,6 +12,7 @@ from matgl.ext.ase import PESCalculator, MolecularDynamics, Relaxer
 from matgl.utils.training import PotentialLightningModule
 import matgl
 
+
 def setup_logging(log_dir: str = "logs") -> None:
     """
     Set up logging configuration
@@ -27,6 +28,7 @@ def setup_logging(log_dir: str = "logs") -> None:
             logging.StreamHandler()
         ]
     )
+
 
 def load_dataset(dataset_path: str) -> list:
     """
@@ -60,6 +62,7 @@ def load_dataset(dataset_path: str) -> list:
         })
 
     return structures
+
 
 def predict_properties(model_path: str, dataset_path: str, output_dir: str) -> str:
     """
@@ -115,6 +118,7 @@ def predict_properties(model_path: str, dataset_path: str, output_dir: str) -> s
         logger.error(f"Prediction failed: {str(e)}")
         raise
 
+
 def calculate_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> tuple:
     """
     Calculate R² and MAE
@@ -131,6 +135,7 @@ def calculate_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> tuple:
     ss_res = np.sum((y_true - y_pred) ** 2)
     r2 = 1 - (ss_res / ss_tot)
     return r2, mae
+
 
 def plot_predictions(predictions_file: str, output_dir: str) -> None:
     """
@@ -203,6 +208,7 @@ def plot_predictions(predictions_file: str, output_dir: str) -> None:
         print("\nPrediction Statistics:")
         print(f"Mean Predicted Energy: {np.mean(predicted_energies):.3f} eV")
         print(f"Std of Predicted Energy: {np.std(predicted_energies):.3f} eV")
+
 
 if __name__ == "__main__":
     import argparse
